@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Force Cache Refresh)
 
 on:
   push:
@@ -38,7 +38,10 @@ jobs:
         run: ls -la
 
       - name: Build 🏗️
-        run: npm run build
+        run: |
+          # Add timestamp to force cache refresh
+          echo "// Build timestamp: $(date)" >> src/components/QuestionPage.js
+          npm run build
         env:
           CI: false # This prevents treating warnings as errors
 
