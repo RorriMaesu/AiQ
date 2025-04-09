@@ -46,7 +46,7 @@
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  padding: 1.25rem; /* Slightly reduced padding */
+  padding: 1rem; /* Further reduced padding */
   background-color: var(--background-card);
   backdrop-filter: blur(10px);
   border-radius: var(--card-radius);
@@ -57,7 +57,7 @@
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  max-height: 80vh; /* Adjusted height for better fit */
+  max-height: 70vh; /* Reduced height to leave room for bottom controls */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* For Firefox */
@@ -234,13 +234,13 @@
 .question-options {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.7rem; /* Slightly increased gap for better separation */
+  gap: 0.6rem; /* Reduced gap */
   animation: fadeIn 1.4s ease-out;
   width: 100%;
   padding: 0 0.5rem 0 0; /* Adjusted padding */
-  margin-bottom: 1rem; /* Adjusted bottom margin */
+  margin-bottom: 0.75rem; /* Reduced bottom margin */
   -webkit-overflow-scrolling: touch;
-  max-height: 45vh; /* Adjusted height to prevent overflow */
+  max-height: 40vh; /* Reduced height to prevent overflow */
   overflow-y: auto; /* Enable scrolling if needed */
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent; /* For Firefox */

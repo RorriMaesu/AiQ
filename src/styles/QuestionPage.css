@@ -83,20 +83,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center content vertically */
+  justify-content: flex-start; /* Align to top instead of center */
+  padding-top: 2vh; /* Add some padding at the top */
 }
 
 .question-page-content {
   max-width: 900px;
   width: 100%;
-  margin: 1rem auto;
-  padding: 1rem;
+  margin: 0.5rem auto;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow-y: auto; /* Allow vertical scrolling if needed */
   box-sizing: border-box;
-  max-height: 90vh; /* Ensure it doesn't overflow the viewport */
+  max-height: 95vh; /* Increased to use more of the viewport */
+  position: relative; /* For absolute positioning of children if needed */
 }
 
 /* Status bar with psychological elements */
@@ -167,11 +169,13 @@
 }
 
 .navigation {
-  margin-top: 1.5rem; /* Reduced margin */
+  margin-top: 1rem; /* Further reduced margin */
+  margin-bottom: 0.5rem; /* Add bottom margin */
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Center the button */
   position: relative;
   flex-shrink: 0; /* Prevent shrinking */
+  width: 100%; /* Full width */
 }
 
 .navigation::before {
@@ -185,7 +189,7 @@
 }
 
 .next-button {
-  padding: 1rem 2rem;
+  padding: 0.9rem 2.5rem; /* Adjusted padding */
   background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
   color: white;
   border: none;
@@ -199,6 +203,8 @@
   box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
   animation: buttonGlow 3s infinite;
   letter-spacing: 1px;
+  min-width: 200px; /* Ensure minimum width */
+  z-index: 20; /* Higher z-index to ensure visibility */
 }
 
 .next-button::before {
@@ -245,6 +251,12 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0; /* Prevent shrinking */
+  position: sticky; /* Make it stick to the bottom */
+  bottom: 0;
+  background-color: var(--background-main); /* Match the background */
+  padding: 0.5rem 0;
+  z-index: 10; /* Ensure it stays on top */
+  width: 100%;
 }
 
 .hint-container {
@@ -335,12 +347,24 @@
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .question-page {
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 0;
     max-width: 100%;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .question-page-content {
     padding: 0.5rem;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .bottom-controls {
+    padding: 0.5rem 0.25rem;
+    background-color: var(--background-main);
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
   }
 
   .status-bar {
@@ -535,8 +559,12 @@
   }
 
   .next-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    width: 90%; /* Make button wider on mobile */
+    max-width: 300px;
+    margin: 0 auto; /* Center the button */
+    min-height: 50px; /* Ensure good touch target size */
   }
 
   .pressure-message {
