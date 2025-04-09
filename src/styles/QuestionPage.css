@@ -83,17 +83,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Center content vertically */
 }
 
 .question-page-content {
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow-y: auto; /* Allow vertical scrolling if needed */
+  box-sizing: border-box;
+  max-height: 90vh; /* Ensure it doesn't overflow the viewport */
 }
 
 /* Status bar with psychological elements */
