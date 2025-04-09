@@ -432,7 +432,7 @@ const questions = [
     ],
     description: 'A, B, D, G, ?',
     correctAnswer: 'B',
-    explanation: 'Each letter's position in the alphabet is the sum of the previous two: 1, 2, 4, 7, 11. So the next letter is K (11th letter).'
+    explanation: 'Each letter\'s position in the alphabet is the sum of the previous two: 1, 2, 4, 7, 11. So the next letter is K (11th letter).'
   },
   {
     id: 28,

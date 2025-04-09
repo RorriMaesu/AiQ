@@ -104,37 +104,37 @@ function getRandomResult(score) {
   return options[randomIndex];
 }
 
-// Create the results array with the score ranges
+// Helper function to select a single random result for each score range
+function getFixedResultForRange(score) {
+  const result = getRandomResult(score);
+  return {
+    title: result.title,
+    description: result.description,
+    advice: result.advice
+  };
+}
+
+// Create the results array with the score ranges and fixed results
 const results = [
   {
     scoreRange: [0, 20],
-    get title() { return getRandomResult(10).title; },
-    get description() { return getRandomResult(10).description; },
-    get advice() { return getRandomResult(10).advice; }
+    ...getFixedResultForRange(10)
   },
   {
     scoreRange: [21, 40],
-    get title() { return getRandomResult(30).title; },
-    get description() { return getRandomResult(30).description; },
-    get advice() { return getRandomResult(30).advice; }
+    ...getFixedResultForRange(30)
   },
   {
     scoreRange: [41, 60],
-    get title() { return getRandomResult(50).title; },
-    get description() { return getRandomResult(50).description; },
-    get advice() { return getRandomResult(50).advice; }
+    ...getFixedResultForRange(50)
   },
   {
     scoreRange: [61, 80],
-    get title() { return getRandomResult(70).title; },
-    get description() { return getRandomResult(70).description; },
-    get advice() { return getRandomResult(70).advice; }
+    ...getFixedResultForRange(70)
   },
   {
     scoreRange: [81, 100],
-    get title() { return getRandomResult(90).title; },
-    get description() { return getRandomResult(90).description; },
-    get advice() { return getRandomResult(90).advice; }
+    ...getFixedResultForRange(90)
   }
 ];
 

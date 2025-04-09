@@ -22,21 +22,23 @@ function App() {
     // Get current timestamp to ensure different randomization each time
     const timestamp = new Date().getTime();
 
-    // Shuffle the array using a more robust method
-    const shuffled = questionsCopy
-      .map(value => ({ value, sort: Math.random() * timestamp }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
+    // Shuffle the array using Fisher-Yates algorithm for better randomization
+    for (let i = questionsCopy.length - 1; i > 0; i--) {
+      // Generate a random index between 0 and i
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap elements at i and j
+      [questionsCopy[i], questionsCopy[j]] = [questionsCopy[j], questionsCopy[i]];
+    }
 
     // Take the first NUM_QUESTIONS questions
-    const selectedQuestions = shuffled.slice(0, NUM_QUESTIONS);
+    const selectedQuestions = questionsCopy.slice(0, NUM_QUESTIONS);
 
     // Renumber the questions from 1 to NUM_QUESTIONS
     const renumberedQuestions = selectedQuestions.map((q, index) => ({
       ...q,
       id: index + 1,
       // Add a unique key to ensure React treats it as a new question
-      uniqueKey: `${q.id}-${timestamp}-${index}`
+      uniqueKey: `${q.id}-${timestamp}-${Math.random()}`
     }));
 
     console.log('Selected questions:', renumberedQuestions.map(q => q.question));
