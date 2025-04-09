@@ -58,9 +58,11 @@ function App() {
   };
 
   const handleRestart = () => {
-    // Reset questions when restarting
-    setQuestions([]);
-    setCurrentPage('intro');
+    // Generate new random questions when restarting
+    const newRandomQuestions = selectRandomQuestions();
+    setQuestions(newRandomQuestions);
+    setScore(0); // Reset score
+    setCurrentPage('questions');
   };
 
   if (isLoading) {

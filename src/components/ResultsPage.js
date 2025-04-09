@@ -232,7 +232,7 @@ const ResultsPage = ({ score, onRestart }) => {
               className="restart-button"
               onClick={onRestart}
             >
-              Take the Test Again
+              Take a New Test with Different Questions
             </button>
           </div>
 
@@ -327,7 +327,7 @@ const ResultsPage = ({ score, onRestart }) => {
               className="restart-button action-button"
               onClick={onRestart}
             >
-              I Understand My True Potential
+              Try a New Test with Different Questions
             </button>
           </div>
         </div>
