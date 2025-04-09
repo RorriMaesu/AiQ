@@ -46,7 +46,7 @@
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem; /* Further reduced padding */
+  padding: 0.8rem; /* Further reduced padding */
   background-color: var(--background-card);
   backdrop-filter: blur(10px);
   border-radius: var(--card-radius);
@@ -57,10 +57,11 @@
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  max-height: 70vh; /* Reduced height to leave room for bottom controls */
+  max-height: 75vh; /* Increased height to use more space */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* For Firefox */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent; /* For Firefox */
 }
 
@@ -268,7 +269,7 @@
 .option {
   display: flex;
   align-items: center;
-  padding: 0.8rem 1rem; /* Adjusted padding for better touch targets */
+  padding: 0.7rem 0.9rem; /* Reduced padding for mobile */
   border: 1.5px solid rgba(255, 255, 255, 0.12); /* Thinner but more visible border */
   border-radius: 8px; /* Reduced border radius */
   cursor: pointer;
@@ -283,6 +284,7 @@
   box-sizing: border-box;
   margin-bottom: 0; /* Remove any margin */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  touch-action: manipulation; /* Improve touch behavior */
 }
 
 .option:nth-child(1) { animation-delay: 0.1s; }
@@ -323,17 +325,17 @@
 }
 
 .option-id {
-  width: 32px; /* Slightly smaller */
-  height: 32px; /* Slightly smaller */
+  width: 30px; /* Smaller for mobile */
+  height: 30px; /* Smaller for mobile */
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.12); /* More visible background */
   color: var(--text-light);
   border-radius: 50%;
-  margin-right: 0.8rem; /* Reduced margin */
+  margin-right: 0.7rem; /* Reduced margin */
   font-weight: bold;
-  font-size: 1rem; /* Adjusted font size */
+  font-size: 0.95rem; /* Smaller font size */
   transition: all 0.25s ease; /* Faster transition */
   border: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0; /* Prevent shrinking */
@@ -354,22 +356,22 @@
 .option-content {
   flex: 1;
   color: var(--text-light);
-  font-size: 0.95rem; /* Slightly reduced font size */
+  font-size: 0.9rem; /* Smaller font size for mobile */
   font-weight: 500;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-width: calc(100% - 45px); /* Account for option-id width and margin */
+  max-width: calc(100% - 40px); /* Account for smaller option-id */
   hyphens: auto; /* Enable hyphenation for better text wrapping */
-  line-height: 1.35; /* Slightly increased line height for readability */
+  line-height: 1.3; /* Slightly reduced line height */
   padding: 0.1rem 0; /* Small vertical padding for better text alignment */
-  letter-spacing: 0.01em; /* Slightly increased letter spacing */
+  letter-spacing: 0; /* Remove letter spacing for mobile */
 }
 
 @media (max-width: 768px) {
   .question-container {
-    padding: 0.9rem 0.7rem;
-    max-height: 92vh; /* Higher on mobile to account for browser chrome */
-    border-radius: 10px; /* Smaller border radius on mobile */
+    padding: 0.7rem 0.6rem;
+    max-height: 75vh; /* Reduced height to leave room for controls */
+    border-radius: 8px; /* Smaller border radius on mobile */
   }
 
   .question-header {
@@ -404,22 +406,24 @@
   }
 
   .option {
-    padding: 0.7rem 0.8rem;
+    padding: 0.6rem 0.7rem;
     min-height: 2.2rem;
     border-width: 1px;
+    margin-bottom: 0.4rem;
   }
 
   .option-id {
-    width: 28px;
-    height: 28px;
-    margin-right: 0.6rem;
-    font-size: 0.85rem;
+    width: 26px;
+    height: 26px;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
   }
 
   .option-content {
-    font-size: 0.85rem;
-    line-height: 1.25;
+    font-size: 0.8rem;
+    line-height: 1.2;
     letter-spacing: normal;
+    max-width: calc(100% - 35px); /* Account for smaller option-id */
   }
 
   .question-type {
@@ -449,5 +453,60 @@
   .question-container::-webkit-scrollbar,
   .question-options::-webkit-scrollbar {
     width: 3px;
+  }
+}
+
+/* Very Small Mobile Optimization */
+@media (max-width: 375px) {
+  .question-container {
+    padding: 0.5rem;
+    max-height: 70vh;
+  }
+
+  .question-header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .question-description {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .question-image {
+    margin-bottom: 0.5rem;
+    max-height: 15vh;
+  }
+
+  .question-image img {
+    max-height: 15vh;
+  }
+
+  .question-options {
+    gap: 0.4rem;
+  }
+
+  .option {
+    padding: 0.5rem 0.6rem;
+    min-height: 2rem;
+  }
+
+  .option-id {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .option-content {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    max-width: calc(100% - 32px);
   }
 }

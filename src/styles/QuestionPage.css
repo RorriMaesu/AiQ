@@ -84,20 +84,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start; /* Align to top instead of center */
-  padding-top: 2vh; /* Add some padding at the top */
+  padding-top: 1vh; /* Reduced padding at the top */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .question-page-content {
   max-width: 900px;
   width: 100%;
-  margin: 0.5rem auto;
-  padding: 0.75rem;
+  margin: 0.25rem auto;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow-y: auto; /* Allow vertical scrolling if needed */
   box-sizing: border-box;
-  max-height: 95vh; /* Increased to use more of the viewport */
+  max-height: 98vh; /* Increased to use more of the viewport */
   position: relative; /* For absolute positioning of children if needed */
 }
 
@@ -169,13 +170,14 @@
 }
 
 .navigation {
-  margin-top: 1rem; /* Further reduced margin */
-  margin-bottom: 0.5rem; /* Add bottom margin */
+  margin-top: 0.5rem; /* Further reduced margin */
+  margin-bottom: 0.25rem; /* Add bottom margin */
   display: flex;
   justify-content: center; /* Center the button */
   position: relative;
   flex-shrink: 0; /* Prevent shrinking */
   width: 100%; /* Full width */
+  box-sizing: border-box;
 }
 
 .navigation::before {
@@ -189,12 +191,12 @@
 }
 
 .next-button {
-  padding: 0.9rem 2.5rem; /* Adjusted padding */
+  padding: 0.8rem 2rem; /* Reduced padding */
   background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1rem; /* Slightly smaller font */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -203,8 +205,10 @@
   box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
   animation: buttonGlow 3s infinite;
   letter-spacing: 1px;
-  min-width: 200px; /* Ensure minimum width */
+  min-width: 180px; /* Smaller minimum width */
+  max-width: 90%; /* Prevent overflow on small screens */
   z-index: 20; /* Higher z-index to ensure visibility */
+  margin: 0 auto; /* Center the button */
 }
 
 .next-button::before {
@@ -247,16 +251,17 @@
 
 /* Hint system - gives illusion of help */
 .bottom-controls {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
   display: flex;
   flex-direction: column;
   flex-shrink: 0; /* Prevent shrinking */
   position: sticky; /* Make it stick to the bottom */
+  width: 100%;
+  box-sizing: border-box;
   bottom: 0;
   background-color: var(--background-main); /* Match the background */
-  padding: 0.5rem 0;
+  padding: 0.25rem 0.25rem 0.5rem;
   z-index: 10; /* Ensure it stays on top */
-  width: 100%;
 }
 
 .hint-container {
@@ -298,14 +303,16 @@
   background: rgba(255, 255, 255, 0.1); /* More visible background */
   border: 1px solid rgba(255, 255, 255, 0.2); /* More visible border */
   border-radius: 8px;
-  padding: 1.2rem;
-  margin: 1rem 0;
+  padding: 1rem;
+  margin: 0.75rem 0;
   display: flex;
   align-items: flex-start; /* Align to top for better readability with longer hints */
   animation: slideInDown 0.5s ease-out;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
-  min-height: 60px; /* Ensure minimum height */
+  min-height: 50px; /* Reduced minimum height */
   transition: all 0.3s ease; /* Smooth transition for any changes */
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .hint-icon {
@@ -484,22 +491,24 @@
   }
 
   .hint-display {
-    padding: 1rem;
-    margin: 0.7rem 0;
-    font-size: 0.9rem;
-    min-height: 50px; /* Ensure minimum height on mobile */
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+    min-height: 40px; /* Reduced minimum height on small mobile */
   }
 
   .hint-display p {
-    font-size: 0.9rem;
-    line-height: 1.3;
+    font-size: 0.85rem;
+    line-height: 1.25;
   }
 
   .next-button {
     width: 100%;
-    padding: 0.8rem 1.5rem;
+    padding: 0.7rem 1.2rem;
     min-height: 44px; /* Touch target size */
-    font-size: 1rem;
+    font-size: 0.95rem;
+    min-width: 150px; /* Smaller minimum width for small screens */
+    max-width: 95%; /* Prevent overflow on small screens */
   }
 
   .pressure-message {
@@ -509,19 +518,73 @@
   }
 }
 
-/* Small Mobile Optimization */
-@media (max-width: 576px) {
-  .question-page {
-    padding: 0.3rem;
-  }
-
+/* Very Small Mobile Optimization */
+@media (max-width: 375px) {
   .question-page-content {
-    padding: 0.3rem;
+    padding: 0.15rem;
+    margin: 0;
   }
 
   .question-container {
+    padding: 0.4rem;
+    max-height: 70vh;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .question-options {
+    gap: 0.4rem;
+  }
+
+  .option {
     padding: 0.6rem;
+  }
+
+  .option-id {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .option-content {
+    font-size: 0.8rem;
+  }
+
+  .hint-display {
+    padding: 0.6rem;
+    margin: 0.4rem 0;
+  }
+
+  .hint-display p {
+    font-size: 0.8rem;
+  }
+
+  .next-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile Optimization */
+@media (max-width: 576px) {
+  .question-page {
+    padding: 0.2rem;
+    padding-top: 0.5rem;
+  }
+
+  .question-page-content {
+    padding: 0.2rem;
+    margin: 0.1rem auto;
+  }
+
+  .question-container {
+    padding: 0.5rem;
     border-radius: 8px;
+    max-height: 75vh; /* Reduced height for small screens */
   }
 
   .status-bar {
@@ -570,15 +633,16 @@
   .hint-button {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+    min-height: 40px; /* Ensure good touch target size */
   }
 
   .next-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
     width: 90%; /* Make button wider on mobile */
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto; /* Center the button */
-    min-height: 50px; /* Ensure good touch target size */
+    min-height: 44px; /* Ensure good touch target size */
   }
 
   .pressure-message {
