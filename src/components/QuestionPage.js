@@ -116,6 +116,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
       console.log('Generated new hint:', generatedHint);
       setCurrentHint(generatedHint); // Store the hint in state
     }
+    // Show the hint and increment the counter
     setShowHint(true);
     setHintsUsed(hintsUsed + 1);
   };

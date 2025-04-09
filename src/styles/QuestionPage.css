@@ -295,16 +295,17 @@
 }
 
 .hint-display {
-  background: rgba(255, 255, 255, 0.07); /* Slightly more visible background */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* More visible border */
+  background: rgba(255, 255, 255, 0.1); /* More visible background */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* More visible border */
   border-radius: 8px;
   padding: 1.2rem;
   margin: 1rem 0;
   display: flex;
   align-items: flex-start; /* Align to top for better readability with longer hints */
   animation: slideInDown 0.5s ease-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
   min-height: 60px; /* Ensure minimum height */
+  transition: all 0.3s ease; /* Smooth transition for any changes */
 }
 
 .hint-icon {
