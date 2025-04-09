@@ -44,14 +44,14 @@ const ResultsPage = ({ score, onRestart }) => {
         if (counter <= score) {
           clearInterval(interval);
 
-          // Show social proof after score is displayed
-          setTimeout(() => setShowSocialProof(true), 1000);
+          // Show social proof after score is displayed - longer delay for mobile
+          setTimeout(() => setShowSocialProof(true), 1500);
 
-          // Show comparison chart after a delay
-          setTimeout(() => setShowComparison(true), 2000);
+          // Show comparison chart after a delay - longer delay for mobile
+          setTimeout(() => setShowComparison(true), 3000);
 
-          // Show share prompt after another delay
-          setTimeout(() => setShowSharePrompt(true), 3000);
+          // Show share prompt after another delay - longer delay for mobile
+          setTimeout(() => setShowSharePrompt(true), 4500);
         }
       }, 40);
 
@@ -69,7 +69,7 @@ const ResultsPage = ({ score, onRestart }) => {
           likes: prev.likes + Math.floor(Math.random() * 3),
           shares: prev.shares + (Math.random() > 0.7 ? 1 : 0)
         }));
-      }, 3000);
+      }, 5000); // Slower updates for better mobile performance
 
       return () => clearInterval(socialInterval);
     }
@@ -80,9 +80,12 @@ const ResultsPage = ({ score, onRestart }) => {
     setRevealButtonClicked(true);
 
     // Delay the actual transition to create anticipation
+    // Longer delay for better mobile experience
     setTimeout(() => {
       setShowMeaningfulMessage(true);
-    }, 1500);
+      // Scroll to top when showing meaningful message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2000);
   };
 
   return (
@@ -115,7 +118,90 @@ const ResultsPage = ({ score, onRestart }) => {
             <p>Compiling comprehensive cognitive profile...</p>
           </div>
         </div>
-      ) : !showMeaningfulMessage ? (
+      ) : showMeaningfulMessage ? (
+        <div className="meaningful-message">
+          {/* Contrast effect - first show what's wrong with IQ tests */}
+          <div className="truth-section">
+            <h2>The Problem with IQ Tests</h2>
+            <div className="truth-points">
+              <div className="truth-point">
+                <div className="point-icon">❌</div>
+                <div className="point-text">
+                  <h3>They Measure Limited Abilities</h3>
+                  <p>IQ tests only assess a narrow range of cognitive skills, ignoring creativity, emotional intelligence, and practical abilities.</p>
+                </div>
+              </div>
+              <div className="truth-point">
+                <div className="point-icon">❌</div>
+                <div className="point-text">
+                  <h3>Cultural and Educational Bias</h3>
+                  <p>Traditional IQ tests favor those from certain cultural backgrounds and educational experiences.</p>
+                </div>
+              </div>
+              <div className="truth-point">
+                <div className="point-icon">❌</div>
+                <div className="point-text">
+                  <h3>Poor Predictors of Success</h3>
+                  <p>Research shows IQ scores are weak predictors of real-world success, happiness, or fulfillment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main message with powerful typography */}
+          <div className="message-highlight">
+            <h1>{meaningfulMessage.title}</h1>
+            <p className="message-quote">"{meaningfulMessage.message}"</p>
+          </div>
+
+          {/* What really matters - positive reframing */}
+          <div className="what-matters">
+            <h2>What Really Matters</h2>
+            <div className="matters-points">
+              <div className="matters-point">
+                <div className="point-icon">✨</div>
+                <div className="point-text">
+                  <h3>Curiosity & Exploration</h3>
+                  <p>The drive to learn, discover and understand the world around you.</p>
+                </div>
+              </div>
+              <div className="matters-point">
+                <div className="point-icon">✨</div>
+                <div className="point-text">
+                  <h3>Creativity & Innovation</h3>
+                  <p>The ability to imagine new possibilities and bring them to life.</p>
+                </div>
+              </div>
+              <div className="matters-point">
+                <div className="point-icon">✨</div>
+                <div className="point-text">
+                  <h3>Empathy & Connection</h3>
+                  <p>Understanding others and forming meaningful relationships.</p>
+                </div>
+              </div>
+              <div className="matters-point">
+                <div className="point-icon">✨</div>
+                <div className="point-text">
+                  <h3>Resilience & Growth</h3>
+                  <p>The capacity to learn from challenges and continuously improve.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to action - commitment and consistency */}
+          <div className="truth-action">
+            <h2>Take the First Step</h2>
+            <p>Commit to valuing your unique cognitive gifts beyond what any test can measure.</p>
+            <button
+              className="restart-button action-button"
+              onClick={onRestart}
+            >
+              Try a New Test with Different Questions
+            </button>
+          </div>
+        </div>
+      ) : (
         <div className="results-content">
           <h1 className="results-header">Your Assessment Results</h1>
 
@@ -216,7 +302,7 @@ const ResultsPage = ({ score, onRestart }) => {
           {showSharePrompt && (
             <div className="share-prompt">
               <div className="prompt-icon">🎉</div>
-              <p>Congratulations on completing the test! Share your results with friends and see how they compare.</p>
+              <p>Congratulations on completing the test! Share your results with friends.</p>
             </div>
           )}
 
@@ -237,98 +323,15 @@ const ResultsPage = ({ score, onRestart }) => {
           </div>
 
           <div className="results-share">
-            <p>Share your "impressive" results with friends:</p>
+            <p>Share your "impressive" results:</p>
             <div className="share-buttons">
-              <button className="share-button facebook">Facebook</button>
-              <button className="share-button twitter">Twitter</button>
-              <button className="share-button email">Email</button>
+              <button className="share-button facebook">Share on Facebook</button>
+              <button className="share-button twitter">Share on Twitter</button>
+              <button className="share-button email">Share via Email</button>
             </div>
             <div className="share-stats">
-              <span>{socialCount.shares} people have shared their results today</span>
+              <span>{socialCount.shares} people shared today</span>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className="meaningful-message">
-          {/* Contrast effect - first show what's wrong with IQ tests */}
-          <div className="truth-section">
-            <h2>The Problem with IQ Tests</h2>
-            <div className="truth-points">
-              <div className="truth-point">
-                <div className="point-icon">❌</div>
-                <div className="point-text">
-                  <h3>They Measure Limited Abilities</h3>
-                  <p>IQ tests only assess a narrow range of cognitive skills, ignoring creativity, emotional intelligence, and practical abilities.</p>
-                </div>
-              </div>
-              <div className="truth-point">
-                <div className="point-icon">❌</div>
-                <div className="point-text">
-                  <h3>Cultural and Educational Bias</h3>
-                  <p>Traditional IQ tests favor those from certain cultural backgrounds and educational experiences.</p>
-                </div>
-              </div>
-              <div className="truth-point">
-                <div className="point-icon">❌</div>
-                <div className="point-text">
-                  <h3>Poor Predictors of Success</h3>
-                  <p>Research shows IQ scores are weak predictors of real-world success, happiness, or fulfillment.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Main message with powerful typography */}
-          <div className="message-highlight">
-            <h1>{meaningfulMessage.title}</h1>
-            <p className="message-quote">"{meaningfulMessage.message}"</p>
-          </div>
-
-          {/* What really matters - positive reframing */}
-          <div className="what-matters">
-            <h2>What Really Matters</h2>
-            <div className="matters-points">
-              <div className="matters-point">
-                <div className="point-icon">✨</div>
-                <div className="point-text">
-                  <h3>Curiosity & Exploration</h3>
-                  <p>The drive to learn, discover and understand the world around you.</p>
-                </div>
-              </div>
-              <div className="matters-point">
-                <div className="point-icon">✨</div>
-                <div className="point-text">
-                  <h3>Creativity & Innovation</h3>
-                  <p>The ability to imagine new possibilities and bring them to life.</p>
-                </div>
-              </div>
-              <div className="matters-point">
-                <div className="point-icon">✨</div>
-                <div className="point-text">
-                  <h3>Empathy & Connection</h3>
-                  <p>Understanding others and forming meaningful relationships.</p>
-                </div>
-              </div>
-              <div className="matters-point">
-                <div className="point-icon">✨</div>
-                <div className="point-text">
-                  <h3>Resilience & Growth</h3>
-                  <p>The capacity to learn from challenges and continuously improve.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Call to action - commitment and consistency */}
-          <div className="truth-action">
-            <h2>Take the First Step</h2>
-            <p>Commit to valuing your unique cognitive gifts beyond what any test can measure.</p>
-            <button
-              className="restart-button action-button"
-              onClick={onRestart}
-            >
-              Try a New Test with Different Questions
-            </button>
           </div>
         </div>
       )}
