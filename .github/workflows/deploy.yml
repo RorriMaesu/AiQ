@@ -16,9 +16,14 @@ jobs:
   # Build and deploy job
   deploy:
     runs-on: ubuntu-latest
+    # Add permissions needed for deployment
+    permissions:
+      contents: write
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true # Ensure credentials are persisted
 
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v4
@@ -29,13 +34,20 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci
 
+      - name: List files before build
+        run: ls -la
+
       - name: Build 🏗️
         run: npm run build
         env:
           CI: false # This prevents treating warnings as errors
+
+      - name: List build directory
+        run: ls -la build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build # The folder the action should deploy
           branch: gh-pages # The branch the action should deploy to
+          token: ${{ github.token }} # Use the built-in token for authentication
