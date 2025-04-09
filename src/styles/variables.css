@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --primary-color: #6c5ce7;
+  --primary-light: #a29bfe;
+  --primary-dark: #4834d4;
+  --secondary-color: #00cec9;
+  --accent-color: #fdcb6e;
+  --text-dark: #2d3436;
+  --text-light: #dfe6e9;
+  --background-main: #0f0c29;
+  --background-light: #24243e;
+  --background-card: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-color: #00b894;
+  --error-color: #d63031;
+  --warning-color: #fdcb6e;
+
+  /* UI Elements */
+  --card-border: 1px solid rgba(255, 255, 255, 0.1);
+  --card-radius: 12px;
+  --button-radius: 50px;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-medium: 0.5s ease;
+  --transition-slow: 0.8s ease;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
+  --font-size-xlarge: 24px;
+  --font-size-xxlarge: 32px;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+
+  /* Touch Targets */
+  --touch-target-size: 44px;
+  --touch-target-spacing: 8px;
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+
+  /* Z-index layers */
+  --z-index-base: 1;
+  --z-index-above: 10;
+  --z-index-modal: 100;
+  --z-index-overlay: 1000;
+}
