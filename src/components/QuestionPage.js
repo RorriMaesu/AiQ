@@ -10,6 +10,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
   const [isTimerActive, setIsTimerActive] = useState(true);
   const [showHint, setShowHint] = useState(false);
   const [hintsUsed, setHintsUsed] = useState(0);
+  const [currentHint, setCurrentHint] = useState('');
   const [showEncouragement, setShowEncouragement] = useState(false);
   const [encouragementMessage, setEncouragementMessage] = useState('');
   const [timeWarning, setTimeWarning] = useState(false);
@@ -22,6 +23,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
     setTimeLeft(60);
     setIsTimerActive(true);
     setShowHint(false);
+    setCurrentHint(''); // Clear the current hint
     setHintsUsed(0);
     setShowEncouragement(false);
     setTimeWarning(false);
@@ -76,6 +78,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
     setTimeLeft(60);
     setIsTimerActive(true);
     setShowHint(false);
+    setCurrentHint(''); // Clear the current hint
     setTimeWarning(false);
 
     // Show random encouragement message with 40% probability
@@ -106,6 +109,9 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
   };
 
   const handleHintRequest = () => {
+    // Generate the hint once and store it
+    const generatedHint = getHint();
+    setCurrentHint(generatedHint);
     setShowHint(true);
     setHintsUsed(hintsUsed + 1);
   };
@@ -254,7 +260,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
           ) : (
             <div className="hint-display">
               <div className="hint-icon">💡</div>
-              <p>{getHint()}</p>
+              <p>{currentHint}</p>
             </div>
           )}
 
