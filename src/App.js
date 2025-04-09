@@ -3,12 +3,39 @@ import './App.css';
 import IntroPage from './components/IntroPage';
 import QuestionPage from './components/QuestionPage';
 import ResultsPage from './components/ResultsPage';
-import questions from './data/questions';
+import allQuestions from './data/questions';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('intro');
   const [score, setScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [questions, setQuestions] = useState([]);
+
+  // Number of questions to show in each test
+  const NUM_QUESTIONS = 10;
+
+  // Function to randomly select questions
+  const selectRandomQuestions = () => {
+    // Create a copy of the questions array
+    const questionsCopy = [...allQuestions];
+
+    // Shuffle the array using Fisher-Yates algorithm
+    for (let i = questionsCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questionsCopy[i], questionsCopy[j]] = [questionsCopy[j], questionsCopy[i]];
+    }
+
+    // Take the first NUM_QUESTIONS questions
+    const selectedQuestions = questionsCopy.slice(0, NUM_QUESTIONS);
+
+    // Renumber the questions from 1 to NUM_QUESTIONS
+    const renumberedQuestions = selectedQuestions.map((q, index) => ({
+      ...q,
+      id: index + 1
+    }));
+
+    return renumberedQuestions;
+  };
 
   // Simulate loading for a premium feel
   useEffect(() => {
@@ -19,6 +46,9 @@ function App() {
   }, []);
 
   const handleStartTest = () => {
+    // Select random questions when starting the test
+    const randomQuestions = selectRandomQuestions();
+    setQuestions(randomQuestions);
     setCurrentPage('questions');
   };
 
@@ -28,6 +58,8 @@ function App() {
   };
 
   const handleRestart = () => {
+    // Reset questions when restarting
+    setQuestions([]);
     setCurrentPage('intro');
   };
 
@@ -63,6 +95,7 @@ function App() {
         <QuestionPage
           questions={questions}
           onComplete={handleCompleteTest}
+          totalQuestions={NUM_QUESTIONS}
         />
       )}
 

@@ -3,7 +3,7 @@ import Question from './Question';
 import ProgressBar from './ProgressBar';
 import '../styles/QuestionPage.css';
 
-const QuestionPage = ({ questions, onComplete }) => {
+const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(60); // 60 seconds per question
@@ -170,6 +170,7 @@ const QuestionPage = ({ questions, onComplete }) => {
             question={questions[currentQuestionIndex]}
             onAnswer={handleAnswer}
             timeLeft={timeLeft}
+            totalQuestions={totalQuestions}
           />
         </div>
 

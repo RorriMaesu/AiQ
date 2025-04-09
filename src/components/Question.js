@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Question.css';
 
-const Question = ({ question, onAnswer, timeLeft }) => {
+const Question = ({ question, onAnswer, timeLeft, totalQuestions = 10 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionSelect = (optionId) => {
@@ -12,7 +12,7 @@ const Question = ({ question, onAnswer, timeLeft }) => {
   return (
     <div className="question-container auto-scale-content">
       <div className="question-header">
-        <div className="question-number">Question {question.id} of 10</div>
+        <div className="question-number">Question {question.id} of {totalQuestions}</div>
         <div className="question-timer">Time Remaining: {timeLeft}s</div>
         <div className="question-type">{question.type.toUpperCase()}</div>
       </div>
