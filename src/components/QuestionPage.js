@@ -110,9 +110,12 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
 
   // Handle hint request - generates and stores a single hint
   const handleHintRequest = () => {
-    // Generate the hint once and store it
-    const generatedHint = getHint();
-    setCurrentHint(generatedHint); // Store the hint in state
+    // Only generate a new hint if we don't already have one for this question
+    if (!currentHint) {
+      const generatedHint = getHint();
+      console.log('Generated new hint:', generatedHint);
+      setCurrentHint(generatedHint); // Store the hint in state
+    }
     setShowHint(true);
     setHintsUsed(hintsUsed + 1);
   };
@@ -167,8 +170,10 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
     // Get the array of hints for this question type, or use default
     const hintsArray = hintOptions[questionType] || defaultHints;
 
-    // Return a random hint from the appropriate array
-    return hintsArray[Math.floor(Math.random() * hintsArray.length)];
+    // Use the question ID as a consistent seed to always get the same hint for the same question
+    // This ensures the hint doesn't change when displayed multiple times
+    const hintIndex = currentQuestion.id % hintsArray.length;
+    return hintsArray[hintIndex];
   };
 
   const calculateScore = () => {
