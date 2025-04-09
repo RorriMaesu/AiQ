@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (Force Cache Refresh)
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -34,16 +34,16 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci
 
-      - name: List files before build
-        run: ls -la
+      - name: Create .nojekyll file
+        run: touch public/.nojekyll
 
       - name: Build 🏗️
-        run: |
-          # Add timestamp to force cache refresh
-          echo "// Build timestamp: $(date)" >> src/components/QuestionPage.js
-          npm run build
+        run: npm run build
         env:
           CI: false # This prevents treating warnings as errors
+
+      - name: Add .nojekyll to build
+        run: touch build/.nojekyll
 
       - name: List build directory
         run: ls -la build
@@ -54,3 +54,4 @@ jobs:
           folder: build # The folder the action should deploy
           branch: gh-pages # The branch the action should deploy to
           token: ${{ github.token }} # Use the built-in token for authentication
+          clean: true # Automatically remove deleted files from the deploy branch
