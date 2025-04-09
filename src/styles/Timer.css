@@ -1,0 +1,15 @@
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.timer-label {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
