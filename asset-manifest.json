@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AiQ/static/css/main.31a21526.css",
+    "main.css": "/AiQ/static/css/main.747ed920.css",
     "main.js": "/AiQ/static/js/main.d9bce63c.js",
     "static/js/453.c892ce2d.chunk.js": "/AiQ/static/js/453.c892ce2d.chunk.js",
     "index.html": "/AiQ/index.html",
-    "main.31a21526.css.map": "/AiQ/static/css/main.31a21526.css.map",
+    "main.747ed920.css.map": "/AiQ/static/css/main.747ed920.css.map",
     "main.d9bce63c.js.map": "/AiQ/static/js/main.d9bce63c.js.map",
     "453.c892ce2d.chunk.js.map": "/AiQ/static/js/453.c892ce2d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.31a21526.css",
+    "static/css/main.747ed920.css",
     "static/js/main.d9bce63c.js"
   ]
 }
