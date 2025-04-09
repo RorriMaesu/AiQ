@@ -108,16 +108,18 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
     }
   };
 
+  // Handle hint request - generates and stores a single hint
   const handleHintRequest = () => {
     // Generate the hint once and store it
     const generatedHint = getHint();
-    setCurrentHint(generatedHint);
+    setCurrentHint(generatedHint); // Store the hint in state
     setShowHint(true);
     setHintsUsed(hintsUsed + 1);
   };
 
   // Generate a sarcastic hint that's even less helpful than before
   const getHint = () => {
+    console.log('Generating hint - this should only happen once per hint request');
     const currentQuestion = questions[currentQuestionIndex];
     const questionType = currentQuestion.type;
 
@@ -261,6 +263,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
             <div className="hint-display">
               <div className="hint-icon">💡</div>
               <p>{currentHint}</p>
+              {console.log('Displaying stored hint:', currentHint)}
             </div>
           )}
 
