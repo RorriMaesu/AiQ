@@ -19,20 +19,27 @@ function App() {
     // Create a copy of the questions array
     const questionsCopy = [...allQuestions];
 
-    // Shuffle the array using Fisher-Yates algorithm
-    for (let i = questionsCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [questionsCopy[i], questionsCopy[j]] = [questionsCopy[j], questionsCopy[i]];
-    }
+    // Get current timestamp to ensure different randomization each time
+    const timestamp = new Date().getTime();
+
+    // Shuffle the array using a more robust method
+    const shuffled = questionsCopy
+      .map(value => ({ value, sort: Math.random() * timestamp }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
 
     // Take the first NUM_QUESTIONS questions
-    const selectedQuestions = questionsCopy.slice(0, NUM_QUESTIONS);
+    const selectedQuestions = shuffled.slice(0, NUM_QUESTIONS);
 
     // Renumber the questions from 1 to NUM_QUESTIONS
     const renumberedQuestions = selectedQuestions.map((q, index) => ({
       ...q,
-      id: index + 1
+      id: index + 1,
+      // Add a unique key to ensure React treats it as a new question
+      uniqueKey: `${q.id}-${timestamp}-${index}`
     }));
+
+    console.log('Selected questions:', renumberedQuestions.map(q => q.question));
 
     return renumberedQuestions;
   };

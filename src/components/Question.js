@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Question.css';
 
 const Question = ({ question, onAnswer, timeLeft, totalQuestions = 10 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+
+  // Reset selected option when question changes
+  useEffect(() => {
+    setSelectedOption(null);
+    // Log the question to verify it's changing
+    console.log('Rendering question:', question.question, 'uniqueKey:', question.uniqueKey);
+  }, [question.id, question.uniqueKey]);
 
   const handleOptionSelect = (optionId) => {
     setSelectedOption(optionId);

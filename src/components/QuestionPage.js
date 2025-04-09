@@ -14,6 +14,19 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
   const [encouragementMessage, setEncouragementMessage] = useState('');
   const [timeWarning, setTimeWarning] = useState(false);
 
+  // Reset state when questions change (new test)
+  useEffect(() => {
+    console.log('Questions changed, resetting state');
+    setCurrentQuestionIndex(0);
+    setAnswers({});
+    setTimeLeft(60);
+    setIsTimerActive(true);
+    setShowHint(false);
+    setHintsUsed(0);
+    setShowEncouragement(false);
+    setTimeWarning(false);
+  }, [questions]);
+
   // "Encouragement" messages - now with more sarcasm
   const encouragementMessages = [
     "Wow, you actually got that one? Even a broken clock is right twice a day.",
