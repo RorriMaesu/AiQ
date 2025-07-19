@@ -1,3 +1,7 @@
+<p align="center">
+<img src="aiqlogo.png" alt="AiQ Logo" width="200"/>
+</p>
+
 AiQ - Advanced Cognitive Assessment ✨
 Overview 🧠
 AiQ is an interactive IQ test application designed to challenge conventional metrics of intelligence while providing an engaging user experience. The application presents users with a series of questions across different cognitive domains, including pattern recognition, verbal reasoning, and spatial intelligence.
@@ -27,21 +31,21 @@ Deployment: GitHub Pages
 Version Control: Git and GitHub
 
 Project Structure 📂
-AiQ/
-├── public/               # Public assets
-├── src/                  # Source files
-│   ├── components/       # React components
-│   │   ├── IntroPage.js  # Landing page
-│   │   ├── Question.js   # Question display
-│   │   ├── QuestionPage.js # Test page
-│   │   └── ResultsPage.js # Results display
-│   ├── data/             # Static data
-│   │   ├── questions.js  # Test questions
-│   │   └── results.js    # Result interpretations
-│   ├── styles/           # CSS styles
-│   ├── App.js            # Main application component
-│   └── index.js          # Entry point
-└── package.json          # Dependencies and scripts
+AiQ/ 
+├── public/ # Public assets 
+├── src/ # Source files 
+│ ├── components/ # React components 
+│ │ ├── IntroPage.js # Landing page 
+│ │ ├── Question.js # Question display 
+│ │ ├── QuestionPage.js # Test page 
+│ │ └── ResultsPage.js # Results display 
+│ ├── data/ # Static data 
+│ │ ├── questions.js # Test questions 
+│ │ └── results.js # Result interpretations 
+│ ├── styles/ # CSS styles 
+│ ├── App.js # Main application component 
+│ └── index.js # Entry point 
+└── package.json # Dependencies and scripts 
 
 Getting Started 🏁
 Prerequisites
@@ -53,6 +57,9 @@ Installation
 Clone the repository:
 
 git clone https://github.com/rorrimaesu/AiQ.git
+
+Navigate to the project directory:
+
 cd AiQ
 
 Install dependencies:
@@ -97,7 +104,7 @@ Push to the branch (git push origin feature/amazing-feature)
 Open a Pull Request
 
 License 📄
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache-2.0 License - see the LICENSE file for details.
 
 Acknowledgments 🙏
 Inspired by traditional IQ tests but designed to challenge their limitations
