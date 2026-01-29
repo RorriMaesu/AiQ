@@ -75,22 +75,26 @@
 @media (max-width: 768px) {
   /* Let the page scroll naturally */
   .question-page {
-    height: auto !important;
+    /* height: auto !important; remove to test */
+    height: 100dvh;
     min-height: 100dvh;
-    overflow: visible;
-    display: block; /* Stack normally */
+    overflow: hidden; /* Lock body */
+    display: flex; /* Flex again to hold sticky footer */
+    flex-direction: column;
   }
 
   .question-page-content {
-      overflow: visible;
+      overflow-y: auto; /* Scroll info */
       height: auto;
-      flex: none;
+      flex: 1; /* Grow to fill space above footer */
       padding: 0.5rem;
+      padding-bottom: 6rem; /* Add padding so content isn't hidden behind fixed footer */
   }
 
   /* Compact Status Bar */
   .status-bar {
       margin-bottom: 0.5rem;
+      flex-shrink: 0;
   }
   
   /* Hide the redundant stats block on mobile */
@@ -105,12 +109,32 @@
       font-size: 0.9rem;
   }
 
-  /* Footer Controls should just be at bottom of flow */
+  /* Footer Controls FIXED at bottom */
   .bottom-controls {
-      position: static;
-      margin-top: 1rem;
-      background: transparent;
-      border-top: none;
+      position: absolute; /* Fixed relative to page container */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin-top: 0;
+      background: var(--background-main); /* Ensure solid background */
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem;
+      z-index: 100; /* Ensure on top */
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.5); /* Shadow to separate from content */
+  }
+  
+  .hint-container {
+      margin: 0.25rem 0; /* Tighter margins */
+  }
+  
+  .hint-button {
+      padding: 0.6rem 1.2rem; /* Compact hint button */
+      font-size: 0.85rem;
+  }
+  
+  .next-button {
+      width: 90%; /* Wide button for easy tap */
+      padding: 0.8rem;
   }
 }
 
