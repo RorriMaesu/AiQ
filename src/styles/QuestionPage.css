@@ -72,21 +72,46 @@
   }
 }
 
-.question-page {
-  max-width: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  overflow: auto; /* Allow scrolling if content exceeds viewport */
-  height: 100vh;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Align to top instead of center */
-  padding-top: 1vh; /* Reduced padding at the top */
-  box-sizing: border-box; /* Include padding in height calculation */
+@media (max-width: 768px) {
+  /* Let the page scroll naturally */
+  .question-page {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible;
+    display: block; /* Stack normally */
+  }
+
+  .question-page-content {
+      overflow: visible;
+      height: auto;
+      flex: none;
+      padding: 0.5rem;
+  }
+
+  /* Compact Status Bar */
+  .status-bar {
+      margin-bottom: 0.5rem;
+  }
+  
+  /* Hide the redundant stats block on mobile */
+  .test-stats {
+      display: none;
+  }
+
+  /* Make timer warning smaller */
+  .time-warning, .encouragement-message {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+  }
+
+  /* Footer Controls should just be at bottom of flow */
+  .bottom-controls {
+      position: static;
+      margin-top: 1rem;
+      background: transparent;
+      border-top: none;
+  }
 }
 
 .question-page-content {
