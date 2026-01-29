@@ -260,9 +260,11 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
           />
         </div>
 
-        <div className="bottom-controls">
-          {/* Hint system - gives illusion of help */}
-          {!showHint ? (
+      </div>
+
+      <div className="bottom-controls">
+        {/* Hint system - gives illusion of help */}
+        {!showHint ? (
             <div className="hint-container">
               <button
                 className="hint-button"
@@ -290,9 +292,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
               {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Complete Test'}
             </button>
           </div>
-        </div>
-
-        {/* Subtle pressure message */}
+        
         <div className="pressure-message">
           High-performing test-takers typically complete this question in under 45 seconds.
         </div>
