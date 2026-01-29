@@ -32,7 +32,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies 📦
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Create .nojekyll file
         run: touch public/.nojekyll
