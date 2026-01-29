@@ -252,17 +252,16 @@
 
 /* Hint system - gives illusion of help */
 .bottom-controls {
-  margin-top: 0.3rem;
+  margin-top: auto; /* Push to bottom in flex container */
   display: flex;
   flex-direction: column;
   flex-shrink: 0; /* Prevent shrinking */
-  position: sticky; /* Make it stick to the bottom */
   width: 100%;
   box-sizing: border-box;
-  bottom: 0;
   background-color: var(--background-main); /* Match the background */
   padding: 0.25rem 0.25rem 0.5rem;
   z-index: 10; /* Ensure it stays on top */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separator */
 }
 
 .hint-container {

@@ -67,8 +67,9 @@
     height: 100%; /* Fill available space */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space */
-    overflow: hidden; /* Prevent scrolling if possible */
+    justify-content: flex-start; /* Start from top */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-x: hidden;
   }
 
   .question-header {
@@ -79,6 +80,7 @@
     padding: 0.25rem 0.5rem; /* Very compact header */
     margin-bottom: 0.5rem;
     min-height: auto;
+    flex-shrink: 0;
   }
 
   .question-number, .question-timer {
@@ -105,13 +107,14 @@
       -webkit-line-clamp: 2; /* Limit lines */
       -webkit-box-orient: vertical;
       overflow: hidden; 
+      flex-shrink: 0;
   }
 
   /* Make image very small if present */
   .question-image {
-      max-height: 10vh; 
+      max-height: 15vh; 
       margin-bottom: 0.25rem;
-      flex-shrink: 1; /* Allow shrinking */
+      flex-shrink: 0; /* Should maintain aspect ratio if possible */
   }
 
   /* Grid layout for options */
@@ -120,8 +123,8 @@
     grid-template-columns: 1fr 1fr; /* 2 Columns */
     gap: 0.5rem;
     margin-bottom: 0;
-    overflow-y: auto; /* allow scroll within options if absolutely needed */
-    flex-grow: 1; /* Take remaining space */
+    overflow-y: visible; /* Let container handle scroll */
+    flex-grow: 0; /* Don't force grow */
     padding-bottom: 0.5rem; /* Space for footer */
   }
   
