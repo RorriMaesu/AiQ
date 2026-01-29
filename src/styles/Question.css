@@ -112,35 +112,37 @@
 
   /* Make image very small if present */
   .question-image {
-      max-height: 15vh; 
+      max-height: 12vh; 
       margin-bottom: 0.25rem;
       flex-shrink: 0; /* Should maintain aspect ratio if possible */
   }
 
-  /* Grid layout for options */
+  /* Vertical Flex layout for options */
   .question-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Columns */
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem; /* Tight gap */
     margin-bottom: 0;
-    overflow-y: visible; /* Let container handle scroll */
-    flex-grow: 0; /* Don't force grow */
-    padding-bottom: 0.5rem; /* Space for footer */
+    overflow-y: visible; 
+    flex-grow: 1; 
+    padding-bottom: 0.25rem; 
   }
   
   .option {
-      padding: 0.4rem 0.5rem;
-      min-height: 3rem; /* Compact touch target */
-      font-size: 0.85rem;
+      padding: 0 0.75rem; /* No vertical padding, use flex align */
+      height: 2.8rem; /* Hard fixed height for consistency */
+      min-height: 0; /* Override default */
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin-bottom: 0;
+      width: 100%;
   }
 
-  /* Ensure last item in odd grid spans full width if needed, or keep 2 cols */
+  /* Remove grid specific styles */
   .option:last-child:nth-child(odd) {
-      grid-column: span 2;
+      grid-column: auto;
   }
 }
 
