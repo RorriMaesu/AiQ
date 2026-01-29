@@ -153,26 +153,28 @@
 
   /* Make sections min-height screen to enable step-by-step feel */
   .intro-section {
-      min-height: 90dvh; /* Nearly full screen */
+      min-height: 100dvh;
       justify-content: center;
       margin-bottom: 0;
-      padding-bottom: 4rem; /* Space for the button */
+      padding-bottom: 6rem; /* Space for the button */
       border-bottom: none;
       box-sizing: border-box;
-      /* Optional: alternating backgrounds or consistent look */
+      scroll-snap-align: start; /* Snap to start of section */
   }
   
   /* Show prompts on mobile */
   .continue-prompt {
       display: flex;
       position: absolute;
-      bottom: 1rem; /* Stick to bottom of the section */
+      bottom: 2rem; /* Stick to bottom of the section */
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       z-index: 10;
       animation: bounce 2s infinite; /* Attention grabbing bounce */
       background: linear-gradient(to top, rgba(15, 12, 41, 0.9), transparent);
+      padding-bottom: 1rem;
+      pointer-events: auto; /* Ensure clickable */
   }
 }
 
