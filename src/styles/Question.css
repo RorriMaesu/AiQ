@@ -63,7 +63,7 @@
 
 @media (max-width: 768px) {
   .question-container {
-    padding: 1rem;
+    padding: 1.5rem 1rem; /* INCREASED TOP PADDING */
     height: auto;
     /* IMPORTANT: Allow flex scrolling on mobile */
     overflow-y: auto; 
@@ -79,9 +79,10 @@
     background: rgba(0,0,0,0.2);
     padding: 0.75rem;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* INCREASED BOTTOM MARGIN */
     width: 100%;
     box-sizing: border-box;
+    margin-top: 0.5rem; /* ADDED TOP MARGIN WITHIN HEADER */
   }
 
   .question-number, .question-timer, .question-type {

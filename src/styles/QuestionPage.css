@@ -420,8 +420,8 @@
   .question-container {
     flex: 1; /* Take remaining space */
     overflow-y: auto; /* Scroll inside this container */
-    margin: 0.5rem 0; /* Add top/bottom margin */
-    padding: 1rem 0.5rem;
+    margin: 1rem 0 0.5rem 0; /* INCREASED TOP MARGIN */
+    padding: 1.5rem 0.75rem; /* INCREASED PADDING */
     height: auto;
     border-radius: 12px;
     z-index: 5;
