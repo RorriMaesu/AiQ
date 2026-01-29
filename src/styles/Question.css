@@ -75,17 +75,26 @@
   .question-header {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Center the timer */
     gap: 0.5rem;
-    padding: 0.25rem 0.5rem; /* Very compact header */
+    padding: 0.25rem 0.5rem;
     margin-bottom: 0.5rem;
     min-height: auto;
     flex-shrink: 0;
   }
 
-  .question-number, .question-timer {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.5rem; /* Compact badges */
+  /* Hide Question info on mobile to save space */
+  .question-number {
+      display: none;
+  }
+
+  .question-timer {
+      font-size: 0.85rem;
+      padding: 0.25rem 0.5rem;
+      width: 100%; /* Full width timer for better visibility */
+      justify-content: center;
+      background:rgba(0,0,0,0.2); /* Darker background for contrast */
+      border: none;
   }
   
   .question-type {
