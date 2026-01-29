@@ -96,6 +96,13 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
       ...answers,
       [questionId]: optionId,
     });
+    
+    // Auto-advance logic for smoother mobile experience
+    if (currentQuestionIndex < questions.length - 1) {
+        setTimeout(() => {
+             handleNextQuestion();
+        }, 600);
+    }
   };
 
   const handleNextQuestion = () => {
