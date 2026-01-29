@@ -411,139 +411,99 @@
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
+  /* Mobile Layout - Fixed viewport with scrolling content */
   .question-page {
-    /* Use dynamic viewport height to fix resizing issues on mobile browsers */
     height: 100dvh;
-    padding: 0;
-    overflow: hidden; /* Prevent body scroll */
-    position: fixed; /* Fix alignment issues */
+    min-height: 100dvh;
+    overflow: hidden; /* Lock body */
+    display: flex; /* Flex to hold sticky footer */
+    flex-direction: column;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
   }
 
   .question-page-content {
+    overflow-y: auto; /* Scroll info */
+    height: auto;
+    flex: 1; /* Grow to fill space above footer */
     padding: 0.5rem;
-    height: 100%; /* Fill the fixed container */
-    max-height: 100%;
+    padding-bottom: 7rem; /* Add padding so content isn't hidden behind fixed footer */
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Prevent double scroll */
   }
 
+  /* Compact Status Bar */
   .status-bar {
-    flex-shrink: 0; /* Don't shrink status bar */
-    margin-bottom: 0.5rem;
-  }
-
-  /* Compact stats for mobile */
-  .test-stats {
-    padding: 0.5rem;
-    margin-top: 0.25rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Explicit columns */
-    gap: 0.25rem;
-    align-items: start;
-  }
-
-  /* Make the middle stat (Remaining) smaller or hide if needed */
-  .stat:nth-child(2) {
-    display: none; /* Hide 'Remaining' on mobile to save space, redundant with progress bar */
+      margin-bottom: 0.25rem;
+      flex-shrink: 0;
   }
   
+  /* HIDE THE STATS BLOCK ENTIRELY ON MOBILE */
   .test-stats {
-    grid-template-columns: 1fr 1fr; /* Two columns now */
+      display: none !important;
   }
 
-  .stat-label {
-    font-size: 0.65rem;
-    margin-bottom: 0.1rem;
-  }
-
-  .stat-value {
-    font-size: 0.85rem;
-    white-space: nowrap; /* Prevent wrapping */
-  }
-
-  /* Make question container the main scrollable area */
-  .question-container {
-    flex: 1; /* Take remaining space */
-    overflow-y: auto; /* Scroll inside this container */
-    margin: 0.25rem 0; /* Minimal margin */
-    padding: 0.75rem; /* Tight padding */
-    height: auto;
-    border-radius: 12px;
-    z-index: 5;
-    background-color: var(--background-card); /* Ensure opacity */
-  }
-
-  .question-page-content {
-      gap: 0.25rem; /* Tight gap */
-      width: 100%; /* Ensure full width usage */
-      max-width: 100%;
-  }
-
-  .bottom-controls {
-    flex-shrink: 0; /* Keep buttons visible */
-    padding-bottom: env(safe-area-inset-bottom, 0.5rem); /* Handle iPhone notches */
-    background: var(--background-main); /* Ensure contrast */
-    position: relative; /* No sticky needed in flex layout */
-    z-index: 20;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.2); /* Shadow so it separates from content */
-    width: 100%;
-  }
-
-  .hint-button {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .next-button {
-    padding: 0.8rem 1.5rem;
-    width: 100%; /* Full width button for easier tapping */
-  }
-
-  .test-stats {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    justify-content: space-between;
-  }
-
-  .stat {
-    flex-direction: row;
-    justify-content: space-between;
-    width: 48%;
-    font-size: 0.8rem;
-  }
-
-  .encouragement-message,
-  .time-warning {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
+  /* Make timer warning smaller */
+  .time-warning, .encouragement-message {
+      padding: 0.4rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
   }
 
   .question-wrapper {
-    min-height: 0;
-    flex: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
   }
 
-  .question-container {
-    padding: 0.8rem;
-    margin-bottom: 0.5rem;
+  /* Footer Controls FIXED at bottom */
+  .bottom-controls {
+      position: absolute; /* Fixed relative to page container */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin-top: 0;
+      background: var(--background-main); /* Ensure solid background */
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem;
+      z-index: 100; /* Ensure on top */
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.5); /* Shadow to separate from content */
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
   }
-
+  
+  .hint-container {
+      margin: 0;
+      width: 100%;
+  }
+  
+  .hint-button {
+      padding: 0.6rem;
+      font-size: 0.85rem;
+      width: 100%;
+      border-radius: 8px; /* More rectangular for bar feel */
+  }
+  
+  .next-button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0;
+      border-radius: 8px;
+  }
+  
+  .navigation {
+      width: 100%;
+  }
+  
+  /* Reset other elements to defaults or simplified versions */
   .question-header {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.5rem;
-    font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
   }
+}
 
   .question-text {
     font-size: 1.2rem;
