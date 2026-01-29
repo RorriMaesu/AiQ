@@ -79,6 +79,18 @@
   }
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-5px) translateX(-50%);
+  }
+}
+
 .intro-container {
   max-width: 900px;
   margin: 0 auto;
@@ -91,6 +103,77 @@
   animation: fadeInUp 1s ease-out;
   position: relative;
   overflow: hidden;
+  /* Smooth scrolling internal to the container if needed */
+  scroll-behavior: smooth;
+}
+
+/* Sections for step-by-step mobile flow */
+.intro-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Ensure sections have some spacing */
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  min-height: auto; /* Default for desktop */
+}
+
+.intro-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Continue prompt styles */
+.continue-prompt {
+  display: none; /* Hidden by default on desktop */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-weight: 600;
+  animation: pulse 2s infinite;
+  padding: 1rem;
+}
+
+.continue-prompt .arrow-down {
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .intro-container {
+      padding: 1rem;
+      /* Remove fixed height constraints if any, let window scroll */
+      overflow: visible; 
+  }
+
+  /* Make sections min-height screen to enable step-by-step feel */
+  .intro-section {
+      min-height: 90dvh; /* Nearly full screen */
+      justify-content: center;
+      margin-bottom: 0;
+      padding-bottom: 4rem; /* Space for the button */
+      border-bottom: none;
+      box-sizing: border-box;
+      /* Optional: alternating backgrounds or consistent look */
+  }
+  
+  /* Show prompts on mobile */
+  .continue-prompt {
+      display: flex;
+      position: absolute;
+      bottom: 1rem; /* Stick to bottom of the section */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      z-index: 10;
+      animation: bounce 2s infinite; /* Attention grabbing bounce */
+      background: linear-gradient(to top, rgba(15, 12, 41, 0.9), transparent);
+  }
 }
 
 .intro-container::before {
