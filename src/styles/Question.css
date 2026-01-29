@@ -64,12 +64,12 @@
 @media (max-width: 768px) {
   .question-container {
     padding: 0.5rem !important; /* Minimal padding */
-    height: 100%; /* Fill available space */
+    height: auto; /* Let content determine height */
+    min-height: 100%; /* Ensure it fills at least the visible area */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Start from top */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    overflow-x: hidden;
+    overflow: visible; /* Let parent handle scrolling */
   }
 
   .question-header {

@@ -98,9 +98,10 @@
   flex-direction: column;
   flex: 1;
   overflow-y: auto; /* Allow vertical scrolling if needed */
+  overflow-x: hidden;
   box-sizing: border-box;
-  max-height: 98vh; /* Increased to use more of the viewport */
   position: relative; /* For absolute positioning of children if needed */
+  /* Removed max-height to let flex container handle sizing */
 }
 
 /* Status bar with psychological elements */
