@@ -18,6 +18,16 @@ const resultOptions = {
       title: "Intellectual Vacuum",
       description: "Scientists could study the empty space between your ears to better understand the concept of nothingness. Your thought process has all the complexity of a pet rock, except the rock might actually be more useful in a crisis.",
       advice: "Have you considered becoming a professional example of what not to do? You'd be a natural."
+    },
+    {
+      title: "Official Amoeba Status",
+      description: "Your test results are in, and we have good news! You qualify as a highly intelligent single-celled organism. An amoeba has basic survival instincts, and we're pretty sure you have those too. Probably.",
+      advice: "Photosynthesis isn't an option for humans, so you might need to find another way to contribute."
+    },
+    {
+      title: "Evolutionary U-Turn",
+      description: "You are the living proof that evolution doesn't always go forward. Sometimes it stops, looks around, and says 'Nah, let's go back to the primordial soup.' You are that soup.",
+      advice: "Avoid sharp objects and complex thoughts. Both could hurt you."
     }
   ],
   range21to40: [
@@ -35,6 +45,11 @@ const resultOptions = {
       title: "The Village Called, They're Missing Their Idiot",
       description: "You're what happens when natural selection takes a smoke break. Your thought process is so slow that by the time you've processed this insult, you'll probably have forgotten why you're offended.",
       advice: "Try not to breed. The gene pool is polluted enough already, thanks."
+    },
+    {
+      title: "Defective Toaster Oven",
+      description: "You have all the processing power of a generic toaster, but at least a toaster makes toast. You mostly just consume oxygen and space. It's truly a marvel.",
+      advice: "Don't try to multitask. Breathing and thinking at the same time might be risky."
     }
   ],
   range41to60: [
@@ -52,6 +67,11 @@ const resultOptions = {
       title: "Spectacularly Unremarkable",
       description: "Your mediocrity is almost impressive in its consistency. You're like a human screensaver—running in the background, serving no real purpose, and occasionally making random movements that seem meaningful but aren't.",
       advice: "Maybe try developing a personality to compensate for your intellectual shortcomings? I hear collecting weird things works for some people."
+    },
+    {
+      title: "Professional Breath Breather",
+      description: "You are doing a fantastic job at converting oxygen into carbon dioxide. Your contribution to the plant life cycle is noted and appreciated. Anything intellectual beyond that is a bonus.",
+      advice: "Keep breathing, you're doing great at that part."
     }
   ],
   range61to80: [
@@ -69,6 +89,11 @@ const resultOptions = {
       title: "Functioning Despite Yourself",
       description: "Your brain is like a hamster on a wheel—lots of activity, minimal progress. You've somehow managed to navigate life despite your obvious limitations, which is honestly more impressive than any score on this test.",
       advice: "Stick to routines. Unexpected situations might require actual thinking, and we wouldn't want to strain anything."
+    },
+    {
+      title: "Part-Time Genius",
+      description: "You have moments of brilliance, usually followed by hours of regretting your life choices. You're smart enough to know you could do better, but lazy enough not to.",
+      advice: "Coffee might help. Or panic. Whatever gets the gears turning."
     }
   ],
   range81to100: [
@@ -86,6 +111,11 @@ const resultOptions = {
       title: "Insufferable Know-It-Almost",
       description: "You're just smart enough to be annoying at dinner parties but not smart enough to realize nobody wants to hear your half-baked theories. You probably think this test actually measures intelligence, which tells us everything we need to know.",
       advice: "Consider using your almost-intelligence to develop self-awareness instead. It would be a better use of your limited mental resources."
+    },
+    {
+      title: "Google Search Expert",
+      description: "You probably Googled half the answers, didn't you? That's resourcefulness, which is a type of intelligence, I guess. You're smart enough to cheat the system but not smart enough to know we know.",
+      advice: "Your browser history is probably more interesting than your personality."
     }
   ]
 };

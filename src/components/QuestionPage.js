@@ -134,28 +134,36 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
         "The answer is a number. That narrows it down to... several options.",
         "If you stare at the sequence long enough, maybe the answer will magically appear. Or not.",
         "Try using your brain for this one. Oh wait...",
-        "It's a pattern. You know, like the pattern of disappointment you leave in everyone's lives."
+        "It's a pattern. You know, like the pattern of disappointment you leave in everyone's lives.",
+        "If you squint really hard, does it make more sense? No? Didn't think so.",
+        "Patterns are everywhere. Unfortunately, intelligence seems to be absent here."
       ],
       verbal: [
         "Words are hard, aren't they? Maybe try grunting at the screen instead.",
         "The relationship between words is like the relationship between you and intelligence - distant.",
         "If you don't know this one, maybe stick to picture books.",
         "It's an analogy. A-N-A-L-O-G-Y. Look it up after you're done failing this test.",
-        "Try sounding out the words slowly. It won't help with the answer, but it might be entertaining to watch."
+        "Try sounding out the words slowly. It won't help with the answer, but it might be entertaining to watch.",
+        "Reading is fundamental. Clearly, so is failing.",
+        "If Shakespeare were here, he'd be crying. And not because of the tragedy."
       ],
       spatial: [
         "Try imagining shapes in your head. No, a donut doesn't count.",
         "Close one eye, tilt your head, and pretend you understand geometry. Works every time.",
         "Spatial reasoning requires a brain. Maybe phone a friend?",
         "Have you tried turning the problem upside down? It won't help, but it might make you dizzy enough to forget how badly you're doing.",
-        "Maybe if you fold the screen in half, the answer will jump out at you. Or just break your device. Either way, problem solved!"
+        "Maybe if you fold the screen in half, the answer will jump out at you. Or just break your device. Either way, problem solved!",
+        "If you rotate your device, the answer might slide into place. (It won't).",
+        "It's just shapes. Toddlers do this with wooden blocks. Just saying."
       ],
       logical: [
         "Logic is clearly not your strong suit. Maybe try guessing?",
         "If P then Q. If you then confused. Welcome to your life.",
         "Try eliminating the wrong answers. Actually, with your track record, maybe eliminate the ones you think are right.",
         "This requires logical thinking, so... good luck with that.",
-        "Have you tried asking yourself what a smart person would do? Then do the opposite of whatever you were going to do."
+        "Have you tried asking yourself what a smart person would do? Then do the opposite of whatever you were going to do.",
+        "A, B, C, or D? Eeny, meeny, miny, moe is a valid strategy here.",
+        "Spock would be disappointed. Very disappointed."
       ]
     };
 
