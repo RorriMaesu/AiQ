@@ -207,7 +207,7 @@ const QuestionPage = ({ questions, onComplete, totalQuestions = 10 }) => {
   const remainingQuestions = questions.length - currentQuestionIndex - 1;
 
   return (
-    <div className="question-page vh-100 flex-center flex-column">
+    <div className="question-page vh-100 flex-column">
       <div className="question-page-content auto-scale-content">
         {/* Status bar with psychological elements */}
         <div className="status-bar">

@@ -65,14 +65,23 @@
   .question-container {
     padding: 1rem;
     height: auto;
-    max-height: none; /* Let the container grow */
-    overflow: visible; /* Remove internal scrollbar */
+    /* IMPORTANT: Allow flex scrolling on mobile */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    flex: 1; /* Grow to fill space */
+    min-height: 0; /* Prevent flex overflow bug */
   }
 
   .question-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    background: rgba(0,0,0,0.2);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .question-number, .question-timer, .question-type {
@@ -80,15 +89,6 @@
     width: 100%;
     justify-content: center;
     text-align: center;
-  }
-  
-  .question-header {
-     background: rgba(0,0,0,0.2);
-     padding: 0.75rem;
-     border-radius: 8px;
-     margin-bottom: 1rem;
-     width: 100%;
-     box-sizing: border-box;
   }
 
   .question-options {
