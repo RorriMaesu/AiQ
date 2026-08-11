@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import QuestionPage, { QUESTION_TIME_SECONDS } from './QuestionPage';
+import QuestionPage, { buildResult, QUESTION_TIME_SECONDS } from './QuestionPage';
 
 const sampleQuestions = [
   {
@@ -51,7 +51,7 @@ test('locks answers and finishes immediately on the final question', () => {
   fireEvent.click(screen.getByRole('button', { name: /lock answer & finish/i }));
 
   expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
-    score: 79,
+    score: expect.any(Number),
     rawScore: 100,
     correctCount: 2,
     timedOutCount: 0,
@@ -59,6 +59,10 @@ test('locks answers and finishes immediately on the final question', () => {
     passMark: 80,
     passed: false,
   }));
+  const result = onComplete.mock.calls[0][0];
+  expect(result.score).toBeGreaterThan(0);
+  expect(result.score).toBeLessThan(result.rawScore);
+  expect(result.comparison.averageScore).toBeGreaterThan(result.score);
 });
 
 test('auto-submits timeouts and completes when the final timer expires', () => {
@@ -75,11 +79,12 @@ test('auto-submits timeouts and completes when the final timer expires', () => {
   });
 
   expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
-    score: 0,
+    score: expect.any(Number),
     correctCount: 0,
     timedOutCount: 2,
     totalQuestions: 2,
   }));
+  expect(onComplete.mock.calls[0][0].score).toBeGreaterThan(0);
 });
 
 test('offers comedy instead of a useful hint', () => {
@@ -89,4 +94,20 @@ test('offers comedy instead of a useful hint', () => {
 
   expect(screen.getByText(/will not help|you-shaped problem|numbers know what they did|hiding in plain sight|warm custard|subtracting confidence/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /regret acknowledged/i })).toBeDisabled();
+});
+
+test('dramatically reduces positive scores and varies the reported result by attempt', () => {
+  const perfectAnswers = { 501: 'A', 502: 'B' };
+  const firstAttempt = buildResult(sampleQuestions, perfectAnswers, 0.1);
+  const secondAttempt = buildResult(sampleQuestions, perfectAnswers, 0.9);
+
+  expect(firstAttempt.rawScore).toBe(100);
+  expect(secondAttempt.rawScore).toBe(100);
+  expect(firstAttempt.score).toBeGreaterThan(0);
+  expect(firstAttempt.score).toBeLessThan(firstAttempt.rawScore);
+  expect(secondAttempt.score).toBeLessThan(secondAttempt.rawScore);
+  expect(firstAttempt.score).not.toBe(secondAttempt.score);
+  expect(firstAttempt.comparison.averageScore).toBeGreaterThan(firstAttempt.score);
+  expect(secondAttempt.comparison.averageScore).toBeGreaterThan(secondAttempt.score);
+  expect(firstAttempt.comparison.sampleSize).not.toBe(secondAttempt.comparison.sampleSize);
 });

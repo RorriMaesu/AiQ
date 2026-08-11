@@ -47,7 +47,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   const missedQuestions = result.review.filter(({ isCorrect }) => !isCorrect);
 
   const shareResult = async () => {
-    const text = `AIQ graded my brain with the confidence of a horoscope wearing a lab coat. ${result.correctCount}/${result.totalQuestions} answers were correct. Its verdict: ${verdict.title}.`;
+    const text = `AIQ graded my brain with the confidence of a horoscope wearing a lab coat. It gave me ${result.score}/100 and placed me in the ${result.comparison.percentile}th percentile. Its verdict: ${verdict.title}.`;
     try {
       if (navigator.share) {
         await navigator.share({ title: 'My AIQ result', text, url: window.location.href });
@@ -86,9 +86,42 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           <h1 id="result-title">{verdict.title}</h1>
           <p>{verdict.copy}</p>
           <div className="raw-score">
-            <strong>{result.correctCount} of {result.totalQuestions}</strong>
-            <span>actually correct · {result.timedOutCount} timed out</span>
+            <strong>{result.comparison.percentile}th percentile</strong>
+            <span>{result.comparison.higherPercentage}% of recent test takers scored higher</span>
           </div>
+        </div>
+      </section>
+
+      <section className="comparison-panel" aria-labelledby="comparison-title">
+        <div className="comparison-heading">
+          <p className="eyebrow">Peer comparison</p>
+          <h2 id="comparison-title">The average is showing off again.</h2>
+          <p>
+            Compared with {result.comparison.sampleSize.toLocaleString()} recent completions.
+            The bell curve has reviewed your application and chosen to proceed with other candidates.
+          </p>
+        </div>
+        <div className="comparison-grid">
+          <article className="comparison-you">
+            <span>Your score</span>
+            <strong>{result.score}</strong>
+            <small>out of 100-ish</small>
+          </article>
+          <article>
+            <span>Current average</span>
+            <strong>{result.comparison.averageScore}</strong>
+            <small>annoyingly comfortable</small>
+          </article>
+          <article>
+            <span>Your percentile</span>
+            <strong>{result.comparison.percentile}th</strong>
+            <small>the curve noticed</small>
+          </article>
+          <article>
+            <span>Scored higher</span>
+            <strong>{result.comparison.higherPercentage}%</strong>
+            <small>rude of them, honestly</small>
+          </article>
         </div>
       </section>
 
@@ -146,17 +179,17 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
 
       <section className="category-results" aria-labelledby="category-results-title">
         <div className="section-heading results-heading">
-          <p className="eyebrow">Real answers, fake conclusion</p>
-          <h2 id="category-results-title">What you actually solved</h2>
+          <p className="eyebrow">Four numbers in tiny lab coats</p>
+          <h2 id="category-results-title">Your cognitive weather map</h2>
         </div>
         <div className="result-grid">
           {result.categoryResults.map((category) => {
-            const percentage = category.total ? (category.correct / category.total) * 100 : 0;
+            const percentage = category.reportedScore;
             return (
               <article className={`result-card result-${category.type}`} key={category.type}>
                 <div className="result-card-topline">
                   <h3>{CATEGORY_NAMES[category.type]}</h3>
-                  <strong>{category.correct}/{category.total}</strong>
+                  <strong>{category.reportedScore}<small>/100</small></strong>
                 </div>
                 <div className="mini-track" aria-hidden="true">
                   <span style={{ width: `${percentage}%` }} />

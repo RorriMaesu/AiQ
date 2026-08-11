@@ -8,6 +8,46 @@ const PASS_MARK = 80;
 const SCORE_CEILING = 79;
 const TIMEOUT_ANSWER = '__timeout__';
 
+const normalizeSeed = (value) => {
+  if (!Number.isFinite(value)) {
+    return 0.5;
+  }
+  return Math.abs(value % 1);
+};
+
+const buildReportedScore = (rawScore, timedOutCount, totalQuestions, seed) => {
+  if (rawScore <= 0) {
+    return 3 + Math.floor(seed * 6);
+  }
+
+  const reductionFactor = 0.31 + (seed * 0.24);
+  const timeoutPenalty = totalQuestions
+    ? Math.round((timedOutCount / totalQuestions) * 6)
+    : 0;
+  const reducedScore = Math.round(rawScore * reductionFactor) - timeoutPenalty;
+
+  return Math.max(1, Math.min(rawScore - 1, reducedScore, SCORE_CEILING));
+};
+
+const buildComparison = (reportedScore, seed) => {
+  const averageBaseline = 64 + Math.floor(seed * 11);
+  const averageScore = Math.min(89, Math.max(
+    averageBaseline,
+    reportedScore + 16 + Math.floor(seed * 8)
+  ));
+  const percentile = Math.max(3, Math.min(
+    39,
+    Math.round((reportedScore / averageScore) * 36)
+  ));
+
+  return {
+    averageScore,
+    percentile,
+    higherPercentage: 100 - percentile,
+    sampleSize: 3200 + Math.floor(seed * 11600),
+  };
+};
+
 const HINTS = {
   pattern: [
     'There is definitely a pattern. Locating it remains a you-shaped problem.',
@@ -43,7 +83,8 @@ const HINTS = {
   ],
 };
 
-const buildResult = (questions, answers) => {
+const buildResult = (questions, answers, randomValue = Math.random()) => {
+  const seed = normalizeSeed(randomValue);
   const review = questions.map((question) => {
     const selectedOption = answers[question.id];
     const timedOut = selectedOption === TIMEOUT_ANSWER || !selectedOption;
@@ -63,17 +104,29 @@ const buildResult = (questions, answers) => {
   const correctCount = review.filter(({ isCorrect }) => isCorrect).length;
   const timedOutCount = review.filter(({ timedOut }) => timedOut).length;
   const rawScore = Math.round((correctCount / questions.length) * 100);
-  const categoryResults = ['pattern', 'verbal', 'spatial', 'logical'].map((type) => {
+  const reportedScore = buildReportedScore(rawScore, timedOutCount, questions.length, seed);
+  const categoryResults = ['pattern', 'verbal', 'spatial', 'logical'].map((type, index) => {
     const categoryQuestions = review.filter((item) => item.type === type);
+    const categoryCorrect = categoryQuestions.filter(({ isCorrect }) => isCorrect).length;
+    const categoryRawScore = categoryQuestions.length
+      ? Math.round((categoryCorrect / categoryQuestions.length) * 100)
+      : 0;
+    const categorySeed = (seed + ((index + 1) * 0.173)) % 1;
+    const categoryReduction = 0.28 + (categorySeed * 0.26);
+    const categoryReportedScore = categoryRawScore <= 0
+      ? 4 + Math.floor(categorySeed * 7)
+      : Math.max(2, Math.min(categoryRawScore - 1, Math.round(categoryRawScore * categoryReduction)));
+
     return {
       type,
-      correct: categoryQuestions.filter(({ isCorrect }) => isCorrect).length,
+      correct: categoryCorrect,
       total: categoryQuestions.length,
+      reportedScore: categoryReportedScore,
     };
   });
 
   return {
-    score: Math.min(rawScore, SCORE_CEILING),
+    score: reportedScore,
     rawScore,
     correctCount,
     timedOutCount,
@@ -81,6 +134,7 @@ const buildResult = (questions, answers) => {
     passMark: PASS_MARK,
     scoreCeiling: SCORE_CEILING,
     passed: false,
+    comparison: buildComparison(reportedScore, seed),
     categoryResults,
     review,
   };
@@ -274,5 +328,13 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
   );
 };
 
-export { buildResult, PASS_MARK, QUESTION_TIME_SECONDS, SCORE_CEILING, TIMEOUT_ANSWER };
+export {
+  buildComparison,
+  buildReportedScore,
+  buildResult,
+  PASS_MARK,
+  QUESTION_TIME_SECONDS,
+  SCORE_CEILING,
+  TIMEOUT_ANSWER,
+};
 export default QuestionPage;

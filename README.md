@@ -15,6 +15,7 @@ AIQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 qu
 - accessible answer buttons and keyboard-friendly interactions
 - responsive layouts designed for natural scrolling on desktop and mobile
 - deliberately useless hints, an eight-second auto-submit timer, and one-way locked answers
+- dynamic reported scores, peer comparisons, and category profiles that change between attempts
 - a suspiciously authoritative verdict followed by an explicit lesson about the limits of IQ-style measurement
 - honest category results and answer explanations separated from the intentionally unreliable verdict
 
