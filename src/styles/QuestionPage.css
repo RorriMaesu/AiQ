@@ -68,12 +68,74 @@
 
 .progress-copy {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  margin-bottom: 0.55rem;
+  margin: 0;
   color: var(--muted);
   font-size: 0.71rem;
   font-weight: 760;
   letter-spacing: 0.03em;
+}
+
+.progress-topline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.55rem;
+}
+
+.timer-badge {
+  display: inline-flex;
+  min-width: 4.4rem;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.38rem 0.55rem;
+  color: var(--night);
+  background: var(--lime);
+  border-radius: 10px;
+  box-shadow: 0 4px 0 #779d1f;
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.timer-badge strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.timer-badge span {
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timer-badge.timer-urgent {
+  color: #fff;
+  background: #ef476f;
+  box-shadow: 0 4px 0 #99233f;
+  animation: timer-pulse 700ms ease-in-out infinite alternate;
+}
+
+.timer-track {
+  height: 0.3rem;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.timer-track span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ef476f, var(--peach), var(--lime));
+  border-radius: inherit;
+  transition: width 900ms linear;
+}
+
+@keyframes timer-pulse {
+  to { transform: scale(1.06) rotate(-1deg); }
 }
 
 .quiz-layout {
@@ -101,6 +163,10 @@
   display: grid;
   gap: 0.6rem;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+
+.navigation-buttons.single-action {
+  grid-template-columns: 1fr;
 }
 
 .sidebar-card {
@@ -192,8 +258,7 @@
   margin: 0;
 }
 
-.next-button,
-.previous-button {
+.next-button {
   display: flex;
   width: 100%;
   min-height: 3.7rem;
@@ -209,25 +274,6 @@
   font-weight: 900;
   text-align: left;
   transition: transform 160ms ease, box-shadow 160ms ease;
-}
-
-.previous-button {
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: none;
-  font-weight: 800;
-}
-
-.previous-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.previous-button:disabled {
-  color: #667286;
-  background: rgba(255, 255, 255, 0.025);
-  border-color: rgba(255, 255, 255, 0.07);
 }
 
 .next-button:hover:not(:disabled) {
@@ -288,6 +334,15 @@
   .progress-panel {
     top: 0.4rem;
     margin-top: 1.4rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  .progress-topline {
+    gap: 0.6rem;
+  }
+
+  .timer-badge {
+    min-width: 3.9rem;
   }
 
   .quiz-sidebar {

@@ -16,28 +16,28 @@ const IntroPage = ({ onStartTest }) => (
         <span>AIQ</span>
       </a>
       <div className="nav-actions">
-        <span className="nav-pill">100% unlicensed brain science</span>
+        <span className="nav-pill">Highly official-looking brain science</span>
         <button className="nav-start-button" type="button" onClick={onStartTest}>
-          Start 20-question test <span aria-hidden="true">→</span>
+          Begin timed test <span aria-hidden="true">→</span>
         </button>
       </div>
     </nav>
 
     <section className="intro-hero" id="top">
       <div className="hero-copy">
-        <p className="eyebrow">A tiny test for your very large thoughts</p>
-        <h1>How loud is your brain today</h1>
+        <p className="eyebrow">20 questions · 8 seconds each · no mercy</p>
+        <h1>Prove your brain before the clock does</h1>
         <p className="hero-lede">
-          Twenty quick questions. Four kinds of thinking. One deeply unofficial score.
-          The question mix stays fresh, even when your strategy does not.
+          A rapid-fire intelligence test promising one suspiciously precise verdict.
+          Think fast; confidence is apparently a scoring method now.
         </p>
 
         <div className="hero-actions">
           <button className="primary-button" type="button" onClick={onStartTest}>
-            Start the 20-question test
+            Start the timed IQ test
             <span aria-hidden="true">→</span>
           </button>
-          <span className="time-note">About 8 minutes · untimed · no fake paywall</span>
+          <span className="time-note">8 seconds each · auto-submit at zero · no pausing</span>
         </div>
 
         <dl className="hero-stats" aria-label="Test details">
@@ -69,9 +69,9 @@ const IntroPage = ({ onStartTest }) => (
         </div>
         <div className="receipt-lines">
           <p><span>Fresh question mix</span><strong>Included</strong></p>
-          <p><span>Needless pressure</span><strong>Removed</strong></p>
-          <p><span>Useful explanations</span><strong>Included</strong></p>
-          <p><span>Scientific validity</span><strong>Absolutely not</strong></p>
+          <p><span>Needless pressure</span><strong>Included</strong></p>
+          <p><span>Useful hints</span><strong>Legally unavailable</strong></p>
+          <p><span>Scientific validity</span><strong>Pending review</strong></p>
         </div>
         <p className="receipt-total"><span>TOTAL EGO AT RISK</span><strong>$0.00</strong></p>
       </aside>
@@ -94,14 +94,14 @@ const IntroPage = ({ onStartTest }) => (
     </section>
 
     <section className="fine-print">
-      <p className="eyebrow">The unusually readable fine print</p>
-      <h2>This is comedy, not a diagnosis.</h2>
+      <p className="eyebrow">The legally soothing fine print</p>
+      <h2>This is entertainment, not a diagnosis.</h2>
       <p>
-        AIQ measures how you answered this particular set of puzzles today. It does not measure
-        your worth, potential, creativity, wisdom, or ability to find the good snacks.
+        The clock will be rude, the hints will be worse, and the final verdict will explain
+        why an official-looking number should not get the last word on your intelligence.
       </p>
       <button className="secondary-button" type="button" onClick={onStartTest}>
-        I understand. Bring on the puzzles.
+        I understand. Start the clock.
       </button>
     </section>
   </main>

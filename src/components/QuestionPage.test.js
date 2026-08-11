@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import QuestionPage from './QuestionPage';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import QuestionPage, { QUESTION_TIME_SECONDS } from './QuestionPage';
 
 const sampleQuestions = [
   {
@@ -33,26 +33,60 @@ const sampleQuestions = [
 ];
 
 beforeEach(() => {
+  jest.useFakeTimers();
   window.scrollTo = jest.fn();
 });
 
-test('preserves answers when navigating back and finishes immediately on the final question', () => {
+afterEach(() => {
+  jest.useRealTimers();
+});
+
+test('locks answers and finishes immediately on the final question', () => {
   const onComplete = jest.fn();
   render(<QuestionPage questions={sampleQuestions} onComplete={onComplete} />);
 
   fireEvent.click(screen.getByRole('button', { name: /^Three$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /^Next/i }));
-  fireEvent.click(screen.getByRole('button', { name: /previous/i }));
-
-  expect(screen.getByRole('button', { name: /^Three$/i })).toHaveAttribute('aria-pressed', 'true');
-
-  fireEvent.click(screen.getByRole('button', { name: /^Next/i }));
+  fireEvent.click(screen.getByRole('button', { name: /lock answer & continue/i }));
   fireEvent.click(screen.getByRole('button', { name: /^Correct$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /finish now/i }));
+  fireEvent.click(screen.getByRole('button', { name: /lock answer & finish/i }));
 
   expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
-    score: 100,
+    score: 79,
+    rawScore: 100,
     correctCount: 2,
+    timedOutCount: 0,
+    totalQuestions: 2,
+    passMark: 80,
+    passed: false,
+  }));
+});
+
+test('auto-submits timeouts and completes when the final timer expires', () => {
+  const onComplete = jest.fn();
+  render(<QuestionPage questions={sampleQuestions} onComplete={onComplete} />);
+
+  act(() => {
+    jest.advanceTimersByTime(QUESTION_TIME_SECONDS * 1000);
+  });
+  expect(screen.getByRole('heading', { name: /second test question/i })).toBeInTheDocument();
+
+  act(() => {
+    jest.advanceTimersByTime(QUESTION_TIME_SECONDS * 1000);
+  });
+
+  expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
+    score: 0,
+    correctCount: 0,
+    timedOutCount: 2,
     totalQuestions: 2,
   }));
+});
+
+test('offers comedy instead of a useful hint', () => {
+  render(<QuestionPage questions={sampleQuestions} onComplete={jest.fn()} />);
+
+  fireEvent.click(screen.getByRole('button', { name: /give me a useless hint/i }));
+
+  expect(screen.getByText(/will not help|you-shaped problem|numbers know what they did/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /regret acknowledged/i })).toBeDisabled();
 });
