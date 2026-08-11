@@ -15,7 +15,12 @@ const IntroPage = ({ onStartTest }) => (
         <span className="brand-mark" aria-hidden="true">A?</span>
         <span>AIQ</span>
       </a>
-      <span className="nav-pill">100% unlicensed brain science</span>
+      <div className="nav-actions">
+        <span className="nav-pill">100% unlicensed brain science</span>
+        <button className="nav-start-button" type="button" onClick={onStartTest}>
+          Start 20-question test <span aria-hidden="true">→</span>
+        </button>
+      </div>
     </nav>
 
     <section className="intro-hero" id="top">
@@ -23,21 +28,21 @@ const IntroPage = ({ onStartTest }) => (
         <p className="eyebrow">A tiny test for your very large thoughts</p>
         <h1>How loud is your brain today</h1>
         <p className="hero-lede">
-          Twelve quick questions. Four kinds of thinking. One deeply unofficial score.
+          Twenty quick questions. Four kinds of thinking. One deeply unofficial score.
           The question mix stays fresh, even when your strategy does not.
         </p>
 
         <div className="hero-actions">
           <button className="primary-button" type="button" onClick={onStartTest}>
-            Test my questionable genius
+            Start the 20-question test
             <span aria-hidden="true">→</span>
           </button>
-          <span className="time-note">About 5 minutes · no email · no fake paywall</span>
+          <span className="time-note">About 8 minutes · untimed · no fake paywall</span>
         </div>
 
         <dl className="hero-stats" aria-label="Test details">
           <div>
-            <dt>12</dt>
+            <dt>20</dt>
             <dd>questions per round</dd>
           </div>
           <div>

@@ -44,7 +44,7 @@ const buildResult = (questions, answers) => {
   };
 };
 
-const QuestionPage = ({ questions, onComplete }) => {
+const QuestionPage = ({ questions, onComplete, onExit }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showHint, setShowHint] = useState(false);
@@ -62,10 +62,8 @@ const QuestionPage = ({ questions, onComplete }) => {
   }, [questions]);
 
   useEffect(() => {
-    if (currentQuestionIndex > 0) {
-      headingTarget.current?.focus({ preventScroll: true });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    headingTarget.current?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: currentQuestionIndex === 0 ? 'auto' : 'smooth' });
   }, [currentQuestionIndex]);
 
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -89,6 +87,15 @@ const QuestionPage = ({ questions, onComplete }) => {
     setShowHint(false);
   };
 
+  const handlePrevious = () => {
+    if (currentQuestionIndex === 0) {
+      return;
+    }
+
+    setCurrentQuestionIndex((index) => index - 1);
+    setShowHint(false);
+  };
+
   return (
     <main className="quiz-page">
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
@@ -96,11 +103,14 @@ const QuestionPage = ({ questions, onComplete }) => {
           <span className="brand-mark" aria-hidden="true">A?</span>
           <span>AIQ</span>
         </a>
-        <p>Round in progress <span aria-hidden="true">·</span> dignity optional</p>
+        <div className="quiz-header-actions">
+          <p>{questions.length} questions <span aria-hidden="true">·</span> untimed</p>
+          <button className="exit-button" type="button" onClick={onExit}>Exit test</button>
+        </div>
       </header>
 
       <div className="progress-panel" id="quiz">
-        <div className="progress-copy">
+        <div className="progress-copy" aria-live="polite">
           <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
           <span>{completedCount} answered</span>
         </div>
@@ -119,6 +129,33 @@ const QuestionPage = ({ questions, onComplete }) => {
         />
 
         <aside className="quiz-sidebar" aria-label="Question controls">
+          <div className="quiz-navigation">
+            <div className="navigation-buttons">
+              <button
+                className="previous-button"
+                type="button"
+                onClick={handlePrevious}
+                disabled={currentQuestionIndex === 0}
+              >
+                <span aria-hidden="true">←</span> Previous
+              </button>
+              <button
+                className="next-button"
+                type="button"
+                onClick={handleNext}
+                disabled={!selectedOption}
+              >
+                {isLastQuestion ? 'Finish now' : 'Next'}
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+            <p className="navigation-status">
+              {selectedOption
+                ? (isLastQuestion ? 'Your result is ready—no timer, no waiting.' : 'Answer saved. You can move on or go back anytime.')
+                : 'Choose an answer to continue.'}
+            </p>
+          </div>
+
           <div className="sidebar-card hint-card">
             <span className="sidebar-kicker">Stuck-ish?</span>
             {showHint ? (
@@ -142,16 +179,6 @@ const QuestionPage = ({ questions, onComplete }) => {
             <p>questions waiting patiently</p>
           </div>
 
-          <button
-            className="next-button"
-            type="button"
-            onClick={handleNext}
-            disabled={!selectedOption}
-          >
-            {isLastQuestion ? 'Reveal my brain weather' : 'Next question'}
-            <span aria-hidden="true">→</span>
-          </button>
-          {!selectedOption && <p className="selection-nudge">Choose an answer to continue.</p>}
         </aside>
       </div>
     </main>

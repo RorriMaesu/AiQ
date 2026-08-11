@@ -36,14 +36,19 @@ beforeEach(() => {
   window.scrollTo = jest.fn();
 });
 
-test('includes the final selected answer in the score', () => {
+test('preserves answers when navigating back and finishes immediately on the final question', () => {
   const onComplete = jest.fn();
   render(<QuestionPage questions={sampleQuestions} onComplete={onComplete} />);
 
   fireEvent.click(screen.getByRole('button', { name: /^Three$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /next question/i }));
+  fireEvent.click(screen.getByRole('button', { name: /^Next/i }));
+  fireEvent.click(screen.getByRole('button', { name: /previous/i }));
+
+  expect(screen.getByRole('button', { name: /^Three$/i })).toHaveAttribute('aria-pressed', 'true');
+
+  fireEvent.click(screen.getByRole('button', { name: /^Next/i }));
   fireEvent.click(screen.getByRole('button', { name: /^Correct$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /reveal my brain weather/i }));
+  fireEvent.click(screen.getByRole('button', { name: /finish now/i }));
 
   expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
     score: 100,

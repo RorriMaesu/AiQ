@@ -14,12 +14,39 @@
   gap: 1rem;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-start-button {
+  display: inline-flex;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.85rem;
+  color: var(--night);
+  background: var(--lime);
+  border: 1px solid var(--lime);
+  border-radius: 10px;
+  font-size: 0.74rem;
+  font-weight: 900;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.nav-start-button:hover {
+  background: #d9ff76;
+  transform: translateY(-1px);
+}
+
 .intro-hero {
   display: grid;
-  min-height: 700px;
+  min-height: 620px;
   align-items: center;
   gap: clamp(2rem, 6vw, 6rem);
-  padding: clamp(3.5rem, 8vw, 7.5rem) 0;
+  padding: clamp(2.75rem, 6vw, 5.5rem) 0;
   grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.75fr);
 }
 
@@ -65,7 +92,7 @@
 .hero-stats {
   display: flex;
   gap: 0;
-  margin: 3.5rem 0 0;
+  margin: 2.7rem 0 0;
 }
 
 .hero-stats div {
@@ -311,17 +338,23 @@
   }
 
   .site-nav .nav-pill {
-    max-width: 9.5rem;
-    text-align: center;
+    display: none;
+  }
+
+  .nav-start-button {
+    width: auto;
+    min-height: 2.55rem;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.68rem;
   }
 
   .intro-hero {
     gap: 3rem;
-    padding: 4.5rem 0 5rem;
+    padding: 2.5rem 0 4rem;
   }
 
   .hero-copy h1 {
-    font-size: clamp(3.25rem, 17vw, 5rem);
+    font-size: clamp(3rem, 16vw, 4.7rem);
   }
 
   .hero-actions {

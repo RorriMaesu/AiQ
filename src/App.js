@@ -6,7 +6,7 @@ import ResultsPage from './components/ResultsPage';
 import allQuestions from './data/questions';
 import { selectQuestionSet, updateRecentQuestionIds } from './utils/questionSelection';
 
-const QUESTION_COUNT = 12;
+const QUESTION_COUNT = 20;
 const RECENT_QUESTIONS_KEY = 'aiq-recent-question-ids';
 
 const getRecentQuestionIds = () => {
@@ -66,7 +66,11 @@ function App() {
       {currentPage === 'intro' && <IntroPage onStartTest={beginTest} />}
 
       {currentPage === 'questions' && (
-        <QuestionPage questions={questions} onComplete={completeTest} />
+        <QuestionPage
+          questions={questions}
+          onComplete={completeTest}
+          onExit={() => setCurrentPage('intro')}
+        />
       )}
 
       {currentPage === 'results' && result && (

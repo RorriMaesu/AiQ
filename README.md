@@ -6,7 +6,7 @@
 
 **[Try the live demo](https://rorrimaesu.github.io/AiQ/)**
 
-AIQ is a humorous puzzle test that treats the experience seriously and the score lightly. Each round draws 12 questions from a balanced 100-question vault covering patterns, verbal reasoning, spatial thinking, and logic.
+AIQ is a humorous puzzle test that treats the experience seriously and the score lightly. Each untimed round draws 20 questions from a balanced 100-question vault covering patterns, verbal reasoning, spatial thinking, and logic.
 
 ## What changed
 

@@ -126,7 +126,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         </div>
         <div className="action-buttons">
           <button className="primary-button" type="button" onClick={onRestart}>
-            Try 12 different questions <span aria-hidden="true">↻</span>
+            Try {result.totalQuestions} different questions <span aria-hidden="true">↻</span>
           </button>
           <button className="secondary-button" type="button" onClick={shareResult}>
             {shareLabel}
