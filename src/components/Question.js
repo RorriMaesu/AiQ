@@ -1,62 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../styles/Question.css';
 
-const Question = ({ question, onAnswer, timeLeft, totalQuestions = 10 }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  // Reset selected option when question changes
-  useEffect(() => {
-    setSelectedOption(null);
-    // Log the question to verify it's changing
-    console.log('Rendering question:', question.question, 'uniqueKey:', question.uniqueKey);
-  }, [question.id, question.uniqueKey]);
-
-  const handleOptionSelect = (optionId) => {
-    setSelectedOption(optionId);
-    onAnswer(question.id, optionId);
-  };
-
-  return (
-    <div className="question-container auto-scale-content">
-      <div className="question-header">
-        <div className="question-number">Question {question.id} of {totalQuestions}</div>
-        <div className="question-timer">Time Remaining: {timeLeft}s</div>
-        <div className="question-type">{question.type.toUpperCase()}</div>
-      </div>
-
-      <div className="question-content">
-        <h2 className="question-text">{question.question}</h2>
-        {question.description && (
-          question.type === 'pattern' ? (
-            <div className="sequence-display">{question.description}</div>
-          ) : (
-            <div className="question-description">{question.description}</div>
-          )
-        )}
-        {question.image && (
-          <div className="question-image">
-            <img src={question.image} alt="Question visual" className="responsive-image" />
-          </div>
-        )}
-
-        <div className="question-options">
-          {question.options.map((option) => (
-            <div
-              key={option.id}
-              className={`option ${selectedOption === option.id ? 'selected' : ''}`}
-              onClick={() => handleOptionSelect(option.id)}
-            >
-              <div className="option-id">{option.id}</div>
-              <div className="option-content">
-                {option.text}
-                {option.image && <img src={option.image} alt={`Option ${option.id}`} className="responsive-image" />}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+const TYPE_LABELS = {
+  pattern: 'Pattern spotting',
+  verbal: 'Word wrangling',
+  spatial: 'Spatial thinking',
+  logical: 'Logic juggling',
 };
+
+const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQuestions }) => (
+  <section className="question-card" aria-labelledby={`question-${question.id}`}>
+    <div className="question-meta">
+      <span className={`type-chip type-${question.type}`}>{TYPE_LABELS[question.type]}</span>
+      <span>{questionNumber} / {totalQuestions}</span>
+    </div>
+
+    <div className="question-copy">
+      <h1 id={`question-${question.id}`}>{question.question}</h1>
+      {question.description && (
+        <p className={question.type === 'pattern' ? 'sequence-display' : 'question-description'}>
+          {question.description}
+        </p>
+      )}
+    </div>
+
+    <div className="question-options" role="group" aria-label="Answer choices">
+      {question.options.map((option) => {
+        const isSelected = selectedOption === option.id;
+        return (
+          <button
+            key={option.id}
+            className={`option-button${isSelected ? ' selected' : ''}`}
+            type="button"
+            aria-pressed={isSelected}
+            onClick={() => onAnswer(question.id, option.id)}
+          >
+            <span className="option-letter" aria-hidden="true">{option.id}</span>
+            <span className="option-text">{option.text}</span>
+            <span className="option-check" aria-hidden="true">{isSelected ? '✓' : ''}</span>
+          </button>
+        );
+      })}
+    </div>
+  </section>
+);
 
 export default Question;

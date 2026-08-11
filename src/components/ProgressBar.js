@@ -1,18 +1,18 @@
 import React from 'react';
 import '../styles/ProgressBar.css';
 
-const ProgressBar = ({ progress }) => {
-  return (
-    <div className="progress-container">
-      <div className="progress-bar">
-        <div 
-          className="progress-fill" 
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-      <div className="progress-text">{Math.round(progress)}% Complete</div>
-    </div>
-  );
-};
+const ProgressBar = ({ progress, answeredProgress = 0 }) => (
+  <div
+    className="progress-track"
+    role="progressbar"
+    aria-valuenow={Math.round(progress)}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Quiz progress"
+  >
+    <span className="answered-progress" style={{ width: `${answeredProgress}%` }} />
+    <span className="current-progress" style={{ width: `${progress}%` }} />
+  </div>
+);
 
 export default ProgressBar;

@@ -1,72 +1,50 @@
 <p align="center">
-  <img src="aiqlogo.png" alt="AiQ Logo" width="200"/>
+  <img src="aiqlogo.png" alt="AIQ logo" width="200" />
 </p>
 
-# AiQ - Advanced Cognitive Assessment ✨
+# AIQ — The Deeply Unofficial Intelligence Test
 
-**[🚀 Try the Live Demo](https://rorrimaesu.github.io/AiQ/)**
+**[Try the live demo](https://rorrimaesu.github.io/AiQ/)**
 
-## Overview 🧠
-AiQ is an interactive IQ test application designed to challenge conventional metrics of intelligence while providing an engaging user experience. The application presents users with a series of questions across different cognitive domains, including pattern recognition, verbal reasoning, and spatial intelligence.
+AIQ is a humorous puzzle test that treats the experience seriously and the score lightly. Each round draws 12 questions from a balanced 100-question vault covering patterns, verbal reasoning, spatial thinking, and logic.
 
-## Features 🚀
-*   **Engaging User Interface:** Modern, responsive design with smooth animations and transitions.
-*   **Multiple Question Types:** Pattern recognition, verbal reasoning, and spatial intelligence questions.
-*   **Interactive Test Experience:** Real-time feedback, timer, and progress tracking.
-*   **Psychological Elements:** Incorporates psychological principles in the UI/UX design.
-*   **Detailed Results Analysis:** Comprehensive breakdown of performance with personalized insights.
-*   **Mobile-Optimized:** Fully responsive design that works on all devices, including in-app browsers.
-*   **No-Scroll Design:** Questions are designed to fit within the viewport layout.
+## What changed
 
-## Technology Stack 🛠️
-*   **Frontend:** React.js with Hooks.
-*   **Styling:** Custom CSS3 with responsive design.
-*   **Deployment:** GitHub Pages.
+- 100 validated questions, evenly split across four categories
+- balanced random selection with recent-question history to reduce repeats
+- accessible answer buttons and keyboard-friendly interactions
+- responsive layouts designed for natural scrolling on desktop and mobile
+- useful hints, honest scoring, category results, and answer explanations
+- explicit satire instead of fabricated users, scarcity, or scientific claims
 
-## Getting Started 🏁
+AIQ is entertainment, not a standardized IQ assessment or diagnosis.
 
-### Prerequisites
-*   Node.js (v14.0.0 or later)
-*   npm (v6.0.0 or later)
+## Run locally
 
-### Installation
+```bash
+npm ci
+npm start
+```
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/rorrimaesu/AiQ.git
-    ```
-2.  Navigate to the project directory:
-    ```bash
-    cd AiQ
-    ```
-3.  Install dependencies:
-    ```bash
-    npm install
-    ```
-4.  Start the development server:
-    ```bash
-    npm start
-    ```
-    Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Run the automated checks and production build with:
 
-### Deployment
-To deploy updates to GitHub Pages:
+```bash
+npm test -- --runInBand
+npm run build
+```
+
+## Deploy
+
+The project is configured for GitHub Pages at `/AiQ/`:
+
 ```bash
 npm run deploy
 ```
 
-## Contributing 🤝
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Technology
 
-1.  Fork the repository.
-2.  Create your feature branch (`git checkout -b feature/amazing-feature`).
-3.  Commit your changes (`git commit -m 'Add some amazing feature'`).
-4.  Push to the branch (`git push origin feature/amazing-feature`).
-5.  Open a Pull Request.
+React 18, Create React App, and custom responsive CSS.
 
-## License 📄
-This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details.
+## License
 
-## Acknowledgments 🙏
-*   Inspired by traditional IQ tests but designed to challenge their limitations.
-*   UI/UX design influenced by modern psychological principles.
+Apache-2.0. See [LICENSE](LICENSE).
