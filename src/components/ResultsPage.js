@@ -8,18 +8,46 @@ const CATEGORY_NAMES = {
   logical: 'Logic',
 };
 
-const getVerdict = () => ({
-  title: 'Denied by design',
-  copy: 'The machine has spoken with the confidence of a printer error. You did not pass. Neither can anyone else.',
-});
+const getVerdict = (result) => {
+  const accuracy = result.totalQuestions ? result.correctCount / result.totalQuestions : 0;
+
+  if (result.timedOutCount >= Math.ceil(result.totalQuestions / 2)) {
+    return {
+      title: 'Outpaced by a rectangle',
+      copy: 'The timer submitted a more complete answer sheet than you did. It has no brain, which makes this professionally awkward.',
+    };
+  }
+  if (accuracy >= 0.75) {
+    return {
+      title: 'Disturbingly adequate',
+      copy: 'You did well enough that the algorithm has begun checking for outside assistance and suspicious bursts of competence.',
+    };
+  }
+  if (accuracy >= 0.5) {
+    return {
+      title: 'Almost professionally awake',
+      copy: 'Several answers were correct on purpose. The review board has described this as “a promising administrative error.”',
+    };
+  }
+  if (accuracy >= 0.25) {
+    return {
+      title: 'Decorative reasoning detected',
+      copy: 'Your logic arrived wearing a tie, carrying no identification, and hoping nobody would ask a follow-up question.',
+    };
+  }
+  return {
+    title: 'Confidence without documentation',
+    copy: 'You answered like someone who had somewhere else to be and no particular need to be correct when you got there.',
+  };
+};
 
 const ResultsPage = ({ result, onRestart, onHome }) => {
-  const [shareLabel, setShareLabel] = useState('Share this nonsense');
-  const verdict = getVerdict();
+  const [shareLabel, setShareLabel] = useState('Share the character assassination');
+  const verdict = getVerdict(result);
   const missedQuestions = result.review.filter(({ isCorrect }) => !isCorrect);
 
   const shareResult = async () => {
-    const text = `I failed AIQ, an intelligence test that caps every score below its own pass mark. ${result.correctCount}/${result.totalQuestions} answers were correct; the conclusion was still nonsense.`;
+    const text = `AIQ graded my brain with the confidence of a horoscope wearing a lab coat. ${result.correctCount}/${result.totalQuestions} answers were correct. Its verdict: ${verdict.title}.`;
     try {
       if (navigator.share) {
         await navigator.share({ title: 'My AIQ result', text, url: window.location.href });
@@ -40,7 +68,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           <span className="brand-mark" aria-hidden="true">A?</span>
           <span>AIQ</span>
         </button>
-        <span className="nav-pill">Certification status: denied</span>
+        <span className="nav-pill">Certification status: try again</span>
       </header>
 
       <section className="result-hero" aria-labelledby="result-title">
@@ -54,63 +82,66 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         </div>
 
         <div className="result-copy">
-          <p className="eyebrow">Your official-looking verdict</p>
+          <p className="eyebrow">Your suspiciously official verdict</p>
           <h1 id="result-title">{verdict.title}</h1>
           <p>{verdict.copy}</p>
           <div className="raw-score">
             <strong>{result.correctCount} of {result.totalQuestions}</strong>
             <span>actually correct · {result.timedOutCount} timed out</span>
           </div>
-          <p className="score-rule">Pass mark: {result.passMark} · Highest score AIQ allows: {result.scoreCeiling}</p>
         </div>
       </section>
 
       <section className="truth-reveal" aria-labelledby="truth-title">
         <div className="truth-heading">
-          <p className="eyebrow">The reveal</p>
-          <h2 id="truth-title">You could not pass. Nobody can.</h2>
+          <p className="eyebrow">The part the score cannot see</p>
+          <h2 id="truth-title">A number is not a mind.</h2>
           <p>
-            AIQ caps every displayed score at {result.scoreCeiling}, then declares that passing starts at {result.passMark}.
-            Even a perfect answer sheet fails. The timer, charts, categories, and precise-looking number
-            were presentation—not proof.
+            AIQ watched twenty answers produced under a countdown. It did not see how you learn,
+            what you create, whom you understand, how you adapt, or what you do when the rules stop being tidy.
+            The score is precise enough to feel true and shallow enough to miss almost everything that matters.
           </p>
-        </div>
-
-        <div className="rigged-equation" aria-label={`Maximum score ${result.scoreCeiling}, pass mark ${result.passMark}`}>
-          <span>Maximum awarded</span>
-          <strong>{result.scoreCeiling}</strong>
-          <i aria-hidden="true">&lt;</i>
-          <strong>{result.passMark}</strong>
-          <span>Pass mark</span>
         </div>
 
         <div className="truth-grid">
           <article>
             <span>01</span>
-            <h3>Pressure is not intelligence</h3>
-            <p>An eight-second clock rewards speed, calm under artificial stress, and willingness to guess.</p>
+            <h3>Speed is a condition</h3>
+            <p>A clock rewards quick recall, calm under artificial pressure, and the confidence to guess. Depth may arrive later.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>The math was arbitrary</h3>
-            <p>A polished score can still be engineered to produce whatever conclusion its author wants.</p>
+            <h3>Familiarity hides inside “aptitude”</h3>
+            <p>People practiced in these puzzle formats look naturally gifted at the exact formats they practiced. Astonishing.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Puzzles are a narrow slice</h3>
-            <p>Familiarity with patterns and analogies is not creativity, judgment, wisdom, or practical skill.</p>
+            <h3>Context moves the score</h3>
+            <p>Stress, language, sleep, culture, disability, education, and motivation all shape what appears on the screen.</p>
           </article>
           <article>
             <span>04</span>
-            <h3>Confidence is not validity</h3>
-            <p>Official typography and animated charts can make weak measurements feel scientifically inevitable.</p>
+            <h3>Intelligence exceeds the test</h3>
+            <p>Creativity, judgment, empathy, practical skill, curiosity, collaboration, and wisdom do not fit into four buttons.</p>
           </article>
         </div>
 
-        <p className="truth-bottomline">
-          A timed online IQ-style quiz can describe how you performed on those questions under those conditions.
-          It cannot reliably reduce the full range of human intelligence—or your worth—to one number.
-        </p>
+        <div className="lesson-statement">
+          <p className="eyebrow">The uncomfortable lesson</p>
+          <h3>IQ-style tests are good at measuring performance on IQ-style tests.</h3>
+          <p>
+            That narrow fact becomes worthless when it is inflated into a verdict on a whole human being.
+            Intelligence is a living capacity: to learn from error, create what did not exist, understand another
+            person’s pain, adapt when conditions change, notice what the test writer never imagined, and decide
+            what is worth doing in the first place.
+          </p>
+          <p>
+            A timer can measure speed. A puzzle can measure familiarity with a puzzle. Neither can measure the mind
+            that continues beyond the answer. The deepest mistake is not choosing the wrong option—it is mistaking
+            the model for the person it failed to capture. You are not the number. You are everything the number
+            had no language to ask.
+          </p>
+        </div>
       </section>
 
       <section className="category-results" aria-labelledby="category-results-title">
@@ -168,12 +199,12 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
 
       <section className="result-actions" aria-label="What next">
         <div>
-          <p className="eyebrow">One more lap?</p>
-          <h2>The vault has plenty you haven’t seen.</h2>
+          <p className="eyebrow">The machine requests a rematch</p>
+          <h2>Apparently it thinks the problem was you.</h2>
         </div>
         <div className="action-buttons">
           <button className="primary-button" type="button" onClick={onRestart}>
-            Try {result.totalQuestions} different questions <span aria-hidden="true">↻</span>
+            Prove the smug little machine wrong <span aria-hidden="true">↻</span>
           </button>
           <button className="secondary-button" type="button" onClick={shareResult}>
             {shareLabel}

@@ -13,21 +13,33 @@ const HINTS = {
     'There is definitely a pattern. Locating it remains a you-shaped problem.',
     'Try squinting. It will not help, but it looks impressively analytical.',
     'The numbers know what they did. Perhaps ask them more firmly.',
+    'The pattern is hiding in plain sight, which is awkward because you were also looking there.',
+    'Your strategy currently has the structural integrity of warm custard.',
+    'Try subtracting confidence from panic. No, that is still not the answer.',
   ],
   verbal: [
     'One of these words is correct. This concludes the language department’s support.',
     'Read every option twice, then panic in alphabetical order.',
     'The dictionary declined to comment on your situation.',
+    'The thesaurus has asked not to be associated with whatever happens next.',
+    'Read the sentence again. It missed you too.',
+    'One option fits perfectly. Your favorite has provided no references.',
   ],
   spatial: [
     'Rotate it in your mind. Gently; the equipment is not insured.',
     'Imagine the shape from another angle. Any angle. We are not checking your work.',
     'Close one eye. Now you have less spatial information. Excellent progress.',
+    'Your mental cube has filed for a less confusing owner.',
+    'Imagine three dimensions. Two were already doing heroic work.',
+    'Turn the shape, not the phone. The phone has seen enough.',
   ],
   logical: [
     'Use logic. The budget did not cover a second hint.',
     'Eliminate the impossible answers, including whichever one you currently like.',
     'The conclusion follows something. Whether you follow it is between you and the clock.',
+    'Even the wrong answers have started eliminating you.',
+    'This argument contains a valid conclusion. Your answer contains decorative confidence.',
+    'Follow the premise carefully. Your attention span said it would meet us there.',
   ],
 };
 
@@ -162,6 +174,14 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
     submitCurrentQuestion(selectedOption);
   };
 
+  const navigationStatus = timeLeft <= 3
+    ? (selectedOption
+      ? 'Lock it now. Your hesitation has developed a résumé.'
+      : 'The clock has reviewed your pace and requested a different candidate.')
+    : (selectedOption
+      ? (isLastQuestion ? 'Finish is immediate. Even you can manage one click.' : 'Selected is not locked. Try committing to something for once.')
+      : 'Choose fast. Zero records silence as your final intellectual contribution.');
+
   return (
     <main className="quiz-page">
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
@@ -222,11 +242,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
                 <span aria-hidden="true">→</span>
               </button>
             </div>
-            <p className="navigation-status">
-              {selectedOption
-                ? (isLastQuestion ? 'Finish is immediate. Beat the clock.' : 'Selected is not locked. Submit it before zero.')
-                : 'Choose fast. Zero submits a blank and moves on.'}
-            </p>
+            <p className="navigation-status">{navigationStatus}</p>
           </div>
 
           <div className="sidebar-card hint-card">
@@ -234,7 +250,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
             {showHint ? (
               <p className="hint-text">{hint}</p>
             ) : (
-              <p>Request an unhelpful observation while the timer continues judging you.</p>
+              <p>Request an unhelpful observation while the timer reviews your handmade thought process.</p>
             )}
             <button
               className="hint-button"
@@ -249,7 +265,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
           <div className="sidebar-card pace-card">
             <span className="sidebar-kicker">Pressure setting</span>
             <strong>{QUESTION_TIME_SECONDS}s</strong>
-            <p>per question. It will not pause for dignity.</p>
+            <p>per question. Your frontal lobe is now on a performance improvement plan.</p>
           </div>
 
         </aside>

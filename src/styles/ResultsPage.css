@@ -137,15 +137,6 @@
   font-size: 0.77rem;
 }
 
-.result-copy .score-rule {
-  margin: 0.9rem 0 0;
-  color: var(--peach);
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .truth-reveal {
   padding: clamp(2rem, 5vw, 4.5rem);
   color: var(--ink-dark);
@@ -179,46 +170,10 @@
   line-height: 1.7;
 }
 
-.rigged-equation {
-  display: grid;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 2.3rem 0;
-  padding: 1rem 1.25rem;
-  color: var(--ink);
-  background: var(--night);
-  border-radius: var(--radius-md);
-  grid-template-columns: 1fr auto auto auto 1fr;
-}
-
-.rigged-equation span {
-  color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.rigged-equation span:last-child {
-  text-align: right;
-}
-
-.rigged-equation strong {
-  color: var(--lime);
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-}
-
-.rigged-equation i {
-  color: var(--peach);
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-style: normal;
-}
-
 .truth-grid {
   display: grid;
   gap: 0.85rem;
+  margin-top: 2.3rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -248,13 +203,37 @@
   line-height: 1.55;
 }
 
-.truth-bottomline {
-  margin: 2rem 0 0;
-  padding-top: 1.5rem;
-  color: #313a47;
-  border-top: 1px solid rgba(17, 24, 39, 0.13);
-  font-weight: 750;
-  line-height: 1.7;
+.lesson-statement {
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.8rem);
+  color: var(--ink);
+  background: var(--night);
+  border-radius: var(--radius-lg);
+}
+
+.lesson-statement .eyebrow {
+  color: var(--lime);
+}
+
+.lesson-statement h3 {
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.lesson-statement > p:not(.eyebrow) {
+  max-width: 72ch;
+  margin: 1.3rem 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.lesson-statement > p:last-child {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .category-results,
@@ -493,41 +472,12 @@
     font-size: clamp(3rem, 15vw, 4.6rem);
   }
 
-  .rigged-equation {
-    grid-template-columns: 1fr auto auto;
-  }
-
-  .rigged-equation span {
-    grid-column: span 1;
-  }
-
-  .rigged-equation span:first-child {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .rigged-equation strong:first-of-type {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .rigged-equation i {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .rigged-equation strong:last-of-type {
-    grid-column: 3;
-    grid-row: 2;
-  }
-
-  .rigged-equation span:last-child {
-    grid-column: 3;
-    grid-row: 1;
-  }
-
   .truth-grid {
     grid-template-columns: 1fr;
+  }
+
+  .lesson-statement {
+    padding: 1.5rem 1.15rem;
   }
 
   .category-results,

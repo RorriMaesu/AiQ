@@ -46,8 +46,8 @@ const IntroPage = ({ onStartTest }) => (
             <dd>questions per round</dd>
           </div>
           <div>
-            <dt>100</dt>
-            <dd>questions in the vault</dd>
+            <dt>08</dt>
+            <dd>seconds per question</dd>
           </div>
           <div>
             <dt>4</dt>

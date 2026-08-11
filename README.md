@@ -6,16 +6,16 @@
 
 **[Try the live demo](https://rorrimaesu.github.io/AiQ/)**
 
-AIQ is a deliberately rigged, humorous IQ-style test. Each round draws 20 questions from a balanced 100-question vault, gives the player eight seconds per question, then reveals why its impossible-to-pass score is not a reliable measure of intelligence.
+AIQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 questions from a large rotating bank, gives the player eight seconds per question, then separates puzzle performance from the far larger reality of human intelligence.
 
 ## What changed
 
-- 100 validated questions, evenly split across four categories
+- a large validated question bank split evenly across four categories
 - balanced random selection with recent-question history to reduce repeats
 - accessible answer buttons and keyboard-friendly interactions
 - responsive layouts designed for natural scrolling on desktop and mobile
 - deliberately useless hints, an eight-second auto-submit timer, and one-way locked answers
-- impossible certification math followed by an explicit explanation of how the result was manipulated
+- a suspiciously authoritative verdict followed by an explicit lesson about the limits of IQ-style measurement
 - honest category results and answer explanations separated from the intentionally unreliable verdict
 
 AIQ is entertainment, not a standardized IQ assessment or diagnosis.

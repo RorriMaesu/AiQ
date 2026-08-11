@@ -19,11 +19,13 @@ const result = {
   review: [],
 };
 
-test('reveals that the test is impossible to pass and why the score is unreliable', () => {
+test('delivers the deeper lesson without disclosing the hidden failure mechanic', () => {
   render(<ResultsPage result={result} onRestart={jest.fn()} onHome={jest.fn()} />);
 
-  expect(screen.getByRole('heading', { name: /denied by design/i })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: /you could not pass. nobody can/i })).toBeInTheDocument();
-  expect(screen.getByText(/caps every displayed score at 79/i)).toBeInTheDocument();
-  expect(screen.getByText(/cannot reliably reduce the full range of human intelligence/i)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /disturbingly adequate/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /a number is not a mind/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /iq-style tests are good at measuring performance on iq-style tests/i })).toBeInTheDocument();
+  expect(screen.getByText(/you are not the number/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /prove the smug little machine wrong/i })).toBeInTheDocument();
+  expect(screen.queryByText(/nobody can|pass mark|maximum awarded/i)).not.toBeInTheDocument();
 });

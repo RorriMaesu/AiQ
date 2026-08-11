@@ -87,6 +87,6 @@ test('offers comedy instead of a useful hint', () => {
 
   fireEvent.click(screen.getByRole('button', { name: /give me a useless hint/i }));
 
-  expect(screen.getByText(/will not help|you-shaped problem|numbers know what they did/i)).toBeInTheDocument();
+  expect(screen.getByText(/will not help|you-shaped problem|numbers know what they did|hiding in plain sight|warm custard|subtracting confidence/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /regret acknowledged/i })).toBeDisabled();
 });
