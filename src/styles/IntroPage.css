@@ -161,10 +161,23 @@
 }
 
 .time-note {
+  display: flex;
+  flex-direction: column;
   max-width: 24ch;
   color: var(--muted);
   font-size: 0.76rem;
   line-height: 1.55;
+}
+
+.time-note strong {
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.time-note small {
+  color: var(--muted);
+  font-size: 0.7rem;
 }
 
 .hero-facts {

@@ -86,7 +86,10 @@ const IntroPage = ({ onStartTest }) => (
             Begin assessment
             <span aria-hidden="true">→</span>
           </button>
-          <span className="time-note">Approximately 3 minutes · No registration · Immediate results</span>
+          <span className="time-note">
+            <strong>Free of charge</strong>
+            <small>No payment required · Immediate results</small>
+          </span>
         </div>
 
         <div className="hero-facts" aria-label="Assessment summary">
@@ -117,6 +120,7 @@ const IntroPage = ({ onStartTest }) => (
         </div>
 
         <dl className="overview-details">
+          <div><dt>Cost</dt><dd>Free</dd></div>
           <div><dt>Format</dt><dd>Timed multiple choice</dd></div>
           <div><dt>Domains</dt><dd>Four</dd></div>
           <div><dt>Time per item</dt><dd>8 seconds</dd></div>
@@ -187,7 +191,7 @@ const IntroPage = ({ onStartTest }) => (
 
     <footer className="intro-footer">
       <span>AIQ Assessment Center</span>
-      <span>Timed cognitive reasoning assessment</span>
+      <span>Free timed cognitive reasoning assessment</span>
     </footer>
   </main>
 );

@@ -10,6 +10,7 @@ test('starts a balanced twenty-question timed round from the intro', () => {
   render(<App />);
 
   expect(screen.getByRole('heading', { name: /cognitive reasoning assessment/i })).toBeInTheDocument();
+  expect(screen.getByText(/free of charge/i)).toBeInTheDocument();
   expect(screen.queryByText(/questions in the vault/i)).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', { name: /^begin assessment/i }));
 
