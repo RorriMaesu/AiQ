@@ -199,33 +199,80 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         </button>
 
         {isConfessionRevealed && (
-          <div className="confession-panel" id="final-confession" ref={confessionRef}>
-            <div className="confession-register"><span>Final disclosure</span><span>Credibility audit / Failed spectacularly</span></div>
-            <div className="confession-intro">
-              <p className="document-label">All right. You caught us.</p>
-              <h2>Fine.<br />We cheated.</h2>
-              <p>
-                AiQ deliberately pushed your displayed score downward. The percentile, comparison group,
-                average, and 99.4% confidence figure were invented to make the result feel authoritative.
-                None of them was a valid measure of your intelligence.
-              </p>
-            </div>
+          <div
+            className="confession-panel"
+            id="final-confession"
+            ref={confessionRef}
+            aria-labelledby="confession-title"
+          >
+            <section className="confession-disclosure">
+              <div className="confession-register"><span>Final disclosure</span><span>Credibility audit / Failed spectacularly</span></div>
 
-            <div className="confession-ledger" aria-label="Actual assessment record">
-              <div><span>Score we reported</span><strong>{result.score}<small>/100</small></strong></div>
-              <div><span>Your raw puzzle score</span><strong>{result.rawScore}<small>/100</small></strong></div>
-              <div><span>Answers correct</span><strong>{result.correctCount}<small>/{result.totalQuestions}</small></strong></div>
-              <div><span>Peer statistics</span><strong className="confession-text-value">Completely made up</strong></div>
-            </div>
+              <div className="confession-intro">
+                <div>
+                  <p className="document-label">All right. You caught us.</p>
+                  <h2 id="confession-title">Fine.<br />We cheated.</h2>
+                </div>
+                <p className="confession-summary">
+                  AiQ deliberately pushed your displayed score downward. The percentile, comparison group,
+                  average, and 99.4% confidence figure were invented to make the result feel authoritative.
+                  None of them was a valid measure of your intelligence.
+                </p>
+              </div>
 
-            <div className="confession-close">
-              <p>
-                That was the last lesson: an online test can look official, produce precise numbers, and still
-                be bogus. A polished interface is not evidence. A percentile is not proof. Before trusting any
-                IQ result, ask who designed it, what it measures, how it was validated, and what it leaves out.
-              </p>
-              <strong>Do not confuse confidence in the presentation with reliability in the measurement.</strong>
-            </div>
+              <div className="score-correction" aria-label="Actual assessment record">
+                <div className="corrected-score corrected-score--reported">
+                  <span>Score AiQ reported</span>
+                  <strong>{result.score}<small>/100</small></strong>
+                  <p>Designed to feel discouraging.</p>
+                </div>
+                <div className="correction-arrow" aria-hidden="true"><span>Actually</span><b>→</b></div>
+                <div className="corrected-score corrected-score--actual">
+                  <span>Your raw puzzle score</span>
+                  <strong>{result.rawScore}<small>/100</small></strong>
+                  <p>Based on the answers you got right.</p>
+                </div>
+              </div>
+
+              <dl className="confession-facts">
+                <div><dt>Answers correct</dt><dd>{result.correctCount} of {result.totalQuestions}</dd></div>
+                <div><dt>Peer comparison</dt><dd>Completely made up</dd></div>
+              </dl>
+            </section>
+
+            <section className="confession-lesson" aria-labelledby="confession-lesson-title">
+              <div className="confession-lesson-opening">
+                <div>
+                  <p className="document-label">The score was fake. The lesson is not.</p>
+                  <h3 id="confession-lesson-title">A confident number can still be nonsense.</h3>
+                </div>
+                <p>
+                  An online test can look official, produce precise numbers, and still be bogus. Presentation
+                  can create confidence; it cannot create validity. Before trusting a result, look past the
+                  polish and ask how the measurement earned its authority.
+                </p>
+              </div>
+
+              <ul className="credibility-checks" aria-label="Warning signs in online assessments">
+                <li><span>01</span><div><strong>Who designed it?</strong><p>Expertise should be identifiable, not implied by a logo and a serious typeface.</p></div></li>
+                <li><span>02</span><div><strong>What does it measure?</strong><p>A narrow puzzle score should never be presented as a complete account of intelligence.</p></div></li>
+                <li><span>03</span><div><strong>How was it validated?</strong><p>Precise percentiles mean nothing when the sample, method, and evidence are missing.</p></div></li>
+                <li><span>04</span><div><strong>What does it leave out?</strong><p>Creativity, judgment, persistence, context, and humanity do not fit inside one number.</p></div></li>
+              </ul>
+
+              <blockquote className="confession-takeaway">
+                <p>A polished interface can make a bad number look official. It cannot make the number valid.</p>
+                <footer>Question the method before you believe the measurement.</footer>
+              </blockquote>
+
+              <div className="confession-actions">
+                <div><span>Still curious?</span><strong>Try again. Trust yourself more than the scoreboard.</strong></div>
+                <div>
+                  <button className="primary-button" type="button" onClick={onRestart}>Take another assessment <span>→</span></button>
+                  <button className="text-button" type="button" onClick={onHome}>Return to introduction</button>
+                </div>
+              </div>
+            </section>
           </div>
         )}
       </section>

@@ -53,6 +53,9 @@ test('presents the score first and reveals the IQ-test lesson only on request', 
   expect(screen.getByText(/deliberately pushed your displayed score downward/i)).toBeInTheDocument();
   expect(screen.getByText(/completely made up/i)).toBeInTheDocument();
   expect(screen.getByText(/raw puzzle score/i)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /confident number can still be nonsense/i })).toBeInTheDocument();
+  expect(screen.getByText(/polished interface can make a bad number look official/i)).toBeInTheDocument();
+  expect(screen.getAllByRole('button', { name: /take another assessment/i })).toHaveLength(2);
   expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(2);
   expect(Element.prototype.scrollIntoView).toHaveBeenLastCalledWith({ behavior: 'smooth', block: 'start' });
 });
