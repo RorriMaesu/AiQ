@@ -19,7 +19,7 @@ const IntroPage = ({ onStartTest }) => (
           <AssessmentBrand />
           <div className="header-protocol">
             <span><i /> System available</span>
-            <span>Form AIQ–04</span>
+            <span>Form AiQ–04</span>
           </div>
           <button className="measure-header-action" type="button" onClick={onStartTest}>
             Begin assessment <span aria-hidden="true">↗</span>
@@ -27,7 +27,7 @@ const IntroPage = ({ onStartTest }) => (
         </header>
 
         <div className="measure-title-lockup">
-          <p>AIQ cognitive assessment</p>
+          <p>AiQ cognitive assessment</p>
           <h1>
             <span>Cognitive reasoning,</span>
             <span className="measured-line">measured under pressure.</span>

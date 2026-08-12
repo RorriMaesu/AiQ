@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="aiqlogo.png" alt="AIQ logo" width="200" />
+  <img src="aiqlogo.png" alt="AiQ logo" width="200" />
 </p>
 
-# AIQ — The Deeply Unofficial Intelligence Test
+# AiQ — The Deeply Unofficial Intelligence Test
 
 **[Try the live demo](https://rorrimaesu.github.io/AiQ/)**
 
-AIQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 questions from a large rotating bank, gives the player eight seconds per question, then separates puzzle performance from the far larger reality of human intelligence.
+AiQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 questions from a large rotating bank, gives the player eight seconds per question, then separates puzzle performance from the far larger reality of human intelligence.
 
 ## What changed
 
@@ -19,7 +19,7 @@ AIQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 qu
 - a suspiciously authoritative verdict followed by an explicit lesson about the limits of IQ-style measurement
 - honest category results and answer explanations separated from the intentionally unreliable verdict
 
-AIQ is entertainment, not a standardized IQ assessment or diagnosis.
+AiQ is entertainment, not a standardized IQ assessment or diagnosis.
 
 ## Run locally
 

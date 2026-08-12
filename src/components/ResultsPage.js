@@ -60,10 +60,10 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   }, [isTruthRevealed]);
 
   const shareResult = async () => {
-    const text = `I scored ${result.score}/100 on AIQ. Then the assessment asked a better question: can any number describe a whole mind?`;
+    const text = `I scored ${result.score}/100 on AiQ. Then the assessment asked a better question: can any number describe a whole mind?`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'My AIQ result', text, url: window.location.href });
+        await navigator.share({ title: 'My AiQ result', text, url: window.location.href });
         setShareLabel('Shared');
       } else if (navigator.clipboard) {
         await navigator.clipboard.writeText(`${text} ${window.location.href}`);
@@ -80,12 +80,12 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         <div className="verdict-grid" aria-hidden="true" />
         <header className="results-header">
           <AssessmentBrand onClick={onHome} />
-          <span>AIQ comparative classification · Complete</span>
+          <span>AiQ comparative classification · Complete</span>
           <span className="report-status"><i /> Report generated</span>
         </header>
 
         <div className="verdict-register">
-          <span>Output / AIQ–04</span>
+          <span>Output / AiQ–04</span>
           <span>Reference group {result.comparison.sampleSize.toLocaleString()} completions</span>
           <span>Confidence 99.4%</span>
         </div>

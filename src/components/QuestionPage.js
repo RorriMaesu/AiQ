@@ -260,7 +260,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
     <main className={`quiz-page quiz-page--${currentQuestion.type}${timeLeft <= 3 ? ' quiz-page--urgent' : ''}`}>
       <div className="quiz-grid" aria-hidden="true" />
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
-        <AssessmentBrand href="#quiz" label="AIQ assessment" />
+        <AssessmentBrand href="#quiz" label="AiQ assessment" />
         <div className="quiz-header-actions">
           <span>Protocol active · Measure {String(currentQuestionIndex + 1).padStart(2, '0')}</span>
           <button className="exit-button" type="button" onClick={onExit}>Exit assessment</button>

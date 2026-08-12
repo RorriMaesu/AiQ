@@ -3,12 +3,12 @@ import React from 'react';
 const BrandContent = () => (
   <>
     <span className="assessment-brand-symbol" aria-hidden="true"><i /></span>
-    <span className="assessment-brand-wordmark">AIQ</span>
+    <span className="assessment-brand-wordmark">AiQ</span>
     <span className="assessment-brand-descriptor">Cognitive Assessment</span>
   </>
 );
 
-const AssessmentBrand = ({ href = '#top', onClick, label = 'AIQ Cognitive Assessment home' }) => {
+const AssessmentBrand = ({ href = '#top', onClick, label = 'AiQ Cognitive Assessment home' }) => {
   if (onClick) {
     return (
       <button className="assessment-brand" type="button" onClick={onClick} aria-label={label}>
