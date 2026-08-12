@@ -350,11 +350,11 @@
 
   .intro-hero {
     gap: 3rem;
-    padding: 2.5rem 0 4rem;
+    padding: 2rem 0 4rem;
   }
 
   .hero-copy h1 {
-    font-size: clamp(3rem, 16vw, 4.7rem);
+    font-size: clamp(2.9rem, 15vw, 4.5rem);
   }
 
   .hero-actions {

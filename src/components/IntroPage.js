@@ -2,10 +2,10 @@ import React from 'react';
 import '../styles/IntroPage.css';
 
 const categories = [
-  { icon: '↗', title: 'Patterns', copy: 'Sequences that start sensible and then choose chaos.' },
-  { icon: 'Aa', title: 'Words', copy: 'Analogies for people who have strong opinions about synonyms.' },
-  { icon: '◇', title: 'Space', copy: 'Shapes, turns, folds, and imaginary cubes with real attitude.' },
-  { icon: '∴', title: 'Logic', copy: 'Tiny deductions with suspiciously dramatic consequences.' },
+  { icon: '↗', title: 'Patterns', copy: 'Sequences that begin politely and then remove the stairs.' },
+  { icon: 'Aa', title: 'Words', copy: 'Analogies written by someone with a personal grudge against synonyms.' },
+  { icon: '◇', title: 'Space', copy: 'Rotate imaginary objects while your real confidence remains stationary.' },
+  { icon: '∴', title: 'Logic', copy: 'Tiny deductions dressed like a court summons.' },
 ];
 
 const IntroPage = ({ onStartTest }) => (
@@ -16,28 +16,28 @@ const IntroPage = ({ onStartTest }) => (
         <span>AIQ</span>
       </a>
       <div className="nav-actions">
-        <span className="nav-pill">Highly official-looking brain science</span>
+        <span className="nav-pill">Peer-reviewed by absolutely nobody</span>
         <button className="nav-start-button" type="button" onClick={onStartTest}>
-          Begin timed test <span aria-hidden="true">→</span>
+          Make a questionable decision <span aria-hidden="true">→</span>
         </button>
       </div>
     </nav>
 
     <section className="intro-hero" id="top">
       <div className="hero-copy">
-        <p className="eyebrow">20 questions · 8 seconds each · no mercy</p>
-        <h1>Prove your brain before the clock does</h1>
+        <p className="eyebrow">20 questions · 8 seconds each · confidence sold separately</p>
+        <h1>How smart are you when the timer gets rude</h1>
         <p className="hero-lede">
-          A rapid-fire intelligence test promising one suspiciously precise verdict.
-          Think fast; confidence is apparently a scoring method now.
+          A smug little algorithm with no qualifications and beautiful typography will now
+          judge your entire brain. Please underperform neatly.
         </p>
 
         <div className="hero-actions">
           <button className="primary-button" type="button" onClick={onStartTest}>
-            Start the timed IQ test
+            Let the timer insult me
             <span aria-hidden="true">→</span>
           </button>
-          <span className="time-note">8 seconds each · auto-submit at zero · no pausing</span>
+          <span className="time-note">8 seconds each · panic included · dignity optional</span>
         </div>
 
         <dl className="hero-stats" aria-label="Test details">
@@ -68,10 +68,10 @@ const IntroPage = ({ onStartTest }) => (
           <i className="doodle-spark spark-three">○</i>
         </div>
         <div className="receipt-lines">
-          <p><span>Fresh question mix</span><strong>Included</strong></p>
-          <p><span>Needless pressure</span><strong>Included</strong></p>
-          <p><span>Useful hints</span><strong>Legally unavailable</strong></p>
-          <p><span>Scientific validity</span><strong>Pending review</strong></p>
+          <p><span>Fresh questions</span><strong>Included</strong></p>
+          <p><span>Needless pressure</span><strong>Aggressively included</strong></p>
+          <p><span>Useful hints</span><strong>Spiritually absent</strong></p>
+          <p><span>Scientific validity</span><strong>Currently at lunch</strong></p>
         </div>
         <p className="receipt-total"><span>TOTAL EGO AT RISK</span><strong>$0.00</strong></p>
       </aside>
@@ -79,8 +79,8 @@ const IntroPage = ({ onStartTest }) => (
 
     <section className="category-section" aria-labelledby="category-title">
       <div className="section-heading">
-        <p className="eyebrow">Pick your mental poison</p>
-        <h2 id="category-title">A balanced buffet of brain snacks</h2>
+        <p className="eyebrow">Four departments of unnecessary concern</p>
+        <h2 id="category-title">A balanced meal, if the meal resented you</h2>
       </div>
       <div className="category-grid">
         {categories.map((category) => (
@@ -97,11 +97,11 @@ const IntroPage = ({ onStartTest }) => (
       <p className="eyebrow">The legally soothing fine print</p>
       <h2>This is entertainment, not a diagnosis.</h2>
       <p>
-        The clock will be rude, the hints will be worse, and the final verdict will explain
-        why an official-looking number should not get the last word on your intelligence.
+        Your score may contain traces of guessing, panic, and an algorithm compensating for
+        its lack of friends. The ending will explain why a number is not a mind.
       </p>
       <button className="secondary-button" type="button" onClick={onStartTest}>
-        I understand. Start the clock.
+        I ignored the warning. Start.
       </button>
     </section>
   </main>
