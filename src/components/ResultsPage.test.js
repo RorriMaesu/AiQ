@@ -45,6 +45,16 @@ test('presents the score first and reveals the IQ-test lesson only on request', 
   expect(screen.getByText(/score can describe an event/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /take another assessment/i })).toBeInTheDocument();
   expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
+  expect(screen.queryByRole('heading', { name: /fine. we cheated/i })).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('button', { name: /show me what else you lied about/i }));
+
+  expect(screen.getByRole('heading', { name: /fine. we cheated/i })).toBeInTheDocument();
+  expect(screen.getByText(/deliberately pushed your displayed score downward/i)).toBeInTheDocument();
+  expect(screen.getByText(/completely made up/i)).toBeInTheDocument();
+  expect(screen.getByText(/raw puzzle score/i)).toBeInTheDocument();
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(2);
+  expect(Element.prototype.scrollIntoView).toHaveBeenLastCalledWith({ behavior: 'smooth', block: 'start' });
 });
 
 test('assigns compact typography to verdicts with long words', () => {

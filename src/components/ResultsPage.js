@@ -39,7 +39,9 @@ const getVerdictSize = (title) => {
 const ResultsPage = ({ result, onRestart, onHome }) => {
   const [shareLabel, setShareLabel] = useState('Share result');
   const [isTruthRevealed, setIsTruthRevealed] = useState(false);
+  const [isConfessionRevealed, setIsConfessionRevealed] = useState(false);
   const truthRef = useRef(null);
+  const confessionRef = useRef(null);
   const verdict = getVerdict(result);
   const verdictSize = getVerdictSize(verdict.title);
   const percentileLabel = formatOrdinal(result.comparison.percentile);
@@ -58,6 +60,16 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
       block: 'start',
     });
   }, [isTruthRevealed]);
+
+  useEffect(() => {
+    if (!isConfessionRevealed || !confessionRef.current) return;
+
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    confessionRef.current.scrollIntoView?.({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }, [isConfessionRevealed]);
 
   const shareResult = async () => {
     const text = `I scored ${result.score}/100 on AiQ. Then the assessment asked a better question: can any number describe a whole mind?`;
@@ -172,6 +184,50 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           <button className="secondary-button" type="button" onClick={shareResult}>{shareLabel} <span>↗</span></button>
           <button className="text-button" type="button" onClick={onHome}>Return to introduction</button>
         </div>
+      </section>
+
+      <section className={`final-reveal${isConfessionRevealed ? ' final-reveal--open' : ''}`}>
+        <button
+          className="final-reveal-control"
+          type="button"
+          aria-expanded={isConfessionRevealed}
+          aria-controls="final-confession"
+          onClick={() => setIsConfessionRevealed(true)}
+        >
+          <span><small>One last thing</small>{isConfessionRevealed ? 'The books are open' : 'Fine. Show me what else you lied about.'}</span>
+          <i aria-hidden="true">{isConfessionRevealed ? '↓' : '→'}</i>
+        </button>
+
+        {isConfessionRevealed && (
+          <div className="confession-panel" id="final-confession" ref={confessionRef}>
+            <div className="confession-register"><span>Final disclosure</span><span>Credibility audit / Failed spectacularly</span></div>
+            <div className="confession-intro">
+              <p className="document-label">All right. You caught us.</p>
+              <h2>Fine.<br />We cheated.</h2>
+              <p>
+                AiQ deliberately pushed your displayed score downward. The percentile, comparison group,
+                average, and 99.4% confidence figure were invented to make the result feel authoritative.
+                None of them was a valid measure of your intelligence.
+              </p>
+            </div>
+
+            <div className="confession-ledger" aria-label="Actual assessment record">
+              <div><span>Score we reported</span><strong>{result.score}<small>/100</small></strong></div>
+              <div><span>Your raw puzzle score</span><strong>{result.rawScore}<small>/100</small></strong></div>
+              <div><span>Answers correct</span><strong>{result.correctCount}<small>/{result.totalQuestions}</small></strong></div>
+              <div><span>Peer statistics</span><strong className="confession-text-value">Completely made up</strong></div>
+            </div>
+
+            <div className="confession-close">
+              <p>
+                That was the last lesson: an online test can look official, produce precise numbers, and still
+                be bogus. A polished interface is not evidence. A percentile is not proof. Before trusting any
+                IQ result, ask who designed it, what it measures, how it was validated, and what it leaves out.
+              </p>
+              <strong>Do not confuse confidence in the presentation with reliability in the measurement.</strong>
+            </div>
+          </div>
+        )}
       </section>
       </div>}
     </main>
