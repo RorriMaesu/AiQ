@@ -27,7 +27,7 @@
 .axis-reading { display: flex; align-items: baseline; justify-content: space-between; }
 .axis-reading strong { color: var(--color-action); font-size: clamp(1.4rem, 3vw, 2.8rem); font-stretch: 92%; letter-spacing: var(--tracking-functional); text-transform: uppercase; }
 .axis-reading span { font-family: var(--font-mono); font-size: 0.52rem; }
-.expose-control { position: relative; display: flex; min-height: 5rem; align-items: center; justify-content: space-between; overflow: hidden; padding: 0; color: #fff; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.55); text-align: left; isolation: isolate; }
+.expose-control { position: relative; display: flex; min-height: 5rem; align-items: center; justify-content: space-between; overflow: hidden; padding: 0 clamp(1rem, 2.5vw, 1.75rem); color: #fff; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.55); text-align: left; isolation: isolate; }
 .expose-control > span { position: relative; z-index: 2; display: grid; gap: 0.3rem; font-size: clamp(0.95rem, 1.6vw, 1.25rem); font-weight: 720; }
 .expose-control small { color: rgba(255,255,255,0.54); font-family: var(--font-mono); font-size: 0.5rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
 .expose-control i { position: relative; z-index: 2; display: grid; width: 2.7rem; height: 2.7rem; place-items: center; color: #0a0a0a; background: var(--color-action); border-radius: 50%; box-shadow: 0 0 0 0 rgba(255,77,25,0.65); font-style: normal; transition: transform 400ms var(--ease-snap); }
@@ -67,7 +67,7 @@
 .text-button { padding: 0.6rem; color: var(--color-ink); background: none; border: 0; font-size: 0.68rem; text-decoration: underline; text-underline-offset: 0.2rem; }
 
 .final-reveal { color: #f5f1e8; background: #0a0a0a; }
-.final-reveal-control { display: flex; min-height: 7rem; align-items: center; justify-content: space-between; padding: 0; color: inherit; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.5); text-align: left; }
+.final-reveal-control { display: flex; min-height: 7rem; align-items: center; justify-content: space-between; padding: 0 clamp(1rem, 2.5vw, 1.75rem); color: inherit; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.5); text-align: left; }
 .final-reveal-control > span { display: grid; gap: 0.4rem; font-size: clamp(1rem, 1.8vw, 1.4rem); font-weight: 720; }
 .final-reveal-control small { color: var(--color-action); font-family: var(--font-mono); font-size: 0.52rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; }
 .final-reveal-control i { display: grid; width: 3rem; height: 3rem; place-items: center; color: #0a0a0a; background: var(--color-action); border-radius: 50%; box-shadow: 0 0 0 0 rgba(255,77,25,0.55); font-style: normal; animation: final-nudge 1.2s var(--ease-out) infinite alternate; }
