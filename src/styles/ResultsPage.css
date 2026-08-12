@@ -75,34 +75,42 @@
 .final-reveal-control:focus-visible { outline: 2px solid var(--color-action); outline-offset: -3px; }
 .final-reveal--open .final-reveal-control i { animation: none; transform: rotate(90deg); }
 .confession-panel { color: #0a0a0a; background: var(--color-canvas); scroll-margin-top: 0; animation: confession-open 800ms var(--ease-snap) both; }
-.confession-disclosure { padding-bottom: clamp(3rem, 6vw, 5.5rem); background: var(--color-action); }
+.confession-disclosure { position: relative; padding-bottom: clamp(3.5rem, 6.5vw, 6rem); color: #f5f1e8; background: #0d0d0d; border-top: 4px solid var(--color-action); }
 .confession-register, .confession-intro, .score-correction, .confession-facts, .confession-lesson { width: min(calc(100% - clamp(2rem, 6vw, 7rem)), var(--page-width)); margin-inline: auto; }
-.confession-register { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 0.53rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.confession-register { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); color: rgba(255, 255, 255, 0.65); font-family: var(--font-mono); font-size: 0.53rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .confession-intro { display: grid; align-items: end; gap: clamp(3rem, 7vw, 7rem); padding: clamp(3rem, 6vw, 5.25rem) 0 clamp(2.5rem, 5vw, 4rem); grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.72fr); }
-.confession-intro h2 { margin: 0.7rem 0 0; font-size: clamp(4.5rem, 8.3vw, 8.5rem); font-stretch: 86%; font-weight: 850; line-height: 0.82; letter-spacing: var(--tracking-display); text-transform: uppercase; }
-.confession-summary { max-width: 43ch; margin: 0 0 0.35rem; font-size: clamp(1.08rem, 1.4vw, 1.28rem); line-height: 1.55; }
-.score-correction { display: grid; overflow: hidden; border: 1px solid #0a0a0a; grid-template-columns: 1fr clamp(4.25rem, 7vw, 6.5rem) 1fr; }
+.confession-intro .document-label { color: var(--color-action); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.confession-intro h2 { margin: 0.7rem 0 0; color: #ffffff; font-size: clamp(4.5rem, 8.3vw, 8.5rem); font-stretch: 86%; font-weight: 850; line-height: 0.82; letter-spacing: var(--tracking-display); text-transform: uppercase; }
+.confession-summary { max-width: 43ch; margin: 0 0 0.35rem; color: rgba(255, 255, 255, 0.84); font-size: clamp(1.08rem, 1.4vw, 1.28rem); line-height: 1.58; }
+.score-correction { display: grid; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.25); grid-template-columns: 1fr clamp(4.25rem, 7vw, 6.5rem) 1fr; }
 .corrected-score { display: grid; min-height: clamp(11rem, 16vw, 14rem); align-content: space-between; gap: 1rem; padding: clamp(1.25rem, 2.2vw, 2rem); }
 .corrected-score > span, .confession-facts dt { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .corrected-score strong { font-family: var(--font-mono); font-size: clamp(4rem, 7vw, 7rem); font-weight: 500; line-height: 0.78; letter-spacing: -0.075em; }
 .corrected-score strong small { margin-left: 0.35rem; font-size: 0.72rem; letter-spacing: 0; }
 .corrected-score p { margin: 0; font-size: 0.82rem; line-height: 1.4; }
-.corrected-score--actual { background: #f5f1e8; }
-.correction-arrow { display: grid; align-content: center; justify-items: center; gap: 0.35rem; border-right: 1px solid #0a0a0a; border-left: 1px solid #0a0a0a; font-family: var(--font-mono); font-size: 2rem; }
-.correction-arrow span { font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; transform: rotate(-90deg); }
+.corrected-score--reported { background: #171717; color: #f5f1e8; }
+.corrected-score--reported > span { color: rgba(255, 255, 255, 0.6); }
+.corrected-score--reported strong { color: var(--color-action); }
+.corrected-score--reported p { color: rgba(255, 255, 255, 0.6); }
+.corrected-score--actual { background: #ffffff; color: #0a0a0a; }
+.corrected-score--actual > span { color: #68665f; }
+.corrected-score--actual strong { color: #0a0a0a; }
+.corrected-score--actual p { color: #68665f; }
+.correction-arrow { display: grid; align-content: center; justify-items: center; gap: 0.35rem; background: #121212; color: var(--color-action); border-right: 1px solid rgba(255, 255, 255, 0.25); border-left: 1px solid rgba(255, 255, 255, 0.25); font-family: var(--font-mono); font-size: 2rem; }
+.correction-arrow span { color: rgba(255, 255, 255, 0.55); font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; transform: rotate(-90deg); }
 .correction-arrow b { font-weight: 500; }
-.confession-facts { display: grid; border-right: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a; border-left: 1px solid #0a0a0a; grid-template-columns: repeat(2, 1fr); }
+.confession-facts { display: grid; background: #141414; border-right: 1px solid rgba(255, 255, 255, 0.25); border-bottom: 1px solid rgba(255, 255, 255, 0.25); border-left: 1px solid rgba(255, 255, 255, 0.25); grid-template-columns: repeat(2, 1fr); }
 .confession-facts > div { display: flex; min-height: 4.75rem; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1rem clamp(1.25rem, 2.2vw, 2rem); }
-.confession-facts > div + div { border-left: 1px solid #0a0a0a; }
-.confession-facts dt, .confession-facts dd { margin: 0; }
-.confession-facts dd { font-size: clamp(1rem, 1.7vw, 1.35rem); font-weight: 750; text-align: right; }
+.confession-facts > div + div { border-left: 1px solid rgba(255, 255, 255, 0.25); }
+.confession-facts dt { color: rgba(255, 255, 255, 0.6); margin: 0; }
+.confession-facts dd { margin: 0; color: #ffffff; font-size: clamp(1rem, 1.7vw, 1.35rem); font-weight: 750; text-align: right; }
 
 .confession-lesson { padding: clamp(5rem, 9vw, 8rem) 0 clamp(4rem, 7vw, 6rem); }
 .confession-lesson-opening { display: grid; align-items: end; gap: clamp(3rem, 7vw, 7rem); grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.7fr); }
 .confession-lesson-opening h3 { max-width: 13ch; margin: 0.8rem 0 0; font-family: var(--font-human); font-size: clamp(3.4rem, 6vw, 6.1rem); font-weight: 500; line-height: 0.95; letter-spacing: -0.04em; }
 .confession-lesson-opening > p { max-width: 44ch; margin: 0 0 0.35rem; color: var(--color-muted); font-size: clamp(1.05rem, 1.3vw, 1.2rem); line-height: 1.62; }
 .credibility-checks { display: grid; margin: clamp(3.5rem, 6vw, 5.5rem) 0 0; padding: 0; border-top: 1px solid #0a0a0a; border-left: 1px solid #0a0a0a; list-style: none; grid-template-columns: repeat(2, 1fr); }
-.credibility-checks li { display: grid; min-height: 10rem; gap: 1.25rem; padding: clamp(1.3rem, 2.4vw, 2rem); border-right: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a; grid-template-columns: 2rem 1fr; }
+.credibility-checks li { display: grid; min-height: 10rem; gap: 1.25rem; padding: clamp(1.3rem, 2.4vw, 2rem); background: var(--color-surface); border-right: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a; grid-template-columns: 2rem 1fr; }
 .credibility-checks li > span { color: var(--color-action); font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; }
 .credibility-checks strong { display: block; font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.15; }
 .credibility-checks p { max-width: 44ch; margin: 0.65rem 0 0; color: var(--color-muted); font-size: 0.98rem; line-height: 1.55; }
@@ -162,7 +170,7 @@
   .confession-summary { font-size: 1.05rem; line-height: 1.58; }
   .score-correction { border-bottom: 0; grid-template-columns: 1fr; }
   .corrected-score { min-height: 10rem; }
-  .correction-arrow { min-height: 3.5rem; border-top: 1px solid #0a0a0a; border-right: 0; border-bottom: 1px solid #0a0a0a; border-left: 0; }
+  .correction-arrow { min-height: 3.5rem; border-top: 1px solid rgba(255,255,255,0.25); border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.25); border-left: 0; }
   .correction-arrow span { transform: none; }
   .correction-arrow { display: flex; align-items: center; justify-content: center; gap: 0.7rem; }
   .correction-arrow { font-size: 1.5rem; }
@@ -170,7 +178,7 @@
   .corrected-score strong { font-size: 4.8rem; }
   .confession-facts { grid-template-columns: 1fr; }
   .confession-facts > div { min-height: 4.5rem; }
-  .confession-facts > div + div { border-top: 1px solid #0a0a0a; border-left: 0; }
+  .confession-facts > div + div { border-top: 1px solid rgba(255,255,255,0.25); border-left: 0; }
   .confession-lesson { padding-top: 4.5rem; }
   .confession-lesson-opening h3 { font-size: clamp(3rem, 14vw, 4rem); }
   .credibility-checks { grid-template-columns: 1fr; }
