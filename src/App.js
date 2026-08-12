@@ -59,10 +59,7 @@ function App() {
   };
 
   return (
-    <div className="app-shell">
-      <div className="ambient-orb ambient-orb-one" aria-hidden="true" />
-      <div className="ambient-orb ambient-orb-two" aria-hidden="true" />
-
+    <div className={`app-shell app-shell--${currentPage}`}>
       {currentPage === 'intro' && <IntroPage onStartTest={beginTest} />}
 
       {currentPage === 'questions' && (

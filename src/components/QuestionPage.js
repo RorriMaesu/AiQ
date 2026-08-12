@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
+import AssessmentBrand from './AssessmentBrand';
 import '../styles/QuestionPage.css';
 
 const QUESTION_TIME_SECONDS = 8;
@@ -150,9 +151,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
   const advancingRef = useRef(false);
   const currentQuestion = questions[currentQuestionIndex];
   const selectedOption = currentQuestion ? answers[currentQuestion.id] : null;
-  const completedCount = currentQuestionIndex;
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-  const answeredProgress = (completedCount / questions.length) * 100;
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
@@ -229,48 +228,40 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
   };
 
   const navigationStatus = timeLeft <= 3
-    ? (selectedOption
-      ? 'Lock it now. Your hesitation has developed a résumé.'
-      : 'The clock has reviewed your pace and requested a different candidate.')
+    ? 'Time is nearly up. Submit now or the item will advance automatically.'
     : (selectedOption
-      ? (isLastQuestion ? 'Finish is immediate. Even you can manage one click.' : 'Selected is not locked. Try committing to something for once.')
-      : 'Choose fast. Zero records silence as your final intellectual contribution.');
+      ? 'Response selected. Submit when ready.'
+      : 'Select one response to continue.');
 
   return (
     <main className="quiz-page">
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
-        <a className="brand compact-brand" href="#quiz" aria-label="AIQ quiz">
-          <span className="brand-mark" aria-hidden="true">A?</span>
-          <span>AIQ</span>
-        </a>
+        <AssessmentBrand href="#quiz" label="AIQ assessment" />
         <div className="quiz-header-actions">
-          <p>{QUESTION_TIME_SECONDS} seconds each <span aria-hidden="true">·</span> no pauses</p>
-          <button className="exit-button" type="button" onClick={onExit}>Exit test</button>
+          <span>Item {currentQuestionIndex + 1} of {questions.length}</span>
+          <button className="exit-button" type="button" onClick={onExit}>Exit assessment</button>
         </div>
       </header>
 
-      <div className="progress-panel" id="quiz">
-        <div className="progress-topline">
+      <section className="quiz-status" id="quiz" aria-label="Assessment progress">
+        <div className="quiz-status-row">
           <div className="progress-copy" aria-live="polite">
-            <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-            <span>{completedCount} locked</span>
+            <span>Progress</span>
+            <strong>{currentQuestionIndex + 1} / {questions.length}</strong>
           </div>
           <div
-            className={`timer-badge${timeLeft <= 3 ? ' timer-urgent' : ''}`}
+            className={`timer-display${timeLeft <= 3 ? ' timer-display--urgent' : ''}`}
             role="timer"
             aria-label={`${timeLeft} seconds remaining`}
           >
-            <strong>{timeLeft}</strong>
-            <span>sec</span>
+            <span>Time remaining</span>
+            <strong>00:{String(timeLeft).padStart(2, '0')}</strong>
           </div>
         </div>
-        <div className="timer-track" aria-hidden="true">
-          <span style={{ width: `${(timeLeft / QUESTION_TIME_SECONDS) * 100}%` }} />
-        </div>
-        <ProgressBar progress={progress} answeredProgress={answeredProgress} />
-      </div>
+        <ProgressBar progress={progress} />
+      </section>
 
-      <div className="quiz-layout">
+      <div className="quiz-workspace">
         <Question
           question={currentQuestion}
           selectedOption={selectedOption}
@@ -283,46 +274,29 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
           totalQuestions={questions.length}
         />
 
-        <aside className="quiz-sidebar" aria-label="Question controls">
-          <div className="quiz-navigation">
-            <div className="navigation-buttons single-action">
-              <button
-                className="next-button"
-                type="button"
-                onClick={handleNext}
-                disabled={!selectedOption}
-              >
-                {isLastQuestion ? 'Lock answer & finish' : 'Lock answer & continue'}
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-            <p className="navigation-status">{navigationStatus}</p>
-          </div>
-
-          <div className="sidebar-card hint-card">
-            <span className="sidebar-kicker">Need “help”?</span>
-            {showHint ? (
-              <p className="hint-text">{hint}</p>
-            ) : (
-              <p>Request an unhelpful observation while the timer reviews your handmade thought process.</p>
-            )}
+        <div className="question-tools">
+          <div className="hint-region">
             <button
-              className="hint-button"
+              className="hint-link"
               type="button"
               onClick={() => setShowHint(true)}
               disabled={showHint}
             >
-              {showHint ? 'Regret acknowledged' : 'Give me a useless hint'}
+              {showHint ? 'Hint requested' : 'Request hint'}
             </button>
+            {showHint && <p className="hint-message">{hint}</p>}
           </div>
-
-          <div className="sidebar-card pace-card">
-            <span className="sidebar-kicker">Pressure setting</span>
-            <strong>{QUESTION_TIME_SECONDS}s</strong>
-            <p>per question. Your frontal lobe is now on a performance improvement plan.</p>
-          </div>
-
-        </aside>
+          <button
+            className="next-button"
+            type="button"
+            onClick={handleNext}
+            disabled={!selectedOption}
+          >
+            {isLastQuestion ? 'Submit final response' : 'Submit response'}
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <p className="navigation-status">{navigationStatus}</p>
       </div>
     </main>
   );

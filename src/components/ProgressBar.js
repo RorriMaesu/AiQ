@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/ProgressBar.css';
 
-const ProgressBar = ({ progress, answeredProgress = 0 }) => (
+const ProgressBar = ({ progress }) => (
   <div
     className="progress-track"
     role="progressbar"
@@ -10,8 +10,7 @@ const ProgressBar = ({ progress, answeredProgress = 0 }) => (
     aria-valuemax="100"
     aria-label="Quiz progress"
   >
-    <span className="answered-progress" style={{ width: `${answeredProgress}%` }} />
-    <span className="current-progress" style={{ width: `${progress}%` }} />
+    <span className="progress-value" style={{ width: `${progress}%` }} />
   </div>
 );
 

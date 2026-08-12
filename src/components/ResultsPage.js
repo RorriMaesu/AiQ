@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import AssessmentBrand from './AssessmentBrand';
 import '../styles/ResultsPage.css';
 
 const CATEGORY_NAMES = {
-  pattern: 'Patterns',
-  verbal: 'Words',
-  spatial: 'Space',
-  logical: 'Logic',
+  pattern: 'Pattern recognition',
+  verbal: 'Verbal reasoning',
+  spatial: 'Spatial analysis',
+  logical: 'Logical deduction',
 };
 
 const getVerdict = (result) => {
@@ -42,186 +43,162 @@ const getVerdict = (result) => {
 };
 
 const ResultsPage = ({ result, onRestart, onHome }) => {
-  const [shareLabel, setShareLabel] = useState('Share the character assassination');
+  const [shareLabel, setShareLabel] = useState('Share result');
   const verdict = getVerdict(result);
   const missedQuestions = result.review.filter(({ isCorrect }) => !isCorrect);
 
   const shareResult = async () => {
-    const text = `AIQ graded my brain with the confidence of a horoscope wearing a lab coat. It gave me ${result.score}/100 and placed me in the ${result.comparison.percentile}th percentile. Its verdict: ${verdict.title}.`;
+    const text = `AIQ gave me ${result.score}/100, then admitted it manipulated the score. The useful result was the lesson: a number is not a mind.`;
     try {
       if (navigator.share) {
         await navigator.share({ title: 'My AIQ result', text, url: window.location.href });
-        setShareLabel('Shared! The world knows.');
+        setShareLabel('Shared');
       } else if (navigator.clipboard) {
         await navigator.clipboard.writeText(`${text} ${window.location.href}`);
-        setShareLabel('Result copied!');
+        setShareLabel('Copied');
       }
     } catch {
-      setShareLabel('Sharing escaped. Try again?');
+      setShareLabel('Share unavailable');
     }
   };
 
   return (
     <main className="results-page">
-      <header className="results-nav">
-        <button className="brand brand-button" type="button" onClick={onHome}>
-          <span className="brand-mark" aria-hidden="true">A?</span>
-          <span>AIQ</span>
-        </button>
-        <span className="nav-pill">Certification status: try again</span>
+      <header className="results-header">
+        <AssessmentBrand onClick={onHome} />
+        <span>Assessment report</span>
       </header>
 
-      <section className="result-hero" aria-labelledby="result-title">
-        <div className="score-orbit" style={{ '--score-angle': `${result.score * 3.6}deg` }}>
-          <div className="score-core">
-            <strong>{result.score}</strong>
-            <span>out of 100-ish</span>
-          </div>
-          <span className="orbit-star orbit-star-one" aria-hidden="true">✦</span>
-          <span className="orbit-star orbit-star-two" aria-hidden="true">+</span>
-        </div>
-
-        <div className="result-copy">
-          <p className="eyebrow">Your suspiciously official verdict</p>
+      <section className="report-summary" aria-labelledby="result-title">
+        <div className="report-heading">
+          <p className="document-label">Assessment complete</p>
           <h1 id="result-title">{verdict.title}</h1>
           <p>{verdict.copy}</p>
-          <div className="raw-score">
-            <strong>{result.comparison.percentile}th percentile</strong>
-            <span>{result.comparison.higherPercentage}% of recent test takers scored higher</span>
-          </div>
+        </div>
+
+        <div className="score-summary" aria-label="Reported score">
+          <span>Reported score</span>
+          <strong>{result.score}<small>/100</small></strong>
+          <p>{result.comparison.percentile}th percentile</p>
         </div>
       </section>
 
-      <section className="comparison-panel" aria-labelledby="comparison-title">
-        <div className="comparison-heading">
-          <p className="eyebrow">Peer comparison</p>
-          <h2 id="comparison-title">The average is showing off again.</h2>
-          <p>
-            Compared with {result.comparison.sampleSize.toLocaleString()} recent completions.
-            The bell curve has reviewed your application and chosen to proceed with other candidates.
-          </p>
+      <section className="report-section comparison-report" aria-labelledby="comparison-title">
+        <div className="report-section-heading">
+          <p className="document-label">Performance summary</p>
+          <h2 id="comparison-title">Reported comparison</h2>
+          <p>Reference information presented at the completion of this assessment.</p>
         </div>
-        <div className="comparison-grid">
-          <article className="comparison-you">
-            <span>Your score</span>
-            <strong>{result.score}</strong>
-            <small>out of 100-ish</small>
-          </article>
-          <article>
-            <span>Current average</span>
-            <strong>{result.comparison.averageScore}</strong>
-            <small>annoyingly comfortable</small>
-          </article>
-          <article>
-            <span>Your percentile</span>
-            <strong>{result.comparison.percentile}th</strong>
-            <small>the curve noticed</small>
-          </article>
-          <article>
-            <span>Scored higher</span>
-            <strong>{result.comparison.higherPercentage}%</strong>
-            <small>rude of them, honestly</small>
-          </article>
+        <dl className="report-table comparison-table">
+          <div><dt>Your reported score</dt><dd>{result.score} / 100</dd></div>
+          <div><dt>Reference average</dt><dd>{result.comparison.averageScore} / 100</dd></div>
+          <div><dt>Reported percentile</dt><dd>{result.comparison.percentile}th</dd></div>
+          <div><dt>Reported comparison group</dt><dd>{result.comparison.sampleSize.toLocaleString()} completions</dd></div>
+          <div><dt>Reported higher-scoring group</dt><dd>{result.comparison.higherPercentage}%</dd></div>
+        </dl>
+      </section>
+
+      <section className="disclosure" aria-labelledby="disclosure-title">
+        <div className="disclosure-marker">Important disclosure</div>
+        <div className="disclosure-copy">
+          <p className="document-label">What just happened</p>
+          <h2 id="disclosure-title">The score above was manipulated.</h2>
+          <p className="disclosure-lede">
+            AIQ deliberately reduced your actual performance and generated a fictional peer comparison.
+            It presented both with formal language, precise numbers, and an official-looking report so they
+            would feel authoritative.
+          </p>
+          <dl className="actual-result">
+            <div><dt>Your actual result</dt><dd>{result.correctCount} of {result.totalQuestions} correct</dd></div>
+            <div><dt>Your raw score</dt><dd>{result.rawScore}%</dd></div>
+            <div><dt>Timed-out items</dt><dd>{result.timedOutCount}</dd></div>
+          </dl>
+          <p>
+            If the lower number felt discouraging—or the invented average made you doubt yourself—that reaction
+            is the point. Precision is not the same as truth, and polished presentation is not evidence.
+          </p>
         </div>
       </section>
 
       <section className="truth-reveal" aria-labelledby="truth-title">
         <div className="truth-heading">
-          <p className="eyebrow">The part the score cannot see</p>
+          <p className="document-label">What the score could not see</p>
           <h2 id="truth-title">A number is not a mind.</h2>
           <p>
-            AIQ watched twenty answers produced under a countdown. It did not see how you learn,
+            This assessment observed twenty answers produced under a countdown. It did not observe how you learn,
             what you create, whom you understand, how you adapt, or what you do when the rules stop being tidy.
-            The score is precise enough to feel true and shallow enough to miss almost everything that matters.
+            The score looked exact while ignoring nearly everything that gives intelligence meaning.
           </p>
         </div>
 
-        <div className="truth-grid">
-          <article>
+        <ol className="truth-list">
+          <li>
             <span>01</span>
-            <h3>Speed is a condition</h3>
-            <p>A clock rewards quick recall, calm under artificial pressure, and the confidence to guess. Depth may arrive later.</p>
-          </article>
-          <article>
+            <div><h3>Speed is a condition</h3><p>A clock rewards quick recall, calm under artificial pressure, and confidence when guessing. Depth may arrive later.</p></div>
+          </li>
+          <li>
             <span>02</span>
-            <h3>Familiarity hides inside “aptitude”</h3>
-            <p>People practiced in these puzzle formats look naturally gifted at the exact formats they practiced. Astonishing.</p>
-          </article>
-          <article>
+            <div><h3>Familiarity can resemble aptitude</h3><p>Practice with a puzzle format improves performance on that format. The score rarely explains that history.</p></div>
+          </li>
+          <li>
             <span>03</span>
-            <h3>Context moves the score</h3>
-            <p>Stress, language, sleep, culture, disability, education, and motivation all shape what appears on the screen.</p>
-          </article>
-          <article>
+            <div><h3>Context moves the result</h3><p>Stress, language, sleep, culture, disability, education, and motivation all shape what appears on the screen.</p></div>
+          </li>
+          <li>
             <span>04</span>
-            <h3>Intelligence exceeds the test</h3>
-            <p>Creativity, judgment, empathy, practical skill, curiosity, collaboration, and wisdom do not fit into four buttons.</p>
-          </article>
-        </div>
+            <div><h3>Intelligence exceeds the instrument</h3><p>Creativity, judgment, empathy, practical skill, curiosity, collaboration, and wisdom do not fit into four buttons.</p></div>
+          </li>
+        </ol>
 
-        <div className="lesson-statement">
-          <p className="eyebrow">The uncomfortable lesson</p>
+        <blockquote className="lesson-statement">
           <h3>IQ-style tests are good at measuring performance on IQ-style tests.</h3>
           <p>
-            That narrow fact becomes worthless when it is inflated into a verdict on a whole human being.
-            Intelligence is a living capacity: to learn from error, create what did not exist, understand another
-            person’s pain, adapt when conditions change, notice what the test writer never imagined, and decide
-            what is worth doing in the first place.
+            Intelligence is also the capacity to learn from error, create what did not exist, understand another
+            person’s pain, adapt when conditions change, and notice what the test writer never imagined.
           </p>
-          <p>
-            A timer can measure speed. A puzzle can measure familiarity with a puzzle. Neither can measure the mind
-            that continues beyond the answer. The deepest mistake is not choosing the wrong option—it is mistaking
-            the model for the person it failed to capture. You are not the number. You are everything the number
-            had no language to ask.
-          </p>
-        </div>
+          <footer>
+            The deepest mistake is not choosing the wrong option. It is mistaking the model for the person it failed
+            to capture. You are not the number. You are everything the number had no language to ask.
+          </footer>
+        </blockquote>
       </section>
 
-      <section className="category-results" aria-labelledby="category-results-title">
-        <div className="section-heading results-heading">
-          <p className="eyebrow">Four numbers in tiny lab coats</p>
-          <h2 id="category-results-title">Your cognitive weather map</h2>
+      <section className="report-section domain-report" aria-labelledby="domain-results-title">
+        <div className="report-section-heading">
+          <p className="document-label">Domain detail</p>
+          <h2 id="domain-results-title">Reported scores by domain</h2>
+          <p>These values were reduced using the same mechanism as the overall reported score.</p>
         </div>
-        <div className="result-grid">
-          {result.categoryResults.map((category) => {
-            const percentage = category.reportedScore;
-            return (
-              <article className={`result-card result-${category.type}`} key={category.type}>
-                <div className="result-card-topline">
-                  <h3>{CATEGORY_NAMES[category.type]}</h3>
-                  <strong>{category.reportedScore}<small>/100</small></strong>
-                </div>
-                <div className="mini-track" aria-hidden="true">
-                  <span style={{ width: `${percentage}%` }} />
-                </div>
-              </article>
-            );
-          })}
+        <div className="domain-table" role="table" aria-label="Domain score report">
+          {result.categoryResults.map((category) => (
+            <div className="domain-row" role="row" key={category.type}>
+              <span role="cell">{CATEGORY_NAMES[category.type]}</span>
+              <div role="cell" className="domain-rule" aria-hidden="true"><i style={{ width: `${category.reportedScore}%` }} /></div>
+              <strong role="cell">{category.reportedScore} / 100</strong>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="answer-review" aria-labelledby="review-title">
-        <div>
-          <p className="eyebrow">The answer sheet</p>
-          <h2 id="review-title">{missedQuestions.length ? 'The ones that wriggled away' : 'A spotless little answer sheet'}</h2>
+        <div className="report-section-heading">
+          <p className="document-label">Answer review</p>
+          <h2 id="review-title">{missedQuestions.length ? 'Items to review' : 'Complete answer record'}</h2>
           <p>
             {missedQuestions.length
-              ? 'Open any question for the answer. A timeout means the clock, not your mind, made the choice.'
-              : 'You solved every puzzle and still failed certification. That is exactly the point.'}
+              ? 'Open an item to see the expected response. A timeout records no answer.'
+              : 'Every response was correct. The reported score was still reduced—which is exactly the lesson.'}
           </p>
         </div>
 
         {missedQuestions.length > 0 && (
           <div className="review-list">
-            {missedQuestions.map((item) => (
+            {missedQuestions.map((item, index) => (
               <details key={item.id}>
-                <summary>
-                  <span>{CATEGORY_NAMES[item.type]}</span>
-                  {item.question}
-                </summary>
+                <summary><span>{String(index + 1).padStart(2, '0')}</span>{item.question}</summary>
                 <div className="review-answer">
-                  {item.timedOut && <p><strong>Your answer:</strong> The timer submitted a blank.</p>}
-                  <p><strong>Correct answer:</strong> {item.correctAnswer}. {item.correctAnswerText}</p>
+                  {item.timedOut && <p><strong>Your answer:</strong> No response recorded.</p>}
+                  <p><strong>Expected answer:</strong> {item.correctAnswer}. {item.correctAnswerText}</p>
                   <p>{item.explanation}</p>
                 </div>
               </details>
@@ -230,18 +207,15 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         )}
       </section>
 
-      <section className="result-actions" aria-label="What next">
+      <section className="result-actions" aria-label="Assessment actions">
         <div>
-          <p className="eyebrow">The machine requests a rematch</p>
-          <h2>Apparently it thinks the problem was you.</h2>
+          <p className="document-label">What next</p>
+          <h2>Take another question set or share the lesson.</h2>
         </div>
         <div className="action-buttons">
-          <button className="primary-button" type="button" onClick={onRestart}>
-            Prove the smug little machine wrong <span aria-hidden="true">↻</span>
-          </button>
-          <button className="secondary-button" type="button" onClick={shareResult}>
-            {shareLabel}
-          </button>
+          <button className="primary-button" type="button" onClick={onRestart}>Take another assessment</button>
+          <button className="secondary-button" type="button" onClick={shareResult}>{shareLabel}</button>
+          <button className="text-button" type="button" onClick={onHome}>Return to introduction</button>
         </div>
       </section>
     </main>

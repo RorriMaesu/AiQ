@@ -2,17 +2,17 @@ import React from 'react';
 import '../styles/Question.css';
 
 const TYPE_LABELS = {
-  pattern: 'Pattern spotting',
-  verbal: 'Word wrangling',
-  spatial: 'Spatial thinking',
-  logical: 'Logic juggling',
+  pattern: 'Pattern recognition',
+  verbal: 'Verbal reasoning',
+  spatial: 'Spatial analysis',
+  logical: 'Logical deduction',
 };
 
 const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQuestions }) => (
-  <section className="question-card" aria-labelledby={`question-${question.id}`}>
+  <section className="question-sheet" aria-labelledby={`question-${question.id}`}>
     <div className="question-meta">
-      <span className={`type-chip type-${question.type}`}>{TYPE_LABELS[question.type]}</span>
-      <span>{questionNumber} / {totalQuestions}</span>
+      <span>{TYPE_LABELS[question.type]}</span>
+      <span>Item {questionNumber} of {totalQuestions}</span>
     </div>
 
     <div className="question-copy">
@@ -37,7 +37,7 @@ const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQue
           >
             <span className="option-letter" aria-hidden="true">{option.id}</span>
             <span className="option-text">{option.text}</span>
-            <span className="option-check" aria-hidden="true">{isSelected ? '✓' : ''}</span>
+            <span className="option-check" aria-hidden="true">{isSelected ? 'Selected' : ''}</span>
           </button>
         );
       })}

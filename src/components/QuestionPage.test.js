@@ -46,9 +46,9 @@ test('locks answers and finishes immediately on the final question', () => {
   render(<QuestionPage questions={sampleQuestions} onComplete={onComplete} />);
 
   fireEvent.click(screen.getByRole('button', { name: /^Three$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /lock answer & continue/i }));
+  fireEvent.click(screen.getByRole('button', { name: /^submit response/i }));
   fireEvent.click(screen.getByRole('button', { name: /^Correct$/i }));
-  fireEvent.click(screen.getByRole('button', { name: /lock answer & finish/i }));
+  fireEvent.click(screen.getByRole('button', { name: /submit final response/i }));
 
   expect(onComplete).toHaveBeenCalledWith(expect.objectContaining({
     score: expect.any(Number),
@@ -87,13 +87,14 @@ test('auto-submits timeouts and completes when the final timer expires', () => {
   expect(onComplete.mock.calls[0][0].score).toBeGreaterThan(0);
 });
 
-test('offers comedy instead of a useful hint', () => {
+test('reveals comedy only after the user requests a hint', () => {
   render(<QuestionPage questions={sampleQuestions} onComplete={jest.fn()} />);
 
-  fireEvent.click(screen.getByRole('button', { name: /give me a useless hint/i }));
+  expect(screen.queryByText(/you-shaped problem|warm custard/i)).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: /request hint/i }));
 
   expect(screen.getByText(/will not help|you-shaped problem|numbers know what they did|hiding in plain sight|warm custard|subtracting confidence/i)).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /regret acknowledged/i })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /hint requested/i })).toBeDisabled();
 });
 
 test('dramatically reduces positive scores and varies the reported result by attempt', () => {

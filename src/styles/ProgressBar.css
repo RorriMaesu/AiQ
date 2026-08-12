@@ -1,25 +1,12 @@
 .progress-track {
-  position: relative;
-  height: 0.48rem;
+  height: 0.24rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.09);
-  border-radius: 999px;
+  background: #d9dcdd;
 }
 
-.answered-progress,
-.current-progress {
-  position: absolute;
-  inset: 0 auto 0 0;
-  border-radius: inherit;
-  transition: width 280ms ease;
-}
-
-.current-progress {
-  z-index: 1;
-  background: rgba(200, 244, 93, 0.25);
-}
-
-.answered-progress {
-  z-index: 2;
-  background: var(--lime);
+.progress-value {
+  display: block;
+  height: 100%;
+  background: var(--color-action);
+  transition: width 220ms ease;
 }

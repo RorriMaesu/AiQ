@@ -1,197 +1,143 @@
 import React from 'react';
+import AssessmentBrand from './AssessmentBrand';
 import '../styles/IntroPage.css';
 
 const domains = [
   {
     index: '01',
-    title: 'Pattern Recognition',
+    title: 'Pattern recognition',
     copy: 'Identify numerical, symbolic, and visual relationships across structured sequences.',
   },
   {
     index: '02',
-    title: 'Verbal Reasoning',
+    title: 'Verbal reasoning',
     copy: 'Evaluate analogies, classifications, vocabulary, and semantic relationships.',
   },
   {
     index: '03',
-    title: 'Spatial Analysis',
+    title: 'Spatial analysis',
     copy: 'Interpret rotation, orientation, symmetry, and relationships between forms.',
   },
   {
     index: '04',
-    title: 'Logical Deduction',
+    title: 'Logical deduction',
     copy: 'Apply conditional reasoning, inference, and constraints to reach a conclusion.',
   },
 ];
 
-const matrixShapes = [
-  'circle',
-  'triangle',
-  'square',
-  'triangle',
-  'square',
-  'circle',
-  'square',
-  'circle',
-  'triangle',
-];
-
-const processSteps = [
-  {
-    index: '01',
-    title: 'Review the item',
-    copy: 'Read each prompt carefully and identify the relationship being tested.',
-  },
-  {
-    index: '02',
-    title: 'Select one response',
-    copy: 'Choose the best available answer from the options provided.',
-  },
-  {
-    index: '03',
-    title: 'Continue before time expires',
-    copy: 'Each item advances automatically when the response window closes.',
-  },
+const sampleShapes = [
+  'circle', 'triangle', 'diamond',
+  'triangle', 'diamond', 'circle',
+  'diamond', 'circle', 'missing',
 ];
 
 const IntroPage = ({ onStartTest }) => (
-  <main className="intro-page">
-    <nav className="site-nav" aria-label="AIQ Assessment Center">
-      <a className="brand" href="#top" aria-label="AIQ Assessment Center home">
-        <span className="brand-mark" aria-hidden="true">IQ</span>
-        <span className="brand-copy">
-          <strong>AIQ</strong>
-          <small>Assessment Center</small>
-        </span>
-      </a>
-      <div className="nav-actions">
-        <span className="nav-pill"><i aria-hidden="true" /> Assessment Center</span>
-        <button className="nav-start-button" type="button" onClick={onStartTest}>
-          Begin
-        </button>
-      </div>
-    </nav>
+  <main className="landing-page">
+    <header className="landing-header">
+      <AssessmentBrand />
+      <nav className="landing-nav" aria-label="Assessment information">
+        <a href="#domains">What is assessed</a>
+        <a href="#method">How it works</a>
+        <button className="header-start" type="button" onClick={onStartTest}>Begin</button>
+      </nav>
+    </header>
 
-    <section className="intro-hero" id="top">
-      <div className="hero-copy">
-        <p className="eyebrow">AIQ Assessment Series <span>·</span> Form A</p>
+    <section className="landing-hero" id="top">
+      <div className="landing-hero-copy">
+        <p className="document-label">Free online reasoning assessment</p>
         <h1>Cognitive Reasoning Assessment</h1>
-        <p className="hero-lede">
-          A timed evaluation of pattern recognition, verbal reasoning, spatial analysis, and
-          logical deduction. Complete each item independently and select the best available response.
+        <p className="landing-lede">
+          A short, timed evaluation of pattern recognition, verbal reasoning, spatial analysis,
+          and logical deduction.
         </p>
+        <p className="free-statement">
+          <strong>The assessment is free.</strong> No account, subscription, or payment information is required.
+        </p>
+        <button className="primary-button landing-primary" type="button" onClick={onStartTest}>
+          Begin assessment <span aria-hidden="true">→</span>
+        </button>
 
-        <div className="hero-actions">
-          <button className="primary-button" type="button" onClick={onStartTest}>
-            Begin assessment
-            <span aria-hidden="true">→</span>
-          </button>
-          <span className="time-note">
-            <strong>Free of charge</strong>
-            <small>No payment required · Immediate results</small>
-          </span>
-        </div>
-
-        <div className="hero-facts" aria-label="Assessment summary">
-          <span><strong>20</strong> scored items</span>
-          <span><strong>08</strong> seconds per item</span>
-          <span><strong>04</strong> reasoning domains</span>
-        </div>
-      </div>
-
-      <aside className="assessment-overview" aria-labelledby="overview-title">
-        <header className="overview-header">
-          <div>
-            <p>Assessment overview</p>
-            <h2 id="overview-title">Form A</h2>
-          </div>
-          <span className="ready-status"><i aria-hidden="true" /> Ready</span>
-        </header>
-
-        <div className="matrix-panel" aria-hidden="true">
-          <div className="matrix-grid">
-            {matrixShapes.map((shape, index) => (
-              <span className="matrix-cell" key={`${shape}-${index}`}>
-                <i className={`matrix-shape matrix-shape--${shape}`} />
-              </span>
-            ))}
-          </div>
-          <span className="matrix-label">Reasoning matrix</span>
-        </div>
-
-        <dl className="overview-details">
-          <div><dt>Cost</dt><dd>Free</dd></div>
-          <div><dt>Format</dt><dd>Timed multiple choice</dd></div>
-          <div><dt>Domains</dt><dd>Four</dd></div>
-          <div><dt>Time per item</dt><dd>8 seconds</dd></div>
-          <div><dt>Results</dt><dd>Immediate</dd></div>
+        <dl className="assessment-facts" aria-label="Assessment details">
+          <div><dt>20</dt><dd>scored items</dd></div>
+          <div><dt>8 seconds</dt><dd>per item</dd></div>
+          <div><dt>About 3 minutes</dt><dd>total duration</dd></div>
         </dl>
-      </aside>
+      </div>
+
+      <figure className="sample-sheet" aria-labelledby="sample-title">
+        <div className="sample-heading">
+          <div>
+            <span>Sample item</span>
+            <strong id="sample-title">Pattern recognition</strong>
+          </div>
+          <small>Not scored</small>
+        </div>
+        <p>Identify the symbol that would complete the matrix.</p>
+        <div className="sample-matrix" aria-hidden="true">
+          {sampleShapes.map((shape, index) => (
+            <span className={`sample-cell sample-cell--${shape}`} key={`${shape}-${index}`}>
+              {shape !== 'missing' && <i />}
+            </span>
+          ))}
+        </div>
+        <figcaption>
+          Items use numerical, verbal, spatial, and logical formats. Each response is timed independently.
+        </figcaption>
+      </figure>
     </section>
 
-    <section className="category-section" aria-labelledby="category-title">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">Assessment domains</p>
-          <h2 id="category-title">Four areas of reasoning</h2>
-        </div>
-        <p>
-          The assessment samples distinct reasoning skills to create a concise performance summary.
-        </p>
+    <section className="landing-section" id="domains" aria-labelledby="domains-title">
+      <div className="landing-section-heading">
+        <p className="document-label">What is assessed</p>
+        <h2 id="domains-title">Four reasoning domains</h2>
+        <p>Each session draws from all four areas to produce a concise performance summary.</p>
       </div>
-      <div className="category-grid">
+      <ol className="domain-list">
         {domains.map((domain) => (
-          <article className="category-card" key={domain.title}>
-            <span className="category-index">{domain.index}</span>
-            <h3>{domain.title}</h3>
-            <p>{domain.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section className="process-section" aria-labelledby="process-title">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">Assessment process</p>
-          <h2 id="process-title">A focused, timed format</h2>
-        </div>
-        <p>Complete the assessment in one sitting for the most consistent result.</p>
-      </div>
-      <ol className="process-grid">
-        {processSteps.map((step) => (
-          <li key={step.index}>
-            <span>{step.index}</span>
+          <li key={domain.index}>
+            <span>{domain.index}</span>
             <div>
-              <h3>{step.title}</h3>
-              <p>{step.copy}</p>
+              <h3>{domain.title}</h3>
+              <p>{domain.copy}</p>
             </div>
           </li>
         ))}
       </ol>
     </section>
 
-    <section className="fine-print" aria-labelledby="before-title">
-      <div className="fine-print-copy">
-        <p className="eyebrow">Before you begin</p>
+    <section className="landing-section method-section" id="method" aria-labelledby="method-title">
+      <div className="landing-section-heading">
+        <p className="document-label">How it works</p>
+        <h2 id="method-title">A focused, timed format</h2>
+      </div>
+      <ol className="method-list">
+        <li><span>1</span><strong>Review the item</strong><p>Read the prompt and identify the relationship being tested.</p></li>
+        <li><span>2</span><strong>Select one response</strong><p>Choose the best available answer from the options provided.</p></li>
+        <li><span>3</span><strong>Submit before time expires</strong><p>The next item appears automatically when the response window closes.</p></li>
+      </ol>
+    </section>
+
+    <section className="before-section" aria-labelledby="before-title">
+      <div>
+        <p className="document-label">Before you begin</p>
         <h2 id="before-title">Complete the assessment in one sitting.</h2>
         <p>
-          Items advance automatically when time expires. Select the best available response before
-          the countdown reaches zero; results are generated immediately after the final item.
+          Select the best available response before the countdown reaches zero. Results appear
+          immediately after the final item.
         </p>
       </div>
-      <div className="readiness-panel">
-        <span className="ready-status"><i aria-hidden="true" /> Session ready</span>
+      <div className="before-action">
+        <strong>Free to take</strong>
+        <span>No registration or payment details</span>
         <button className="primary-button" type="button" onClick={onStartTest}>
-          Start assessment <span aria-hidden="true">→</span>
+          Begin assessment <span aria-hidden="true">→</span>
         </button>
-        <p>AIQ results are intended for personal insight and are not a clinical or educational diagnosis.</p>
       </div>
     </section>
 
-    <footer className="intro-footer">
-      <span>AIQ Assessment Center</span>
-      <span>Free timed cognitive reasoning assessment</span>
+    <footer className="landing-footer">
+      <span>AIQ Cognitive Assessment</span>
+      <span>Personal-use reasoning assessment · Not a clinical diagnosis</span>
     </footer>
   </main>
 );

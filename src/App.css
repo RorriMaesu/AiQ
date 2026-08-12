@@ -1,152 +1,84 @@
 .app-shell {
-  position: relative;
   min-height: 100vh;
-  overflow: hidden;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    radial-gradient(circle at 12% 0%, rgba(142, 125, 255, 0.18), transparent 31rem),
-    radial-gradient(circle at 96% 80%, rgba(99, 217, 232, 0.1), transparent 34rem),
-    var(--night);
-  background-size: 44px 44px, 44px 44px, auto, auto, auto;
+  background: var(--color-canvas);
 }
 
-.ambient-orb {
-  position: absolute;
-  z-index: 0;
-  border-radius: 50%;
-  filter: blur(1px);
-  pointer-events: none;
-}
-
-.ambient-orb-one {
-  top: 10rem;
-  right: -8rem;
-  width: 20rem;
-  height: 20rem;
-  border: 1px solid rgba(200, 244, 93, 0.12);
-  box-shadow: inset 0 0 80px rgba(200, 244, 93, 0.04);
-}
-
-.ambient-orb-two {
-  bottom: 14rem;
-  left: -9rem;
-  width: 17rem;
-  height: 17rem;
-  border: 1px dashed rgba(255, 173, 112, 0.17);
-}
-
-.brand {
+.assessment-brand {
   display: inline-flex;
-  align-items: center;
-  gap: 0.72rem;
-  color: var(--ink);
-  font-weight: 850;
-  letter-spacing: 0.08em;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0;
+  color: var(--color-ink);
+  background: none;
+  border: 0;
+  text-align: left;
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  color: var(--night);
-  background: var(--lime);
-  border-radius: 12px 12px 4px 12px;
+.assessment-brand-wordmark {
   font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.08em;
-  transform: rotate(-4deg);
-}
-
-.nav-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.25rem;
-  padding: 0.36rem 0.8rem;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.76rem;
+  font-size: 1.18rem;
   font-weight: 750;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
 
-.eyebrow {
-  margin: 0 0 0.8rem;
-  color: var(--lime);
-  font-size: 0.76rem;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.assessment-brand-descriptor {
+  padding-left: 0.7rem;
+  color: var(--color-muted);
+  border-left: 1px solid var(--color-rule-dark);
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .primary-button,
 .secondary-button {
   display: inline-flex;
-  min-height: 3.5rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
-  padding: 0.85rem 1.25rem;
-  border-radius: 14px;
-  font-weight: 850;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  gap: 0.7rem;
+  padding: 0.68rem 1.05rem;
+  border-radius: var(--radius-control);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease;
 }
 
 .primary-button {
-  color: var(--night);
-  background: var(--lime);
-  border: 1px solid var(--lime);
-  box-shadow: 0 8px 0 #779d1f, 0 18px 40px rgba(200, 244, 93, 0.17);
+  color: #fff;
+  background: var(--color-action);
+  border: 1px solid var(--color-action);
 }
 
 .primary-button:hover {
-  background: #d9ff76;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 0 #779d1f, 0 22px 44px rgba(200, 244, 93, 0.2);
-}
-
-.primary-button:active {
-  transform: translateY(5px);
-  box-shadow: 0 3px 0 #779d1f;
+  background: var(--color-action-hover);
+  border-color: var(--color-action-hover);
 }
 
 .secondary-button {
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-ink);
+  background: transparent;
+  border: 1px solid var(--color-rule-dark);
 }
 
 .secondary-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  background: #fff;
+  border-color: var(--color-ink);
 }
 
-.section-heading h2 {
-  max-width: 16ch;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.05rem, 4vw, 3.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+.document-label {
+  margin: 0 0 0.75rem;
+  color: var(--color-action);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
-@media (hover: none) {
-  .primary-button:hover,
-  .secondary-button:hover {
-    transform: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .nav-pill {
-    font-size: 0.68rem;
-  }
+@media (max-width: 560px) {
+  .assessment-brand-descriptor { display: none; }
 
   .primary-button,
-  .secondary-button {
-    width: 100%;
-  }
+  .secondary-button { min-height: 3.2rem; }
 }

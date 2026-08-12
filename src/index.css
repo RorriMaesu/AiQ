@@ -3,6 +3,7 @@
 }
 
 html {
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -10,11 +11,11 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: var(--ink);
-  background: var(--night);
+  color: var(--color-ink);
+  background: var(--color-canvas);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -31,32 +32,22 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
-a {
-  color: inherit;
-}
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+a { color: inherit; }
 
 ::selection {
-  color: var(--night);
-  background: var(--lime);
+  color: #fff;
+  background: var(--color-action);
 }
 
 :focus-visible {
-  outline: 3px solid var(--cyan);
-  outline-offset: 4px;
+  outline: 3px solid #2b76ad;
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 
   *,
   *::before,
