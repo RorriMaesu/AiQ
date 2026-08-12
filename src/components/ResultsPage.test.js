@@ -1,6 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ResultsPage, { getVerdictSize } from './ResultsPage';
 
+beforeEach(() => {
+  Element.prototype.scrollIntoView = jest.fn();
+});
+
 const result = {
   score: 43,
   rawScore: 100,
@@ -40,6 +44,7 @@ test('presents the score first and reveals the IQ-test lesson only on request', 
   expect(screen.getByRole('heading', { name: /test can be consistent and still be incomplete/i })).toBeInTheDocument();
   expect(screen.getByText(/score can describe an event/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /take another assessment/i })).toBeInTheDocument();
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
 });
 
 test('assigns compact typography to verdicts with long words', () => {

@@ -27,15 +27,19 @@
 .axis-reading { display: flex; align-items: baseline; justify-content: space-between; }
 .axis-reading strong { color: var(--color-action); font-size: clamp(1.4rem, 3vw, 2.8rem); font-stretch: 92%; letter-spacing: var(--tracking-functional); text-transform: uppercase; }
 .axis-reading span { font-family: var(--font-mono); font-size: 0.52rem; }
-.expose-control { display: flex; min-height: 5rem; align-items: center; justify-content: space-between; padding: 0; color: #fff; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.55); text-align: left; }
-.expose-control > span { display: grid; gap: 0.3rem; font-size: clamp(0.95rem, 1.6vw, 1.25rem); font-weight: 720; }
+.expose-control { position: relative; display: flex; min-height: 5rem; align-items: center; justify-content: space-between; overflow: hidden; padding: 0; color: #fff; background: transparent; border: 0; border-top: 1px solid rgba(255,255,255,0.55); text-align: left; isolation: isolate; }
+.expose-control > span { position: relative; z-index: 2; display: grid; gap: 0.3rem; font-size: clamp(0.95rem, 1.6vw, 1.25rem); font-weight: 720; }
 .expose-control small { color: rgba(255,255,255,0.54); font-family: var(--font-mono); font-size: 0.5rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
-.expose-control i { display: grid; width: 2.7rem; height: 2.7rem; place-items: center; color: #0a0a0a; background: var(--color-action); border-radius: 50%; font-style: normal; transition: transform 400ms var(--ease-snap); }
+.expose-control i { position: relative; z-index: 2; display: grid; width: 2.7rem; height: 2.7rem; place-items: center; color: #0a0a0a; background: var(--color-action); border-radius: 50%; box-shadow: 0 0 0 0 rgba(255,77,25,0.65); font-style: normal; transition: transform 400ms var(--ease-snap); }
 .expose-control:hover i { transform: translateX(0.35rem); }
 .expose-control:focus-visible { outline: 2px solid var(--color-action); outline-offset: -3px; }
+.results-page:not(.results-page--truth) .expose-control { background: linear-gradient(90deg, rgba(255,77,25,0.14), rgba(255,77,25,0.02) 52%, transparent); border-bottom: 1px solid rgba(255,77,25,0.72); }
+.results-page:not(.results-page--truth) .expose-control::before { position: absolute; z-index: 1; top: 0; bottom: 0; left: -28%; width: 22%; content: ''; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent); transform: skewX(-18deg); animation: truth-sweep 2.8s ease-in-out infinite; }
+.results-page:not(.results-page--truth) .expose-control::after { position: absolute; z-index: 0; inset: 0; pointer-events: none; content: ''; box-shadow: inset 4px 0 0 var(--color-action); opacity: 0.35; animation: truth-edge 1.6s ease-in-out infinite alternate; }
+.results-page:not(.results-page--truth) .expose-control i { animation: truth-arrow 1.15s var(--ease-out) infinite alternate; }
 .results-page--truth .expose-control i { transform: rotate(90deg); }
 
-.truth-content { background: var(--color-canvas); animation: truth-open 800ms var(--ease-snap) both; }
+.truth-content { background: var(--color-canvas); scroll-margin-top: 0; animation: truth-open 800ms var(--ease-snap) both; }
 .lesson-register, .details-register { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid currentColor; font-family: var(--font-mono); font-size: 0.53rem; letter-spacing: 0.07em; text-transform: uppercase; }
 
 .lesson-stage, .result-actions { width: min(calc(100% - clamp(2rem, 6vw, 7rem)), var(--page-width)); margin-inline: auto; }
@@ -65,6 +69,9 @@
 @keyframes verdict-enter { from { opacity: 0; transform: translateY(40%); clip-path: inset(0 0 100%); } to { opacity: 1; transform: translateY(0); clip-path: inset(0); } }
 @keyframes score-stamp { from { opacity: 0; transform: scale(1.35); } to { opacity: 1; transform: scale(1); } }
 @keyframes truth-open { from { opacity: 0; transform: translateY(4rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes truth-sweep { 0%, 18% { left: -28%; } 76%, 100% { left: 112%; } }
+@keyframes truth-edge { to { opacity: 0.9; } }
+@keyframes truth-arrow { to { box-shadow: 0 0 0 0.7rem rgba(255,77,25,0); transform: translateX(0.22rem); } }
 
 @media (max-width: 760px) {
   .results-header { grid-template-columns: 1fr auto; }

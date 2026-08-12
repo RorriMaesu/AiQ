@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AssessmentBrand from './AssessmentBrand';
 import '../styles/ResultsPage.css';
 
@@ -39,6 +39,7 @@ const getVerdictSize = (title) => {
 const ResultsPage = ({ result, onRestart, onHome }) => {
   const [shareLabel, setShareLabel] = useState('Share result');
   const [isTruthRevealed, setIsTruthRevealed] = useState(false);
+  const truthRef = useRef(null);
   const verdict = getVerdict(result);
   const verdictSize = getVerdictSize(verdict.title);
   const percentileLabel = formatOrdinal(result.comparison.percentile);
@@ -47,6 +48,16 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
     if (isTruthRevealed) return;
     setIsTruthRevealed(true);
   };
+
+  useEffect(() => {
+    if (!isTruthRevealed || !truthRef.current) return;
+
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    truthRef.current.scrollIntoView?.({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }, [isTruthRevealed]);
 
   const shareResult = async () => {
     const text = `I scored ${result.score}/100 on AIQ. Then the assessment asked a better question: can any number describe a whole mind?`;
@@ -120,7 +131,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         </button>
       </section>
 
-      {isTruthRevealed && <div className="truth-content" id="iq-truth">
+      {isTruthRevealed && <div className="truth-content" id="iq-truth" ref={truthRef}>
       <section className="lesson-stage" aria-labelledby="truth-title">
         <div className="lesson-register"><span>Beyond the score</span><span>A wider view of intelligence</span></div>
         <div className="lesson-opening">
