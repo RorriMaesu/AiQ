@@ -54,7 +54,7 @@
   max-width: 9.2ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 8vw, 6.8rem);
+  font-size: clamp(3.4rem, 7vw, 5.8rem);
   font-weight: 700;
   line-height: 0.88;
   letter-spacing: -0.07em;

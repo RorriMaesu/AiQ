@@ -2,10 +2,10 @@ import React from 'react';
 import '../styles/IntroPage.css';
 
 const categories = [
-  { icon: '↗', title: 'Patterns', copy: 'Sequences that begin politely and then remove the stairs.' },
-  { icon: 'Aa', title: 'Words', copy: 'Analogies written by someone with a personal grudge against synonyms.' },
-  { icon: '◇', title: 'Space', copy: 'Rotate imaginary objects while your real confidence remains stationary.' },
-  { icon: '∴', title: 'Logic', copy: 'Tiny deductions dressed like a court summons.' },
+  { icon: '↗', title: 'Patterns', copy: 'Numerical and symbolic sequences, progression, and rule detection.' },
+  { icon: 'Aa', title: 'Verbal', copy: 'Analogies, classification, vocabulary, and semantic relationships.' },
+  { icon: '◇', title: 'Spatial', copy: 'Mental rotation, symmetry, orientation, and geometric reasoning.' },
+  { icon: '∴', title: 'Logic', copy: 'Deduction, inference, conditional reasoning, and constraints.' },
 ];
 
 const IntroPage = ({ onStartTest }) => (
@@ -16,50 +16,50 @@ const IntroPage = ({ onStartTest }) => (
         <span>AIQ</span>
       </a>
       <div className="nav-actions">
-        <span className="nav-pill">Peer-reviewed by absolutely nobody</span>
+        <span className="nav-pill">Adaptive Cognitive Assessment</span>
         <button className="nav-start-button" type="button" onClick={onStartTest}>
-          Make a questionable decision <span aria-hidden="true">→</span>
+          Begin assessment <span aria-hidden="true">→</span>
         </button>
       </div>
     </nav>
 
     <section className="intro-hero" id="top">
       <div className="hero-copy">
-        <p className="eyebrow">20 questions · 8 seconds each · confidence sold separately</p>
-        <h1>How smart are you when the timer gets rude</h1>
+        <p className="eyebrow">20 items · 8 seconds each · four reasoning domains</p>
+        <h1>Measure your reasoning under pressure</h1>
         <p className="hero-lede">
-          A smug little algorithm with no qualifications and beautiful typography will now
-          judge your entire brain. Please underperform neatly.
+          A rapid cognitive assessment covering pattern recognition, verbal reasoning, spatial
+          processing, and logic. Complete each item before the timer expires.
         </p>
 
         <div className="hero-actions">
           <button className="primary-button" type="button" onClick={onStartTest}>
-            Let the timer insult me
+            Start assessment
             <span aria-hidden="true">→</span>
           </button>
-          <span className="time-note">8 seconds each · panic included · dignity optional</span>
+          <span className="time-note">Approximately 3 minutes · immediate results · no registration</span>
         </div>
 
         <dl className="hero-stats" aria-label="Test details">
           <div>
             <dt>20</dt>
-            <dd>questions per round</dd>
+            <dd>questions per assessment</dd>
           </div>
           <div>
             <dt>08</dt>
-            <dd>seconds per question</dd>
+            <dd>seconds per item</dd>
           </div>
           <div>
             <dt>4</dt>
-            <dd>brain-flavored categories</dd>
+            <dd>reasoning domains</dd>
           </div>
         </dl>
       </div>
 
       <aside className="test-receipt" aria-label="What this test includes">
         <div className="receipt-topline">
-          <span>AIQ LAB RECEIPT</span>
-          <span>#00042</span>
+          <span>AIQ ASSESSMENT PROFILE</span>
+          <span>FORM A-042</span>
         </div>
         <div className="brain-doodle" aria-hidden="true">
           <span>?</span>
@@ -68,19 +68,19 @@ const IntroPage = ({ onStartTest }) => (
           <i className="doodle-spark spark-three">○</i>
         </div>
         <div className="receipt-lines">
-          <p><span>Fresh questions</span><strong>Included</strong></p>
-          <p><span>Needless pressure</span><strong>Aggressively included</strong></p>
-          <p><span>Useful hints</span><strong>Spiritually absent</strong></p>
-          <p><span>Scientific validity</span><strong>Currently at lunch</strong></p>
+          <p><span>Randomized item set</span><strong>Enabled</strong></p>
+          <p><span>Timed response scoring</span><strong>Enabled</strong></p>
+          <p><span>Domain analysis</span><strong>Included</strong></p>
+          <p><span>Results summary</span><strong>Immediate</strong></p>
         </div>
-        <p className="receipt-total"><span>TOTAL EGO AT RISK</span><strong>$0.00</strong></p>
+        <p className="receipt-total"><span>ESTIMATED DURATION</span><strong>03:00</strong></p>
       </aside>
     </section>
 
     <section className="category-section" aria-labelledby="category-title">
       <div className="section-heading">
-        <p className="eyebrow">Four departments of unnecessary concern</p>
-        <h2 id="category-title">A balanced meal, if the meal resented you</h2>
+        <p className="eyebrow">Assessment domains</p>
+        <h2 id="category-title">Four dimensions of rapid reasoning</h2>
       </div>
       <div className="category-grid">
         {categories.map((category) => (
@@ -94,14 +94,14 @@ const IntroPage = ({ onStartTest }) => (
     </section>
 
     <section className="fine-print">
-      <p className="eyebrow">The legally soothing fine print</p>
-      <h2>This is entertainment, not a diagnosis.</h2>
+      <p className="eyebrow">Before you begin</p>
+      <h2>Complete the assessment in one sitting.</h2>
       <p>
-        Your score may contain traces of guessing, panic, and an algorithm compensating for
-        its lack of friends. The ending will explain why a number is not a mind.
+        Each item advances when time expires. Select the best available answer before the countdown
+        reaches zero. Results are generated immediately and are not a clinical or educational diagnosis.
       </p>
       <button className="secondary-button" type="button" onClick={onStartTest}>
-        I ignored the warning. Start.
+        Begin assessment
       </button>
     </section>
   </main>
