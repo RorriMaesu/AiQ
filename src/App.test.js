@@ -15,6 +15,6 @@ test('starts a balanced twenty-question timed round from the intro', () => {
   fireEvent.click(screen.getAllByRole('button', { name: /^begin assessment/i })[0]);
 
   expect(screen.getAllByText(/measure 01/i).length).toBeGreaterThan(0);
-  expect(screen.getByRole('timer', { name: /8 seconds remaining/i })).toBeInTheDocument();
+  expect(screen.getByRole('timer', { name: /9 seconds remaining/i })).toBeInTheDocument();
   expect(screen.getByRole('progressbar', { name: /quiz progress/i })).toBeInTheDocument();
 });

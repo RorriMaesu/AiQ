@@ -1,6 +1,10 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import QuestionPage, { buildResult, QUESTION_TIME_SECONDS } from './QuestionPage';
 
+test('uses a nine-second response window', () => {
+  expect(QUESTION_TIME_SECONDS).toBe(9);
+});
+
 const sampleQuestions = [
   {
     id: 501,

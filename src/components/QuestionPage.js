@@ -4,7 +4,7 @@ import ProgressBar from './ProgressBar';
 import AssessmentBrand from './AssessmentBrand';
 import '../styles/QuestionPage.css';
 
-const QUESTION_TIME_SECONDS = 8;
+const QUESTION_TIME_SECONDS = 9;
 const PASS_MARK = 80;
 const SCORE_CEILING = 79;
 const TIMEOUT_ANSWER = '__timeout__';

@@ -88,12 +88,12 @@ const IntroPage = ({ onStartTest }) => (
           <span>Read · Decide · Submit</span>
         </div>
         <div className="protocol-copy">
-          <p className="document-label">Eight seconds per item</p>
+          <p className="document-label">Nine seconds per item</p>
           <h2 id="protocol-heading">The clock does<br />not negotiate.</h2>
           <p>Choose the best available response before the measurement window closes. Unanswered items advance automatically.</p>
         </div>
         <div className="protocol-clock" aria-hidden="true">
-          <div className="clock-ring"><span>08</span><i /></div>
+          <div className="clock-ring"><span>09</span><i /></div>
           <p>Seconds<br />per response</p>
         </div>
       </section>

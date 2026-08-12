@@ -6,7 +6,7 @@
 
 **[Try the live demo](https://rorrimaesu.github.io/AiQ/)**
 
-AiQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 questions from a large rotating bank, gives the player eight seconds per question, then separates puzzle performance from the far larger reality of human intelligence.
+AiQ is a deliberately suspicious, humorous IQ-style test. Each round draws 20 questions from a large rotating bank, gives the player nine seconds per question, then separates puzzle performance from the far larger reality of human intelligence.
 
 ## What changed
 
