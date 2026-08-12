@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AssessmentBrand from './AssessmentBrand';
 import '../styles/IntroPage.css';
 
@@ -9,22 +9,11 @@ const domains = [
   { code: 'LOG', title: 'Logical deduction', sample: 'If P → Q, what must follow?' },
 ];
 
-const IntroPage = ({ onStartTest }) => {
-  const [calibration, setCalibration] = useState(61);
-
-  const calibrate = (event) => {
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const position = ((event.clientX - bounds.left) / bounds.width) * 100;
-    setCalibration(Math.round(Math.min(92, Math.max(8, position))));
-  };
-
-  return (
+const IntroPage = ({ onStartTest }) => (
     <main className="measure-landing">
       <section
         className="measure-hero"
         id="top"
-        onPointerMove={calibrate}
-        style={{ '--calibration': calibration, '--calibration-position': `${calibration}%` }}
       >
         <header className="measure-header">
           <AssessmentBrand />
@@ -37,23 +26,12 @@ const IntroPage = ({ onStartTest }) => {
           </button>
         </header>
 
-        <div className="hero-instrument" aria-hidden="true">
-          <span className="instrument-index">CAL/{String(calibration).padStart(3, '0')}</span>
-          <span className="instrument-axis"><i /></span>
-          <span className="instrument-index">READY</span>
-        </div>
-
         <div className="measure-title-lockup">
           <p>AIQ cognitive assessment</p>
           <h1>
             <span>Cognitive reasoning,</span>
             <span className="measured-line">measured under pressure.</span>
           </h1>
-        </div>
-
-        <div className="measure-word" aria-hidden="true">
-          <span>MEASURE</span>
-          <i className="measure-cursor"><b>{calibration}</b></i>
         </div>
 
         <div className="hero-control-panel">
@@ -68,7 +46,7 @@ const IntroPage = ({ onStartTest }) => {
             <strong>Free of charge.</strong>
             <span>No account. No subscription. No payment details.</span>
           </div>
-          <button className="calibration-start" type="button" onClick={onStartTest}>
+          <button className="hero-start" type="button" onClick={onStartTest}>
             <span>Begin free assessment</span>
             <i aria-hidden="true">→</i>
           </button>
@@ -78,7 +56,6 @@ const IntroPage = ({ onStartTest }) => {
           <span>Timed response protocol</span>
           <span>Approx. 3 minutes</span>
           <span>Immediate report</span>
-          <span className="pointer-note">Move pointer to calibrate</span>
         </div>
       </section>
 
@@ -137,10 +114,9 @@ const IntroPage = ({ onStartTest }) => {
       <footer className="measure-footer">
         <AssessmentBrand href="#top" />
         <span>Personal-use reasoning assessment · Not a clinical diagnosis</span>
-        <a href="#top">Return to calibration ↑</a>
+        <a href="#top">Return to overview ↑</a>
       </footer>
     </main>
   );
-};
 
 export default IntroPage;

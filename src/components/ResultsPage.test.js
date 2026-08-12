@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ResultsPage from './ResultsPage';
 
 const result = {
@@ -25,18 +25,19 @@ const result = {
   review: [],
 };
 
-test('discloses the manipulation and delivers the deeper lesson', () => {
+test('presents the score first and reveals the IQ-test lesson only on request', () => {
   render(<ResultsPage result={result} onRestart={jest.fn()} onHome={jest.fn()} />);
 
   expect(screen.getByRole('heading', { name: /disturbingly adequate/i })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: /score above was manipulated/i })).toBeInTheDocument();
-  expect(screen.getByText(/deliberately reduced your actual performance/i)).toBeInTheDocument();
-  expect(screen.getByText(/fictional peer comparison/i)).toBeInTheDocument();
-  expect(screen.getByText(/20 of 20 correct/i)).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: /a number is not a mind/i })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: /iq-style tests are good at measuring performance on iq-style tests/i })).toBeInTheDocument();
-  expect(screen.getByText(/you are not the number/i)).toBeInTheDocument();
   expect(screen.getByText(/8,421 completions/i)).toBeInTheDocument();
   expect(screen.getByText(/22nd percentile/i)).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: /a snapshot. not a definition/i })).not.toBeInTheDocument();
+  expect(screen.queryByText(/manipulated|fictional peer comparison/i)).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('button', { name: /reveal the truth about iq tests/i }));
+
+  expect(screen.getByRole('heading', { name: /a snapshot. not a definition/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /test can be consistent and still be incomplete/i })).toBeInTheDocument();
+  expect(screen.getByText(/score can describe an event/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /take another assessment/i })).toBeInTheDocument();
 });

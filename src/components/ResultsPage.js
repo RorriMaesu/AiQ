@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AssessmentBrand from './AssessmentBrand';
 import '../styles/ResultsPage.css';
-
-const CATEGORY_NAMES = {
-  pattern: 'Pattern recognition',
-  verbal: 'Verbal reasoning',
-  spatial: 'Spatial analysis',
-  logical: 'Logical deduction',
-};
 
 const formatOrdinal = (value) => {
   const remainder = value % 100;
@@ -38,18 +31,17 @@ const getVerdict = (result) => {
 
 const ResultsPage = ({ result, onRestart, onHome }) => {
   const [shareLabel, setShareLabel] = useState('Share result');
-  const [isExposed, setIsExposed] = useState(false);
+  const [isTruthRevealed, setIsTruthRevealed] = useState(false);
   const verdict = getVerdict(result);
-  const missedQuestions = result.review.filter(({ isCorrect }) => !isCorrect);
   const percentileLabel = formatOrdinal(result.comparison.percentile);
 
-  useEffect(() => {
-    const revealTimer = window.setTimeout(() => setIsExposed(true), 2600);
-    return () => window.clearTimeout(revealTimer);
-  }, []);
+  const revealTruth = () => {
+    if (isTruthRevealed) return;
+    setIsTruthRevealed(true);
+  };
 
   const shareResult = async () => {
-    const text = `AIQ gave me ${result.score}/100, then admitted it manipulated the score. The useful result was the lesson: a number is not a mind.`;
+    const text = `I scored ${result.score}/100 on AIQ. Then the assessment asked a better question: can any number describe a whole mind?`;
     try {
       if (navigator.share) {
         await navigator.share({ title: 'My AIQ result', text, url: window.location.href });
@@ -64,7 +56,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   };
 
   return (
-    <main className={`results-page${isExposed ? ' results-page--exposed' : ''}`}>
+    <main className={`results-page${isTruthRevealed ? ' results-page--truth' : ''}`}>
       <section className="verdict-stage" aria-labelledby="result-title">
         <div className="verdict-grid" aria-hidden="true" />
         <header className="results-header">
@@ -105,114 +97,64 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           </div>
         </div>
 
-        <button className="expose-control" type="button" onClick={() => setIsExposed(true)}>
-          <span>{isExposed ? 'Methodology exposed' : 'Inspect score methodology'}</span>
-          <i aria-hidden="true">{isExposed ? '↓' : '＋'}</i>
+        <button
+          className="expose-control"
+          type="button"
+          aria-expanded={isTruthRevealed}
+          aria-controls="iq-truth"
+          onClick={revealTruth}
+        >
+          <span>
+            <small>{isTruthRevealed ? 'Continue below' : 'Before you accept the number'}</small>
+            {isTruthRevealed ? 'The wider picture is open' : 'Reveal the truth about IQ tests'}
+          </span>
+          <i aria-hidden="true">{isTruthRevealed ? '↓' : '→'}</i>
         </button>
       </section>
 
-      <section className="system-rupture" aria-hidden="true">
-        <span>OBJECTIVE</span><span>VERIFIED</span><span>PRECISE</span><span>NEUTRAL</span>
-      </section>
-
-      <section className="exposure-stage" aria-labelledby="disclosure-title">
-        <div className="exposure-register"><span>System disclosure</span><span>The instrument was the trick</span></div>
-        <div className="exposure-headline">
-          <p className="document-label">What just happened</p>
-          <h2 id="disclosure-title">The score above<br />was manipulated.</h2>
-        </div>
-        <div className="exposure-evidence">
-          <p>
-            AIQ deliberately reduced your actual performance and generated a fictional peer comparison.
-            It wrapped both in precise numbers, formal language, and an authoritative interface so the result
-            would feel measured instead of manufactured.
-          </p>
-          <dl>
-            <div><dt>Displayed score</dt><dd><s>{result.score}%</s></dd></div>
-            <div><dt>Actual raw score</dt><dd>{result.rawScore}%</dd></div>
-            <div><dt>Actual answers</dt><dd>{result.correctCount} of {result.totalQuestions} correct</dd></div>
-            <div><dt>Timed out</dt><dd>{result.timedOutCount}</dd></div>
-          </dl>
-        </div>
-        <div className="manufactured-labels" aria-label="Manufactured result elements">
-          <span>Reduced score</span><span>Invented average</span><span>Fabricated percentile</span><span>False confidence</span>
-        </div>
-      </section>
-
+      {isTruthRevealed && <div className="truth-content" id="iq-truth">
       <section className="lesson-stage" aria-labelledby="truth-title">
-        <div className="lesson-register"><span>After the number</span><span>Read slowly. No timer now.</span></div>
+        <div className="lesson-register"><span>Beyond the score</span><span>A wider view of intelligence</span></div>
         <div className="lesson-opening">
-          <p className="document-label">What the score could not see</p>
-          <h2 id="truth-title">A number<br />is not a mind.</h2>
+          <p className="document-label">The limits of the instrument</p>
+          <h2 id="truth-title">A snapshot.<br />Not a definition.</h2>
           <p>
-            The assessment observed a handful of answers produced under a countdown. It did not observe how
-            you learn, what you create, whom you understand, how you adapt, or what you do when the rules stop
-            being tidy. The result looked exact while ignoring nearly everything that gives intelligence meaning.
+            An IQ-style assessment can describe how someone performed on a narrow set of tasks, under particular
+            conditions, at one moment in time. That can be information. It is not a complete account of a person’s
+            intelligence, potential, judgment, creativity, or worth.
           </p>
         </div>
 
         <ol className="truth-list">
-          <li><span>01</span><div><h3>Speed is a condition</h3><p>A clock rewards quick recall, calm under artificial pressure, and confidence when guessing. Depth may arrive later.</p></div></li>
-          <li><span>02</span><div><h3>Familiarity resembles aptitude</h3><p>Practice with a puzzle format improves performance on that format. The number rarely explains that history.</p></div></li>
-          <li><span>03</span><div><h3>Context moves the result</h3><p>Stress, language, sleep, culture, disability, education, and motivation all shape what appears on the screen.</p></div></li>
-          <li><span>04</span><div><h3>The instrument is narrow</h3><p>Creativity, judgment, empathy, practical skill, curiosity, collaboration, and wisdom do not fit into four buttons.</p></div></li>
+          <li><span>01</span><div><h3>It measures performance under conditions</h3><p>Time pressure, stress, sleep, health, attention, and confidence can all change the result without changing the mind behind it.</p></div></li>
+          <li><span>02</span><div><h3>Practice can look like aptitude</h3><p>Familiarity with analogies, sequences, and test conventions improves performance. Scores rarely show who learned the format beforehand.</p></div></li>
+          <li><span>03</span><div><h3>Context enters every answer</h3><p>Language, culture, education, disability, access, and opportunity shape what a test makes easy or difficult to demonstrate.</p></div></li>
+          <li><span>04</span><div><h3>Important abilities remain outside the frame</h3><p>Creativity, empathy, practical judgment, persistence, curiosity, collaboration, and wisdom do not fit neatly into timed multiple choice.</p></div></li>
         </ol>
 
         <blockquote className="lesson-statement">
-          <h3>IQ-style tests are good at measuring performance on IQ-style tests.</h3>
+          <h3>A test can be consistent and still be incomplete.</h3>
           <footer>
-            Intelligence is also learning from error, creating what did not exist, understanding another person,
-            adapting when conditions change, and noticing what the test writer never imagined.
+            The problem begins when a limited measurement is treated as a final verdict—when a score becomes a
+            label, a ceiling, or a substitute for understanding the person who produced it.
           </footer>
         </blockquote>
 
         <div className="final-thesis">
-          <span>The deepest mistake is not choosing the wrong option.</span>
-          <strong>You are not the number.<br />You are everything the number had no language to ask.</strong>
+          <span>The score can describe an event. It cannot contain a life.</span>
+          <strong>Intelligence is not a position on a scale.<br />It is the continuing capacity to learn, create, adapt, care, and notice what the scale was never built to see.</strong>
         </div>
       </section>
 
-      <section className="report-details" aria-label="Detailed assessment report">
-        <div className="details-register"><span>Supporting record</span><span>For the curious and professionally unconvinced</span></div>
-        <details className="report-drawer">
-          <summary><span>01</span><strong>Manipulated scores by domain</strong><small>Open record</small></summary>
-          <div className="domain-table" role="table" aria-label="Domain score report">
-            {result.categoryResults.map((category) => (
-              <div className="domain-row" role="row" key={category.type}>
-                <span role="cell">{CATEGORY_NAMES[category.type]}</span>
-                <div role="cell" className="domain-rule" aria-hidden="true"><i style={{ width: `${category.reportedScore}%` }} /></div>
-                <strong role="cell">{category.reportedScore} / 100</strong>
-              </div>
-            ))}
-          </div>
-        </details>
-        <details className="report-drawer">
-          <summary><span>02</span><strong>{missedQuestions.length ? 'Items to review' : 'Complete answer record'}</strong><small>Open record</small></summary>
-          {missedQuestions.length ? (
-            <div className="review-list">
-              {missedQuestions.map((item, index) => (
-                <details key={item.id}>
-                  <summary><span>{String(index + 1).padStart(2, '0')}</span>{item.question}</summary>
-                  <div className="review-answer">
-                    {item.timedOut && <p><strong>Your answer:</strong> No response recorded.</p>}
-                    <p><strong>Expected answer:</strong> {item.correctAnswer}. {item.correctAnswerText}</p>
-                    <p>{item.explanation}</p>
-                  </div>
-                </details>
-              ))}
-            </div>
-          ) : <p className="complete-record">Every response was correct. The reported score was still reduced—which is exactly the lesson.</p>}
-        </details>
-      </section>
-
       <section className="result-actions">
-        <div><p className="document-label">Try the instrument again</p><h2>Same mind.<br />Different number.</h2></div>
+        <div><p className="document-label">Keep the lesson, question the label</p><h2>Same mind.<br />Different moment.</h2></div>
         <div className="action-buttons">
           <button className="primary-button" type="button" onClick={onRestart}>Take another assessment <span>→</span></button>
           <button className="secondary-button" type="button" onClick={shareResult}>{shareLabel} <span>↗</span></button>
           <button className="text-button" type="button" onClick={onHome}>Return to introduction</button>
         </div>
       </section>
+      </div>}
     </main>
   );
 };
