@@ -18,6 +18,10 @@
   --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', sans-serif;
   --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  --font-human: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --tracking-machine: -0.045em;
+  --tracking-display: -0.03em;
+  --tracking-functional: -0.018em;
   --page-width: 1440px;
   --reading-width: 1120px;
   --radius-control: 0;

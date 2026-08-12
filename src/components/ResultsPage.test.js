@@ -37,5 +37,6 @@ test('discloses the manipulation and delivers the deeper lesson', () => {
   expect(screen.getByRole('heading', { name: /iq-style tests are good at measuring performance on iq-style tests/i })).toBeInTheDocument();
   expect(screen.getByText(/you are not the number/i)).toBeInTheDocument();
   expect(screen.getByText(/8,421 completions/i)).toBeInTheDocument();
+  expect(screen.getByText(/22nd percentile/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /take another assessment/i })).toBeInTheDocument();
 });

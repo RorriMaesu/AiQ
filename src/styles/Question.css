@@ -21,7 +21,7 @@
 
 .question-meta span:first-child { color: var(--domain-color); }
 .question-copy { display: flex; justify-content: center; flex-direction: column; padding: clamp(1.2rem, 4vh, 3rem) 0; }
-.question-copy h1 { max-width: 22ch; margin: 0; font-size: clamp(2.4rem, 5.6vw, 5.9rem); font-stretch: 82%; font-weight: 760; line-height: 0.92; letter-spacing: -0.07em; text-wrap: balance; }
+.question-copy h1 { max-width: 24ch; margin: 0; font-size: clamp(2.35rem, 5vw, 5.2rem); font-stretch: 100%; font-weight: 680; line-height: 0.98; letter-spacing: var(--tracking-functional); word-spacing: 0.06em; text-wrap: balance; }
 .sequence-display, .question-description { max-width: 100%; margin: 1.35rem 0 0; }
 .sequence-display { width: fit-content; padding: 0.55rem 0.75rem; color: var(--domain-color); border: 1px solid currentColor; font-family: var(--font-mono); font-size: clamp(0.9rem, 1.8vw, 1.25rem); letter-spacing: 0.06em; }
 .question-description { max-width: 62ch; color: rgba(255,255,255,0.68); font-size: 0.85rem; }
@@ -29,10 +29,12 @@
 .option-button { position: relative; display: grid; min-height: clamp(4.2rem, 8.5vh, 6.2rem); align-items: center; gap: 1rem; padding: 0.65rem 0.9rem; color: #fff; background: transparent; border: 0; border-right: 1px solid rgba(255,255,255,0.35); border-bottom: 1px solid rgba(255,255,255,0.35); text-align: left; grid-template-columns: 2.1rem minmax(0,1fr) auto; transition: color 160ms ease, background 160ms ease, padding 220ms var(--ease-out); }
 .option-button:nth-child(even) { border-right: 0; }
 .option-button:hover { color: #0a0a0a; background: #f5f1e7; padding-left: 1.2rem; }
-.option-button.selected { color: #fff; background: var(--domain-color); }
+.option-button.selected { color: #fff; background: var(--domain-color); box-shadow: inset 3px 0 0 #fff; }
+.option-button:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.option-button.selected:focus-visible { outline: 0; box-shadow: inset 0 0 0 2px #fff; }
 .option-letter { position: relative; display: grid; width: 1.9rem; height: 1.9rem; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-family: var(--font-mono); font-size: 0.67rem; }
 .option-letter small { position: absolute; top: -0.35rem; right: -0.35rem; display: grid; width: 0.8rem; height: 0.8rem; place-items: center; color: #0a0a0a; background: #fff; border-radius: 50%; font-size: 0.42rem; }
-.option-text { overflow-wrap: anywhere; font-size: clamp(0.78rem, 1.3vw, 0.95rem); font-weight: 650; }
+.option-text { overflow-wrap: anywhere; font-size: clamp(0.8rem, 1.3vw, 0.98rem); font-stretch: 100%; font-weight: 620; letter-spacing: 0; line-height: 1.35; word-spacing: 0.04em; }
 .option-check { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase; }
 
 .question-sheet--pattern .question-copy::after,
@@ -56,14 +58,14 @@
 
 @media (max-height: 760px) and (min-width: 621px) {
   .question-copy { min-height: 8rem; padding: 1rem 0; }
-  .question-copy h1 { font-size: clamp(2.15rem, 4.8vw, 4.4rem); }
+  .question-copy h1 { font-size: clamp(2.15rem, 4.6vw, 4.1rem); }
   .option-button { min-height: 4rem; }
 }
 
 @media (max-width: 620px) {
   .question-sheet { grid-template-rows: auto minmax(9.5rem, auto) auto; }
   .question-copy { padding: 1.2rem 0; }
-  .question-copy h1 { font-size: clamp(2.25rem, 11.5vw, 3.7rem); }
+  .question-copy h1 { font-size: clamp(2.05rem, 9.5vw, 3.35rem); line-height: 1; }
   .sequence-display { margin-top: 0.9rem; }
   .question-options { grid-template-columns: 1fr; }
   .option-button, .option-button:nth-child(even) { min-height: 3.75rem; border-right: 0; }

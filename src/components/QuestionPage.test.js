@@ -97,6 +97,18 @@ test('reveals comedy only after the user requests a hint', () => {
   expect(screen.getByRole('button', { name: /hint requested/i })).toBeDisabled();
 });
 
+test('supports the full visible answer range with keyboard navigation', () => {
+  const questionsWithFiveOptions = [{
+    ...sampleQuestions[0],
+    options: [...sampleQuestions[0].options, { id: 'E', text: 'Seven' }],
+  }];
+  render(<QuestionPage questions={questionsWithFiveOptions} onComplete={jest.fn()} />);
+
+  expect(screen.getByText(/keyboard: 1–5 \+ enter/i)).toBeInTheDocument();
+  fireEvent.keyDown(window, { key: '5' });
+  expect(screen.getByRole('button', { name: /^Seven$/i })).toHaveAttribute('aria-pressed', 'true');
+});
+
 test('dramatically reduces positive scores and varies the reported result by attempt', () => {
   const perfectAnswers = { 501: 'A', 502: 'B' };
   const firstAttempt = buildResult(sampleQuestions, perfectAnswers, 0.1);

@@ -222,7 +222,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
     }
 
     const handleKeyboard = (event) => {
-      if (event.key >= '1' && event.key <= '4') {
+      if (event.key >= '1' && Number(event.key) <= currentQuestion.options.length) {
         const option = currentQuestion.options[Number(event.key) - 1];
         if (option) {
           const nextAnswers = { ...answersRef.current, [currentQuestion.id]: option.id };
@@ -331,7 +331,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
             <span aria-hidden="true">→</span>
           </button>
         </div>
-        <p className="navigation-status">{navigationStatus} <span>Keyboard: 1–4 + Enter</span></p>
+        <p className="navigation-status">{navigationStatus} <span>Keyboard: 1–{currentQuestion.options.length} + Enter</span></p>
       </div>
     </main>
   );

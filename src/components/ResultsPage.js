@@ -9,6 +9,15 @@ const CATEGORY_NAMES = {
   logical: 'Logical deduction',
 };
 
+const formatOrdinal = (value) => {
+  const remainder = value % 100;
+  if (remainder >= 11 && remainder <= 13) return `${value}th`;
+  if (value % 10 === 1) return `${value}st`;
+  if (value % 10 === 2) return `${value}nd`;
+  if (value % 10 === 3) return `${value}rd`;
+  return `${value}th`;
+};
+
 const getVerdict = (result) => {
   const accuracy = result.totalQuestions ? result.correctCount / result.totalQuestions : 0;
 
@@ -32,6 +41,7 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   const [isExposed, setIsExposed] = useState(false);
   const verdict = getVerdict(result);
   const missedQuestions = result.review.filter(({ isCorrect }) => !isCorrect);
+  const percentileLabel = formatOrdinal(result.comparison.percentile);
 
   useEffect(() => {
     const revealTimer = window.setTimeout(() => setIsExposed(true), 2600);
@@ -83,14 +93,14 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           </div>
         </div>
 
-        <div className="comparison-axis" aria-label={`Reported ${result.comparison.percentile}th percentile`}>
+        <div className="comparison-axis" aria-label={`Reported ${percentileLabel} percentile`}>
           <div className="axis-labels"><span>Lower</span><span>Reference average {result.comparison.averageScore}</span><span>Higher</span></div>
           <div className="axis-rule">
             <i className="score-marker" style={{ left: `${result.comparison.percentile}%` }}><b>You</b></i>
             <i className="average-marker" style={{ left: `${result.comparison.averageScore}%` }}><b>Average</b></i>
           </div>
           <div className="axis-reading">
-            <strong>{result.comparison.percentile}th percentile</strong>
+            <strong>{percentileLabel} percentile</strong>
             <span>{result.comparison.higherPercentage}% of comparison group reported higher</span>
           </div>
         </div>
@@ -207,5 +217,5 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   );
 };
 
-export { getVerdict };
+export { formatOrdinal, getVerdict };
 export default ResultsPage;
