@@ -8,11 +8,11 @@ const TYPE_LABELS = {
   logical: 'Logical deduction',
 };
 
-const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQuestions }) => (
+const Question = ({ question, selectedOption, onAnswer, questionNumber }) => (
   <section className={`question-sheet question-sheet--${question.type}`} aria-labelledby={`question-${question.id}`}>
     <div className="question-meta">
       <span>{TYPE_LABELS[question.type]}</span>
-      <span>Item {questionNumber} of {totalQuestions}</span>
+      <span>Measure {String(questionNumber).padStart(2, '0')}</span>
     </div>
 
     <div className="question-copy">
@@ -35,7 +35,7 @@ const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQue
             aria-pressed={isSelected}
             onClick={() => onAnswer(question.id, option.id)}
           >
-            <span className="option-letter" aria-hidden="true">{option.id}</span>
+            <span className="option-letter" aria-hidden="true">{option.id}<small>{question.options.indexOf(option) + 1}</small></span>
             <span className="option-text">{option.text}</span>
             <span className="option-check" aria-hidden="true">{isSelected ? 'Selected' : ''}</span>
           </button>

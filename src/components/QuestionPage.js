@@ -216,6 +216,29 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
     };
   }, [currentQuestion, submitCurrentQuestion]);
 
+  useEffect(() => {
+    if (!currentQuestion) {
+      return undefined;
+    }
+
+    const handleKeyboard = (event) => {
+      if (event.key >= '1' && event.key <= '4') {
+        const option = currentQuestion.options[Number(event.key) - 1];
+        if (option) {
+          const nextAnswers = { ...answersRef.current, [currentQuestion.id]: option.id };
+          answersRef.current = nextAnswers;
+          setAnswers(nextAnswers);
+        }
+      }
+      if (event.key === 'Enter' && answersRef.current[currentQuestion.id]) {
+        submitCurrentQuestion(answersRef.current[currentQuestion.id]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyboard);
+    return () => window.removeEventListener('keydown', handleKeyboard);
+  }, [currentQuestion, submitCurrentQuestion]);
+
   if (!currentQuestion) {
     return null;
   }
@@ -235,10 +258,11 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
 
   return (
     <main className={`quiz-page quiz-page--${currentQuestion.type}${timeLeft <= 3 ? ' quiz-page--urgent' : ''}`}>
+      <div className="quiz-grid" aria-hidden="true" />
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
         <AssessmentBrand href="#quiz" label="AIQ assessment" />
         <div className="quiz-header-actions">
-          <span>Item {currentQuestionIndex + 1} of {questions.length}</span>
+          <span>Protocol active · Measure {String(currentQuestionIndex + 1).padStart(2, '0')}</span>
           <button className="exit-button" type="button" onClick={onExit}>Exit assessment</button>
         </div>
       </header>
@@ -246,25 +270,31 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
       <section className="quiz-status" id="quiz" aria-label="Assessment progress">
         <div className="quiz-status-row">
           <div className="progress-copy" aria-live="polite">
-            <span>Progress</span>
-            <strong>{currentQuestionIndex + 1} / {questions.length}</strong>
+            <span>Assessment progression</span>
+            <strong>{String(Math.round(progress)).padStart(2, '0')}%</strong>
           </div>
           <div
             className={`timer-display${timeLeft <= 3 ? ' timer-display--urgent' : ''}`}
             role="timer"
             aria-label={`${timeLeft} seconds remaining`}
           >
-            <span>Time remaining</span>
-            <strong>00:{String(timeLeft).padStart(2, '0')}</strong>
+            <span>Measurement window</span>
+            <strong>{String(timeLeft).padStart(2, '0')}</strong>
           </div>
         </div>
         <ProgressBar progress={progress} />
-        <div className="time-track" aria-hidden="true">
-          <span style={{ transform: `scaleX(${timeLeft / QUESTION_TIME_SECONDS})` }} />
+        <div className="time-track" aria-hidden="true" style={{ '--time-left': timeLeft / QUESTION_TIME_SECONDS }}>
+          <span />
+          <i>{String(timeLeft).padStart(2, '0')}</i>
         </div>
       </section>
 
       <div className="quiz-workspace">
+        <aside className="question-register" aria-hidden="true">
+          <span>{String(currentQuestionIndex + 1).padStart(2, '0')}</span>
+          <i />
+          <span>{currentQuestion.type.slice(0, 3).toUpperCase()}</span>
+        </aside>
         <Question
           key={currentQuestion.id}
           question={currentQuestion}
@@ -275,7 +305,6 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
             setAnswers(nextAnswers);
           }}
           questionNumber={currentQuestionIndex + 1}
-          totalQuestions={questions.length}
         />
 
         <div className="question-tools">
@@ -285,8 +314,9 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
               type="button"
               onClick={() => setShowHint(true)}
               disabled={showHint}
+              aria-label={showHint ? 'Hint requested' : 'Request hint'}
             >
-              {showHint ? 'Hint requested' : 'Request hint'}
+              {showHint ? 'Examiner has spoken' : 'Request examiner hint'}
             </button>
             {showHint && <p className="hint-message"><span>Examiner note</span>{hint}</p>}
           </div>
@@ -295,12 +325,13 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
             type="button"
             onClick={handleNext}
             disabled={!selectedOption}
+            aria-label={isLastQuestion ? 'Submit final response' : 'Submit response'}
           >
-            {isLastQuestion ? 'Submit final response' : 'Submit response'}
+            {isLastQuestion ? 'Complete assessment' : 'Register response'}
             <span aria-hidden="true">→</span>
           </button>
         </div>
-        <p className="navigation-status">{navigationStatus}</p>
+        <p className="navigation-status">{navigationStatus} <span>Keyboard: 1–4 + Enter</span></p>
       </div>
     </main>
   );

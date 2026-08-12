@@ -2,6 +2,7 @@ import React from 'react';
 
 const BrandContent = () => (
   <>
+    <span className="assessment-brand-symbol" aria-hidden="true"><i /></span>
     <span className="assessment-brand-wordmark">AIQ</span>
     <span className="assessment-brand-descriptor">Cognitive Assessment</span>
   </>

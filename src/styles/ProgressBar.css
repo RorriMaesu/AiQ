@@ -1,12 +1,24 @@
 .progress-track {
-  height: 0.18rem;
-  overflow: hidden;
-  background: #d9dcdd;
+  position: relative;
+  height: 1px;
+  overflow: visible;
+  background: rgba(255,255,255,0.25);
 }
 
 .progress-value {
+  position: relative;
   display: block;
   height: 100%;
-  background: var(--domain-color, var(--color-action));
-  transition: width 320ms var(--ease-out), background 180ms ease;
+  background: var(--color-action);
+  transition: width 500ms var(--ease-snap);
+}
+
+.progress-value::after {
+  position: absolute;
+  top: -4px;
+  right: -1px;
+  width: 2px;
+  height: 9px;
+  content: '';
+  background: var(--color-action);
 }
