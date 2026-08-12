@@ -5,21 +5,25 @@ import '../styles/IntroPage.css';
 const domains = [
   {
     index: '01',
+    code: 'PTN',
     title: 'Pattern recognition',
     copy: 'Identify numerical, symbolic, and visual relationships across structured sequences.',
   },
   {
     index: '02',
+    code: 'VRB',
     title: 'Verbal reasoning',
     copy: 'Evaluate analogies, classifications, vocabulary, and semantic relationships.',
   },
   {
     index: '03',
+    code: 'SPT',
     title: 'Spatial analysis',
     copy: 'Interpret rotation, orientation, symmetry, and relationships between forms.',
   },
   {
     index: '04',
+    code: 'LOG',
     title: 'Logical deduction',
     copy: 'Apply conditional reasoning, inference, and constraints to reach a conclusion.',
   },
@@ -44,14 +48,18 @@ const IntroPage = ({ onStartTest }) => (
 
     <section className="landing-hero" id="top">
       <div className="landing-hero-copy">
-        <p className="document-label">Free online reasoning assessment</p>
-        <h1>Cognitive Reasoning Assessment</h1>
+        <div className="hero-status">
+          <span><i aria-hidden="true" /> Assessment available</span>
+          <strong>Free access</strong>
+        </div>
+        <p className="document-label">AIQ assessment · Form 04</p>
+        <h1>Measure how you reason under pressure.</h1>
         <p className="landing-lede">
-          A short, timed evaluation of pattern recognition, verbal reasoning, spatial analysis,
-          and logical deduction.
+          A focused cognitive assessment across pattern, verbal, spatial, and logical reasoning.
+          Every response is timed. Results are immediate.
         </p>
         <p className="free-statement">
-          <strong>The assessment is free.</strong> No account, subscription, or payment information is required.
+          <strong>Free of charge.</strong> No account, subscription, or payment information required.
         </p>
         <button className="primary-button landing-primary" type="button" onClick={onStartTest}>
           Begin assessment <span aria-hidden="true">→</span>
@@ -65,6 +73,11 @@ const IntroPage = ({ onStartTest }) => (
       </div>
 
       <figure className="sample-sheet" aria-labelledby="sample-title">
+        <div className="instrument-strip" aria-hidden="true">
+          <span>LIVE PREVIEW</span>
+          <i />
+          <span>08 SEC</span>
+        </div>
         <div className="sample-heading">
           <div>
             <span>Sample item</span>
@@ -79,6 +92,9 @@ const IntroPage = ({ onStartTest }) => (
               {shape !== 'missing' && <i />}
             </span>
           ))}
+        </div>
+        <div className="sample-response" aria-hidden="true">
+          <span>A</span><span>B</span><span className="active">C</span><span>D</span>
         </div>
         <figcaption>
           Items use numerical, verbal, spatial, and logical formats. Each response is timed independently.
@@ -95,7 +111,7 @@ const IntroPage = ({ onStartTest }) => (
       <ol className="domain-list">
         {domains.map((domain) => (
           <li key={domain.index}>
-            <span>{domain.index}</span>
+            <span className="domain-code" aria-hidden="true">{domain.code}</span>
             <div>
               <h3>{domain.title}</h3>
               <p>{domain.copy}</p>
@@ -108,7 +124,7 @@ const IntroPage = ({ onStartTest }) => (
     <section className="landing-section method-section" id="method" aria-labelledby="method-title">
       <div className="landing-section-heading">
         <p className="document-label">How it works</p>
-        <h2 id="method-title">A focused, timed format</h2>
+        <h2 id="method-title">One item. One decision. Eight seconds.</h2>
       </div>
       <ol className="method-list">
         <li><span>1</span><strong>Review the item</strong><p>Read the prompt and identify the relationship being tested.</p></li>

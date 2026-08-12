@@ -20,6 +20,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+#root { min-height: 100vh; }
+
 button,
 input,
 textarea,

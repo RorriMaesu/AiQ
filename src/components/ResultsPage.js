@@ -80,22 +80,12 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           <span>Reported score</span>
           <strong>{result.score}<small>/100</small></strong>
           <p>{result.comparison.percentile}th percentile</p>
+          <dl className="score-context">
+            <div><dt>Reference average</dt><dd>{result.comparison.averageScore}</dd></div>
+            <div><dt>Comparison group</dt><dd>{result.comparison.sampleSize.toLocaleString()} completions</dd></div>
+            <div><dt>Reported higher</dt><dd>{result.comparison.higherPercentage}%</dd></div>
+          </dl>
         </div>
-      </section>
-
-      <section className="report-section comparison-report" aria-labelledby="comparison-title">
-        <div className="report-section-heading">
-          <p className="document-label">Performance summary</p>
-          <h2 id="comparison-title">Reported comparison</h2>
-          <p>Reference information presented at the completion of this assessment.</p>
-        </div>
-        <dl className="report-table comparison-table">
-          <div><dt>Your reported score</dt><dd>{result.score} / 100</dd></div>
-          <div><dt>Reference average</dt><dd>{result.comparison.averageScore} / 100</dd></div>
-          <div><dt>Reported percentile</dt><dd>{result.comparison.percentile}th</dd></div>
-          <div><dt>Reported comparison group</dt><dd>{result.comparison.sampleSize.toLocaleString()} completions</dd></div>
-          <div><dt>Reported higher-scoring group</dt><dd>{result.comparison.higherPercentage}%</dd></div>
-        </dl>
       </section>
 
       <section className="disclosure" aria-labelledby="disclosure-title">
@@ -163,48 +153,48 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
         </blockquote>
       </section>
 
-      <section className="report-section domain-report" aria-labelledby="domain-results-title">
-        <div className="report-section-heading">
-          <p className="document-label">Domain detail</p>
-          <h2 id="domain-results-title">Reported scores by domain</h2>
-          <p>These values were reduced using the same mechanism as the overall reported score.</p>
-        </div>
-        <div className="domain-table" role="table" aria-label="Domain score report">
-          {result.categoryResults.map((category) => (
-            <div className="domain-row" role="row" key={category.type}>
-              <span role="cell">{CATEGORY_NAMES[category.type]}</span>
-              <div role="cell" className="domain-rule" aria-hidden="true"><i style={{ width: `${category.reportedScore}%` }} /></div>
-              <strong role="cell">{category.reportedScore} / 100</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="answer-review" aria-labelledby="review-title">
-        <div className="report-section-heading">
-          <p className="document-label">Answer review</p>
-          <h2 id="review-title">{missedQuestions.length ? 'Items to review' : 'Complete answer record'}</h2>
-          <p>
-            {missedQuestions.length
-              ? 'Open an item to see the expected response. A timeout records no answer.'
-              : 'Every response was correct. The reported score was still reduced—which is exactly the lesson.'}
-          </p>
-        </div>
-
-        {missedQuestions.length > 0 && (
-          <div className="review-list">
-            {missedQuestions.map((item, index) => (
-              <details key={item.id}>
-                <summary><span>{String(index + 1).padStart(2, '0')}</span>{item.question}</summary>
-                <div className="review-answer">
-                  {item.timedOut && <p><strong>Your answer:</strong> No response recorded.</p>}
-                  <p><strong>Expected answer:</strong> {item.correctAnswer}. {item.correctAnswerText}</p>
-                  <p>{item.explanation}</p>
-                </div>
-              </details>
+      <section className="report-details" aria-label="Detailed assessment report">
+        <p className="document-label">Supporting report</p>
+        <details className="report-drawer">
+          <summary>
+            <span>01</span>
+            <strong>Reported scores by domain</strong>
+            <small>Four manipulated sub-scores</small>
+          </summary>
+          <div className="domain-table" role="table" aria-label="Domain score report">
+            {result.categoryResults.map((category) => (
+              <div className="domain-row" role="row" key={category.type}>
+                <span role="cell">{CATEGORY_NAMES[category.type]}</span>
+                <div role="cell" className="domain-rule" aria-hidden="true"><i style={{ width: `${category.reportedScore}%` }} /></div>
+                <strong role="cell">{category.reportedScore} / 100</strong>
+              </div>
             ))}
           </div>
-        )}
+        </details>
+
+        <details className="report-drawer">
+          <summary>
+            <span>02</span>
+            <strong>{missedQuestions.length ? 'Items to review' : 'Complete answer record'}</strong>
+            <small>{missedQuestions.length ? `${missedQuestions.length} responses available` : 'Every response was correct'}</small>
+          </summary>
+          {missedQuestions.length > 0 ? (
+            <div className="review-list">
+              {missedQuestions.map((item, index) => (
+                <details key={item.id}>
+                  <summary><span>{String(index + 1).padStart(2, '0')}</span>{item.question}</summary>
+                  <div className="review-answer">
+                    {item.timedOut && <p><strong>Your answer:</strong> No response recorded.</p>}
+                    <p><strong>Expected answer:</strong> {item.correctAnswer}. {item.correctAnswerText}</p>
+                    <p>{item.explanation}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          ) : (
+            <p className="complete-record">Every response was correct. The reported score was still reduced—which is exactly the lesson.</p>
+          )}
+        </details>
       </section>
 
       <section className="result-actions" aria-label="Assessment actions">

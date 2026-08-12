@@ -9,7 +9,7 @@ const TYPE_LABELS = {
 };
 
 const Question = ({ question, selectedOption, onAnswer, questionNumber, totalQuestions }) => (
-  <section className="question-sheet" aria-labelledby={`question-${question.id}`}>
+  <section className={`question-sheet question-sheet--${question.type}`} aria-labelledby={`question-${question.id}`}>
     <div className="question-meta">
       <span>{TYPE_LABELS[question.type]}</span>
       <span>Item {questionNumber} of {totalQuestions}</span>

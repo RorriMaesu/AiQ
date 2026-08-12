@@ -1,136 +1,44 @@
 .question-sheet {
-  padding: clamp(1.5rem, 4vw, 2.75rem);
+  position: relative;
+  padding: clamp(1.15rem, 2.2vw, 1.65rem);
+  overflow: hidden;
   background: var(--color-surface);
   border: 1px solid var(--color-rule-dark);
+  box-shadow: var(--shadow-sheet);
+  animation: question-enter 380ms var(--ease-out) both;
 }
-
-.question-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  color: var(--color-muted);
-  border-bottom: 1px solid var(--color-rule);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.question-copy {
-  min-height: 210px;
-  padding: clamp(2rem, 5vw, 3.5rem) 0;
-}
-
-.question-copy h1 {
-  max-width: 24ch;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.7vw, 3.25rem);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-}
-
+.question-sheet::before { position: absolute; top: 0; bottom: 0; left: 0; width: 3px; content: ''; background: var(--domain-color); }
+.question-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-bottom: 0.65rem; color: var(--color-muted); border-bottom: 1px solid var(--color-rule); font-size: 0.61rem; font-weight: 750; letter-spacing: 0.09em; text-transform: uppercase; }
+.question-meta span:first-child { color: var(--domain-color); }
+.question-copy { min-height: 128px; padding: clamp(1rem, 3vh, 1.7rem) 0; }
+.question-copy h1 { max-width: 29ch; margin: 0; font-family: var(--font-display); font-size: clamp(1.65rem, 3.1vw, 2.45rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
 .sequence-display,
-.question-description {
-  margin: 1.5rem 0 0;
-}
+.question-description { margin: 0.85rem 0 0; }
+.sequence-display { width: fit-content; max-width: 100%; padding: 0.48rem 0.7rem; color: var(--color-ink); background: #f3f5f4; border: 1px solid var(--color-rule); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: clamp(0.92rem, 2vw, 1.15rem); font-weight: 650; letter-spacing: 0.055em; }
+.question-description { max-width: 60ch; color: var(--color-muted); font-size: 0.86rem; }
+.question-options { display: grid; border-top: 1px solid var(--color-rule-dark); }
+.option-button { position: relative; display: grid; min-height: 3.35rem; align-items: center; gap: 0.8rem; padding: 0.48rem 0.68rem; color: var(--color-ink); background: var(--color-surface); border: 0; border-bottom: 1px solid var(--color-rule); text-align: left; grid-template-columns: 1.8rem minmax(0, 1fr) auto; transition: background 150ms ease, transform 160ms var(--ease-out), box-shadow 160ms ease; }
+.option-button:hover { z-index: 1; background: #f4f7f8; transform: translateX(3px); }
+.option-button.selected { z-index: 2; background: color-mix(in srgb, var(--domain-color) 10%, white); box-shadow: inset 3px 0 0 var(--domain-color); animation: selected-lock 240ms var(--ease-out); }
+.option-letter { display: grid; width: 1.55rem; height: 1.55rem; place-items: center; border: 1px solid var(--color-rule-dark); border-radius: 50%; font-size: 0.68rem; font-weight: 750; transition: transform 180ms var(--ease-out), background 180ms ease; }
+.selected .option-letter { color: #fff; background: var(--domain-color); border-color: var(--domain-color); transform: scale(1.05); }
+.option-text { overflow-wrap: anywhere; font-size: 0.86rem; font-weight: 600; }
+.option-check { color: var(--domain-color); font-size: 0.62rem; font-weight: 750; letter-spacing: 0.04em; text-transform: uppercase; }
 
-.sequence-display {
-  width: fit-content;
-  max-width: 100%;
-  padding: 0.7rem 0.9rem;
-  color: var(--color-ink);
-  background: #f5f5f2;
-  border: 1px solid var(--color-rule);
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: clamp(1rem, 3vw, 1.35rem);
-  font-weight: 650;
-  letter-spacing: 0.06em;
-}
+@keyframes question-enter { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes selected-lock { 50% { transform: translateX(3px); } }
 
-.question-description {
-  max-width: 58ch;
-  color: var(--color-muted);
-}
-
-.question-options {
-  display: grid;
-  border-top: 1px solid var(--color-rule-dark);
-}
-
-.option-button {
-  display: grid;
-  min-height: 4rem;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 0.75rem 0.85rem;
-  color: var(--color-ink);
-  background: var(--color-surface);
-  border: 0;
-  border-bottom: 1px solid var(--color-rule);
-  text-align: left;
-  grid-template-columns: 2rem minmax(0, 1fr) auto;
-  transition: background 120ms ease;
-}
-
-.option-button:hover {
-  background: #f5f6f6;
-}
-
-.option-button.selected {
-  background: var(--color-action-soft);
-  box-shadow: inset 3px 0 0 var(--color-action);
-}
-
-.option-letter {
-  display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
-  place-items: center;
-  border: 1px solid var(--color-rule-dark);
-  border-radius: 50%;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.selected .option-letter {
-  color: #fff;
-  background: var(--color-action);
-  border-color: var(--color-action);
-}
-
-.option-text {
-  overflow-wrap: anywhere;
-  font-size: 0.92rem;
-  font-weight: 600;
-}
-
-.option-check {
-  color: var(--color-action);
-  font-size: 0.7rem;
-  font-weight: 700;
+@media (max-height: 760px) and (min-width: 561px) {
+  .question-copy { min-height: 112px; padding: 0.85rem 0; }
+  .question-copy h1 { font-size: clamp(1.55rem, 2.8vw, 2.2rem); }
+  .option-button { min-height: 3.05rem; }
 }
 
 @media (max-width: 560px) {
-  .question-sheet {
-    padding: 1.1rem;
-  }
-
-  .question-copy {
-    min-height: 175px;
-    padding: 2rem 0;
-  }
-
-  .question-copy h1 {
-    font-size: clamp(1.75rem, 9vw, 2.45rem);
-  }
-
-  .option-button {
-    min-height: 3.8rem;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
+  .question-sheet { padding: 0.85rem; box-shadow: 0 8px 26px rgba(19,37,54,0.08); }
+  .question-copy { min-height: 115px; padding: 1rem 0; }
+  .question-copy h1 { font-size: clamp(1.55rem, 7.5vw, 2.05rem); }
+  .option-button { min-height: 3.25rem; padding-right: 0.45rem; padding-left: 0.45rem; }
+  .option-check { font-size: 0; }
+  .option-check:not(:empty)::after { content: '✓'; font-size: 0.75rem; }
 }

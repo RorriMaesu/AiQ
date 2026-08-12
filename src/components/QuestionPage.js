@@ -234,7 +234,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
       : 'Select one response to continue.');
 
   return (
-    <main className="quiz-page">
+    <main className={`quiz-page quiz-page--${currentQuestion.type}${timeLeft <= 3 ? ' quiz-page--urgent' : ''}`}>
       <header className="quiz-header" ref={headingTarget} tabIndex="-1">
         <AssessmentBrand href="#quiz" label="AIQ assessment" />
         <div className="quiz-header-actions">
@@ -259,10 +259,14 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
           </div>
         </div>
         <ProgressBar progress={progress} />
+        <div className="time-track" aria-hidden="true">
+          <span style={{ transform: `scaleX(${timeLeft / QUESTION_TIME_SECONDS})` }} />
+        </div>
       </section>
 
       <div className="quiz-workspace">
         <Question
+          key={currentQuestion.id}
           question={currentQuestion}
           selectedOption={selectedOption}
           onAnswer={(questionId, optionId) => {
@@ -284,7 +288,7 @@ const QuestionPage = ({ questions, onComplete, onExit }) => {
             >
               {showHint ? 'Hint requested' : 'Request hint'}
             </button>
-            {showHint && <p className="hint-message">{hint}</p>}
+            {showHint && <p className="hint-message"><span>Examiner note</span>{hint}</p>}
           </div>
           <button
             className="next-button"
