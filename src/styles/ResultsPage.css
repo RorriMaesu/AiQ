@@ -7,7 +7,11 @@
 .report-status i { width: 0.42rem; height: 0.42rem; background: var(--color-action); border-radius: 50%; }
 .verdict-register { display: flex; justify-content: space-between; padding: 0.8rem 0; font-family: var(--font-mono); font-size: 0.5rem; text-transform: uppercase; }
 .verdict-content { display: grid; align-items: center; gap: 4rem; padding: clamp(2rem, 5vh, 4rem) 0; grid-template-columns: 1.3fr 0.7fr; }
-.verdict-copy h1 { max-width: 10ch; margin: 0; font-size: clamp(3.5rem, 8.2vw, 8.4rem); font-stretch: 84%; font-weight: 820; line-height: 0.84; letter-spacing: var(--tracking-machine); word-spacing: 0.08em; text-transform: uppercase; animation: verdict-enter 800ms var(--ease-snap) both; }
+.verdict-content--long { grid-template-columns: 1.42fr 0.58fr; }
+.verdict-copy { min-width: 0; }
+.verdict-copy h1 { max-width: 100%; margin: 0; font-size: clamp(3.5rem, 8.2vw, 8.4rem); font-stretch: 84%; font-weight: 820; hyphens: none; line-height: 0.84; letter-spacing: var(--tracking-machine); overflow-wrap: normal; text-wrap: balance; word-break: keep-all; word-spacing: 0.08em; text-transform: uppercase; animation: verdict-enter 800ms var(--ease-snap) both; }
+.verdict-copy--medium h1 { font-size: clamp(3.25rem, 7.1vw, 7.25rem); line-height: 0.87; }
+.verdict-copy--long h1 { font-size: clamp(3rem, 6.1vw, 6.35rem); line-height: 0.9; letter-spacing: -0.035em; }
 .verdict-copy > p:last-child { max-width: 52ch; margin: 1.3rem 0 0; color: rgba(255,255,255,0.68); font-size: 0.84rem; line-height: 1.55; }
 .reported-score { position: relative; min-width: 17rem; padding-left: 2rem; border-left: 1px solid rgba(255,255,255,0.55); }
 .reported-score > span { display: block; font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -79,6 +83,8 @@
   .verdict-register span:nth-child(2) { display: none; }
   .verdict-content { padding: 2rem 0 1rem; }
   .verdict-copy h1 { font-size: clamp(2.8rem,13vw,4.5rem); overflow-wrap: break-word; }
+  .verdict-copy--medium h1 { font-size: clamp(2.6rem, 11.5vw, 4rem); line-height: 0.9; }
+  .verdict-copy--long h1 { font-size: clamp(2.35rem, 10.3vw, 3.65rem); line-height: 0.92; overflow-wrap: normal; }
   .axis-labels span:nth-child(2) { color: transparent; }
   .axis-reading { align-items: start; gap: 0.5rem; flex-direction: column; }
   .lesson-opening { grid-template-columns: 1fr; }

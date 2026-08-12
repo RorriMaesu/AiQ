@@ -53,18 +53,18 @@ const questions = [
   {
     id: 4,
     type: 'logical',
-    question: 'All Zorks are Morks, and some Morks are Dorks. Which statement is possible but not guaranteed?',
+    question: 'All Zorks are Morks, and some Morks are Dorks. What can be concluded about Zorks and Dorks?',
     image: null,
     options: [
-      { id: 'A', text: 'All Zorks are definitely Dorks', image: null },
+      { id: 'A', text: 'All Zorks are Dorks', image: null },
       { id: 'B', text: 'No Zorks are Dorks', image: null },
-      { id: 'C', text: 'Some Zorks might be Dorks', image: null },
-      { id: 'D', text: 'All Dorks are Zorks', image: null },
-      { id: 'E', text: 'None of the above', image: null }
+      { id: 'C', text: 'Some Zorks are Dorks', image: null },
+      { id: 'D', text: 'No definite relationship follows', image: null },
+      { id: 'E', text: 'All Dorks are Zorks', image: null }
     ],
     description: null,
-    correctAnswer: 'C',
-    explanation: 'The Dork Morks might overlap with the Zorks, but the facts do not require that overlap.'
+    correctAnswer: 'D',
+    explanation: 'The Dork Morks may overlap with the Zorks, but they may also be different Morks. The premises establish no definite relationship between Zorks and Dorks.'
   },
   {
     id: 5,
@@ -124,7 +124,7 @@ const questions = [
       { id: 'B', text: 'If the ground is not wet, then it did not rain', image: null },
       { id: 'C', text: 'If it does not rain, the ground does not get wet', image: null },
       { id: 'D', text: 'Rain is the only thing that can make the ground wet', image: null },
-      { id: 'E', text: 'The ground is always wet when it rains', image: null }
+      { id: 'E', text: 'The ground can get wet only when it rains', image: null }
     ],
     description: null,
     correctAnswer: 'B',
@@ -208,23 +208,23 @@ const questions = [
     ],
     description: null,
     correctAnswer: 'B',
-    explanation: 'Folding a square diagonally creates two congruent right triangles.'
+    explanation: 'The diagonal divides the square into two congruent right triangles, which overlap when the paper is folded.'
   },
   {
     id: 14,
     type: 'logical',
-    question: 'All cats have tails, and Fluffy has a tail. Which statement is possible but not guaranteed?',
+    question: 'All cats have tails, and Fluffy has a tail. Which conclusion about Fluffy is possible but not proven?',
     image: null,
     options: [
       { id: 'A', text: 'Fluffy is definitely a cat', image: null },
       { id: 'B', text: 'Fluffy might be a cat', image: null },
-      { id: 'C', text: 'Fluffy is not a cat', image: null },
+      { id: 'C', text: 'Fluffy has no tail', image: null },
       { id: 'D', text: 'All tailed animals are cats', image: null },
       { id: 'E', text: 'None of the above', image: null }
     ],
     description: null,
     correctAnswer: 'B',
-    explanation: 'Having a tail is necessary but not sufficient to be a cat. Many animals have tails, so Fluffy might be a cat, but could also be another animal.'
+    explanation: 'Having a tail is necessary but not sufficient to be a cat. Fluffy might be a cat, but the premise does not prove it.'
   },
   {
     id: 15,
@@ -389,7 +389,7 @@ const questions = [
   {
     id: 25,
     type: 'spatial',
-    question: 'If you look at a clock in a mirror, what time will it show when the actual time is 3:15?',
+    question: 'What time appears on an analog clock’s mirror image when the actual clock reads 3:15?',
     image: null,
     options: [
       { id: 'A', text: '3:15', image: null },
@@ -400,7 +400,7 @@ const questions = [
     ],
     description: null,
     correctAnswer: 'B',
-    explanation: 'In a mirror, the hour hand at 3 appears to be at 9, but since we read it as a clock, it looks like 8:45.'
+    explanation: 'For an analog clock, subtract the actual time from 11:60. The mirror image of 3:15 therefore reads 8:45.'
   },
   {
     id: 26,
@@ -770,17 +770,17 @@ const questions = [
   {
     id: 50,
     type: 'verbal',
-    question: 'BOOK is to READ as SONG is to:',
+    question: 'BOOK is to READING as SONG is to:',
     image: null,
     options: [
-      { id: 'A', text: 'LISTEN', image: null },
+      { id: 'A', text: 'LISTENING', image: null },
       { id: 'B', text: 'WRITE', image: null },
       { id: 'C', text: 'DANCE', image: null },
       { id: 'D', text: 'SPEAK', image: null }
     ],
     description: null,
     correctAnswer: 'A',
-    explanation: 'You read a book and listen to a song.'
+    explanation: 'Reading is how a book is experienced; listening is how a song is experienced.'
   },
   {
     id: 51,
@@ -875,7 +875,7 @@ const questions = [
   {
     id: 57,
     type: 'verbal',
-    question: 'SEED is to TREE as EGG is to:',
+    question: 'SEED is to PLANT as EGG is to:',
     image: null,
     options: [
       { id: 'A', text: 'NEST', image: null },
@@ -885,7 +885,7 @@ const questions = [
     ],
     description: null,
     correctAnswer: 'C',
-    explanation: 'A seed can develop into a tree; an egg can develop into a bird.'
+    explanation: 'A seed can develop into a plant; an egg can develop into a bird.'
   },
   {
     id: 58,
@@ -1010,7 +1010,7 @@ const questions = [
   {
     id: 66,
     type: 'spatial',
-    question: 'Using the same painted 3 × 3 × 3 cube, how many small cubes have paint on exactly two faces?',
+    question: 'A cube is painted on every face, then cut into 27 equal cubes. How many small cubes have paint on exactly two faces?',
     image: null,
     options: [
       { id: 'A', text: '8', image: null },
@@ -1025,7 +1025,7 @@ const questions = [
   {
     id: 67,
     type: 'spatial',
-    question: 'Using the same painted 3 × 3 × 3 cube, how many small cubes have paint on exactly one face?',
+    question: 'A cube is painted on every face, then cut into 27 equal cubes. How many small cubes have paint on exactly one face?',
     image: null,
     options: [
       { id: 'A', text: '6', image: null },
@@ -1055,7 +1055,7 @@ const questions = [
   {
     id: 69,
     type: 'spatial',
-    question: 'How many times does a regular hexagon match its original position during one full rotation?',
+    question: 'How many distinct orientations make a regular hexagon match its original outline during a full 360° turn?',
     image: null,
     options: [
       { id: 'A', text: '3', image: null },
@@ -1160,7 +1160,7 @@ const questions = [
   {
     id: 76,
     type: 'spatial',
-    question: 'How many squares of all sizes appear in a 3 × 3 grid?',
+    question: 'How many squares of all sizes appear in a 3 × 3 arrangement of equal square cells?',
     image: null,
     options: [
       { id: 'A', text: '9', image: null },
@@ -1325,7 +1325,7 @@ const questions = [
   {
     id: 87,
     type: 'logical',
-    question: 'Nora traveled by either train or bus. She did not take the train. What did she take?',
+    question: 'Nora traveled by exactly one of two options: train or bus. She did not take the train. What did she take?',
     image: null,
     options: [
       { id: 'A', text: 'BUS', image: null },
@@ -1355,7 +1355,7 @@ const questions = [
   {
     id: 89,
     type: 'logical',
-    question: 'Exactly one of statements A and B is true. If A is true, what is B?',
+    question: 'Exactly one of propositions P and Q is true. If P is true, what must Q be?',
     image: null,
     options: [
       { id: 'A', text: 'TRUE', image: null },

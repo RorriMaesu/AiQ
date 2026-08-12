@@ -29,10 +29,18 @@ const getVerdict = (result) => {
   return { title: 'Confidence without documentation', copy: 'You answered like someone who had somewhere else to be and no particular need to be correct when you got there.' };
 };
 
+const getVerdictSize = (title) => {
+  const letterCount = title.replace(/\s/g, '').length;
+  if (letterCount >= 28) return 'long';
+  if (letterCount >= 23) return 'medium';
+  return 'standard';
+};
+
 const ResultsPage = ({ result, onRestart, onHome }) => {
   const [shareLabel, setShareLabel] = useState('Share result');
   const [isTruthRevealed, setIsTruthRevealed] = useState(false);
   const verdict = getVerdict(result);
+  const verdictSize = getVerdictSize(verdict.title);
   const percentileLabel = formatOrdinal(result.comparison.percentile);
 
   const revealTruth = () => {
@@ -71,8 +79,8 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
           <span>Confidence 99.4%</span>
         </div>
 
-        <div className="verdict-content">
-          <div className="verdict-copy">
+        <div className={`verdict-content verdict-content--${verdictSize}`}>
+          <div className={`verdict-copy verdict-copy--${verdictSize}`}>
             <p className="document-label">Performance classification</p>
             <h1 id="result-title">{verdict.title}</h1>
             <p>{verdict.copy}</p>
@@ -159,5 +167,5 @@ const ResultsPage = ({ result, onRestart, onHome }) => {
   );
 };
 
-export { formatOrdinal, getVerdict };
+export { formatOrdinal, getVerdict, getVerdictSize };
 export default ResultsPage;

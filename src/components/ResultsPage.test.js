@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import ResultsPage from './ResultsPage';
+import ResultsPage, { getVerdictSize } from './ResultsPage';
 
 const result = {
   score: 43,
@@ -40,4 +40,10 @@ test('presents the score first and reveals the IQ-test lesson only on request', 
   expect(screen.getByRole('heading', { name: /test can be consistent and still be incomplete/i })).toBeInTheDocument();
   expect(screen.getByText(/score can describe an event/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /take another assessment/i })).toBeInTheDocument();
+});
+
+test('assigns compact typography to verdicts with long words', () => {
+  expect(getVerdictSize('Disturbingly adequate')).toBe('standard');
+  expect(getVerdictSize('Decorative reasoning detected')).toBe('medium');
+  expect(getVerdictSize('Confidence without documentation')).toBe('long');
 });
